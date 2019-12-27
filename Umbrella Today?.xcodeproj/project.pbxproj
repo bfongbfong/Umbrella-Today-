@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5521B1B423B6BCA100D0911C /* city.list.json in Resources */ = {isa = PBXBuildFile; fileRef = 5521B1B323B6BCA000D0911C /* city.list.json */; };
 		55C3FE3D23B6B27F00CE7776 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C3FE3C23B6B27F00CE7776 /* AppDelegate.swift */; };
 		55C3FE3F23B6B27F00CE7776 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C3FE3E23B6B27F00CE7776 /* SceneDelegate.swift */; };
 		55C3FE4123B6B27F00CE7776 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C3FE4023B6B27F00CE7776 /* ViewController.swift */; };
@@ -14,9 +15,12 @@
 		55C3FE4723B6B27F00CE7776 /* Umbrella_Today_.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 55C3FE4523B6B27F00CE7776 /* Umbrella_Today_.xcdatamodeld */; };
 		55C3FE4923B6B28200CE7776 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55C3FE4823B6B28200CE7776 /* Assets.xcassets */; };
 		55C3FE4C23B6B28200CE7776 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55C3FE4A23B6B28200CE7776 /* LaunchScreen.storyboard */; };
+		740AA9BC6AFAFF17F1BCBC0D /* Pods_Umbrella_Today_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAFD893038799641174FC52B /* Pods_Umbrella_Today_.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		22FFC432312624CC84A18F46 /* Pods-Umbrella Today?.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Umbrella Today?.debug.xcconfig"; path = "Target Support Files/Pods-Umbrella Today?/Pods-Umbrella Today?.debug.xcconfig"; sourceTree = "<group>"; };
+		5521B1B323B6BCA000D0911C /* city.list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = city.list.json; sourceTree = "<group>"; };
 		55C3FE3923B6B27F00CE7776 /* Umbrella Today?.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Umbrella Today?.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55C3FE3C23B6B27F00CE7776 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55C3FE3E23B6B27F00CE7776 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -26,6 +30,8 @@
 		55C3FE4823B6B28200CE7776 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		55C3FE4B23B6B28200CE7776 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		55C3FE4D23B6B28200CE7776 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		99EC326CFE3E1ADBC87A6EF7 /* Pods-Umbrella Today?.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Umbrella Today?.release.xcconfig"; path = "Target Support Files/Pods-Umbrella Today?/Pods-Umbrella Today?.release.xcconfig"; sourceTree = "<group>"; };
+		FAFD893038799641174FC52B /* Pods_Umbrella_Today_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Umbrella_Today_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +39,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				740AA9BC6AFAFF17F1BCBC0D /* Pods_Umbrella_Today_.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		06DC72063C4D870A3A8E0C94 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				22FFC432312624CC84A18F46 /* Pods-Umbrella Today?.debug.xcconfig */,
+				99EC326CFE3E1ADBC87A6EF7 /* Pods-Umbrella Today?.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		55C3FE3023B6B27F00CE7776 = {
 			isa = PBXGroup;
 			children = (
 				55C3FE3B23B6B27F00CE7776 /* Umbrella Today? */,
 				55C3FE3A23B6B27F00CE7776 /* Products */,
+				06DC72063C4D870A3A8E0C94 /* Pods */,
+				C6496420EBCE793A4E3186B2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,12 +80,21 @@
 				55C3FE3E23B6B27F00CE7776 /* SceneDelegate.swift */,
 				55C3FE4023B6B27F00CE7776 /* ViewController.swift */,
 				55C3FE4223B6B27F00CE7776 /* Main.storyboard */,
+				5521B1B323B6BCA000D0911C /* city.list.json */,
 				55C3FE4823B6B28200CE7776 /* Assets.xcassets */,
 				55C3FE4A23B6B28200CE7776 /* LaunchScreen.storyboard */,
 				55C3FE4D23B6B28200CE7776 /* Info.plist */,
 				55C3FE4523B6B27F00CE7776 /* Umbrella_Today_.xcdatamodeld */,
 			);
 			path = "Umbrella Today?";
+			sourceTree = "<group>";
+		};
+		C6496420EBCE793A4E3186B2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FAFD893038799641174FC52B /* Pods_Umbrella_Today_.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -77,9 +104,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 55C3FE5023B6B28200CE7776 /* Build configuration list for PBXNativeTarget "Umbrella Today?" */;
 			buildPhases = (
+				F48B4D54DAA6BEB3A6CB8CAF /* [CP] Check Pods Manifest.lock */,
 				55C3FE3523B6B27F00CE7776 /* Sources */,
 				55C3FE3623B6B27F00CE7776 /* Frameworks */,
 				55C3FE3723B6B27F00CE7776 /* Resources */,
+				8708ED008DB116576F2BE95F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -129,12 +158,60 @@
 			buildActionMask = 2147483647;
 			files = (
 				55C3FE4C23B6B28200CE7776 /* LaunchScreen.storyboard in Resources */,
+				5521B1B423B6BCA100D0911C /* city.list.json in Resources */,
 				55C3FE4923B6B28200CE7776 /* Assets.xcassets in Resources */,
 				55C3FE4423B6B27F00CE7776 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8708ED008DB116576F2BE95F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Umbrella Today?/Pods-Umbrella Today?-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Umbrella Today?/Pods-Umbrella Today?-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F48B4D54DAA6BEB3A6CB8CAF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Umbrella Today?-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		55C3FE3523B6B27F00CE7776 /* Sources */ = {
@@ -286,6 +363,7 @@
 		};
 		55C3FE5123B6B28200CE7776 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 22FFC432312624CC84A18F46 /* Pods-Umbrella Today?.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -304,6 +382,7 @@
 		};
 		55C3FE5223B6B28200CE7776 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 99EC326CFE3E1ADBC87A6EF7 /* Pods-Umbrella Today?.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
