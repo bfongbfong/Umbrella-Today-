@@ -44,7 +44,7 @@ class ViewController: UIViewController {
         guard currentLocation != nil else { return }
         AF.request("http://api.openweathermap.org/data/2.5/weather?lat=\(currentLocation.coordinate.latitude)&lon=\(currentLocation.coordinate.longitude)&APIKEY=\(apikey)").responseJSON(completionHandler: { (response) in
 
-//            print(response.value!)
+            print(response.value!)
 
             if let responseJson = response.value as? [String: Any] {
                 self.weatherReport = self.parseJson(jsonObject: responseJson)
