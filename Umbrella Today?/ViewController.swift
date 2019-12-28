@@ -12,7 +12,6 @@ import CoreLocation
 
 class ViewController: UIViewController {
 
-//    let url =
     let apikey = "8cf99fbd36fd589f46f2813475533328"
     let homeLat = "40.920295"
     let homeLon = "-74.530521"
