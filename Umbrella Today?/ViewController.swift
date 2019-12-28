@@ -11,7 +11,16 @@ import Alamofire
 import CoreLocation
 
 class ViewController: UIViewController {
+    
+    // MARK: - Outlets
+    @IBOutlet weak var currentTempLabel: UILabel!
+    @IBOutlet weak var minTempLabel: UILabel!
+    @IBOutlet weak var maxTempLabel: UILabel!
+    @IBOutlet weak var feelsLikeLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var locationLabel: UILabel!
 
+    // MARK: - Properties
     let apikey = "8cf99fbd36fd589f46f2813475533328"
     let homeLat = "40.920295"
     let homeLon = "-74.530521"
@@ -30,6 +39,20 @@ class ViewController: UIViewController {
         locationManager.requestWhenInUseAuthorization()
     }
     
+    func updateUI() {
+        if weatherReport == nil {
+            print("weather report is nil. there was an error with the API or parsing the JSON")
+            return
+        }
+        
+        currentTempLabel.text = String(weatherReport.temperature.current)
+        minTempLabel.text = String(weatherReport.temperature.minimum)
+        maxTempLabel.text = String(weatherReport.temperature.maximum)
+        feelsLikeLabel.text = String(weatherReport.temperature.feelsLike)
+        locationLabel.text = weatherReport.location
+        descriptionLabel.text = weatherReport.description
+    }
+    
     func getLocation() {
         if(CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
                 CLLocationManager.authorizationStatus() ==  .authorizedAlways) {
@@ -46,9 +69,10 @@ class ViewController: UIViewController {
             print(response.value!)
 
             if let responseJson = response.value as? [String: Any] {
-                self.weatherReport = self.parseJson(jsonObject: responseJson)
                 DispatchQueue.main.async {
                     // update ui
+                    self.weatherReport = self.parseJson(jsonObject: responseJson)
+                    self.updateUI()
                 }
             }
             
@@ -68,16 +92,21 @@ class ViewController: UIViewController {
         
         guard let location = jsonObject["name"] as? String else { return nil }
         
-        guard let weatherObject = jsonObject["weather"] as? [String: Any] else { return nil }
+        guard let weatherArray = jsonObject["weather"] as? [Any] else { return nil }
+        guard let weatherObject = weatherArray[0] as? [String: Any] else { return nil }
         guard let description = weatherObject["description"] as? String else { return nil }
         guard let main = weatherObject["main"] as? String else { return nil }
+                        
+        let thisWeatherReport = WeatherReport(temperature: temperature, location: location, description: description, main: main)
         
-        guard let rainObject = jsonObject["rain"] as? [String: Any] else { return nil }
-        
-        guard let rain1hr = rainObject["1h"] as? Double else { return nil }
-        
-        let thisWeatherReport = WeatherReport(temperature: temperature, location: location, description: description, main: main, rain1hr: rain1hr)
-        
+        if let rainObject = jsonObject["rain"] as? [String: Any] {
+            if let rain1hr = rainObject["1hr"] as? Double {
+                self.weatherReport.rain1hr = rain1hr
+            }
+            if let rain3hr = rainObject["3h"] as? Double {
+                thisWeatherReport.rain3hr = rain3hr
+            }
+        }
         
         // optional properties
         if let humidity = temperatureObject["humidity"] as? Int {
@@ -87,9 +116,6 @@ class ViewController: UIViewController {
             thisWeatherReport.pressure = pressure
         }
         
-        if let rain3hr = rainObject["3h"] as? Double {
-            thisWeatherReport.rain3hr = rain3hr
-        }
         if let cloudsObject = jsonObject["clouds"] as? [String: Any] {
             if let clouds = cloudsObject["all"] as? Double {
                 thisWeatherReport.clouds = clouds

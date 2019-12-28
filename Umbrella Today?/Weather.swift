@@ -13,11 +13,10 @@ class WeatherReport {
     var location: String
     var description: String
     var main: String
-    var rain1hr: Double
     
     var humidity: Int?
     var pressure: Int?
-    
+    var rain1hr: Double?
     var rain3hr: Double?
     var clouds: Double?
     var visibility: Int?
@@ -28,7 +27,7 @@ class WeatherReport {
          location: String,
          description: String,
          main: String,
-         rain1hr: Double,
+         rain1hr: Double?,
          humidity: Int?,
          pressure: Int?,
          rain3hr: Double?,
@@ -53,13 +52,11 @@ class WeatherReport {
     init(temperature: Temperature,
          location: String,
          description: String,
-         main: String,
-         rain1hr: Double) {
+         main: String) {
         self.temperature = temperature
         self.location = location
         self.description = description
         self.main = main
-        self.rain1hr = rain1hr
     }
 }
 
