@@ -29,4 +29,19 @@ class OpenWeatherManager {
             }
         })
     }
+    
+    static func getCurrentWeatherData(cityID: Int, completion: @escaping((_ jsonWeatherObject: [String: Any]?) -> Void)) {
+        
+        AF.request("http://api.openweathermap.org/data/2.5/weather?id=\(cityID)&APIKEY=\(apikey)").responseJSON(completionHandler: { (response) in
+            
+            print(response.value!)
+            
+            if let responseJson = response.value as? [String: Any] {
+                completion(responseJson)
+            } else {
+                completion(nil)
+            }
+            
+        })
+    }
 }
