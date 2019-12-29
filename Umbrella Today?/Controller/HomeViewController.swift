@@ -118,28 +118,32 @@ extension HomeViewController {
     func populateWeatherReportData() {
         
         guard currentLocation != nil else { return }
-        let hurzufID = 707860
+//        let hurzufID = 707860
         
-        OpenWeatherManager.getCurrentWeatherData(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude) { (jsonWeatherObject) in
-
-            if let responseJson = jsonWeatherObject {
-                DispatchQueue.main.async {
-
-                    self.weatherReport = self.parseJsonWeatherObject(jsonObject: responseJson)
-                    self.updateUI()
-                }
-            }
-        }
+//        OpenWeatherManager.getCurrentWeatherData(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude) { (jsonWeatherObject) in
+//
+//            if let responseJson = jsonWeatherObject {
+//                DispatchQueue.main.async {
+//
+//                    self.weatherReport = self.parseJsonWeatherObject(jsonObject: responseJson)
+//                    self.updateUI()
+//                }
+//            }
+//        }
         
-        OpenWeatherManager.getCurrentWeatherData(cityID: hurzufID) { (jsonWeatherObject) in
-            if let responseJson = jsonWeatherObject {
-                DispatchQueue.main.async {
-                    
-                    self.weatherReport = self.parseJsonWeatherObject(jsonObject: responseJson)
-                    self.updateUI()
-                }
-            }
-        }
+//        OpenWeatherManager.getCurrentWeatherData(cityID: hurzufID) { (jsonWeatherObject) in
+//            if let responseJson = jsonWeatherObject {
+//                DispatchQueue.main.async {
+//
+//                    self.weatherReport = self.parseJsonWeatherObject(jsonObject: responseJson)
+//                    self.updateUI()
+//                }
+//            }
+//        }
+//
+//        Helpers.readJson()
+        
+        Helpers.searchForCityID(cityName: "dumb")
     }
     
     func parseJsonWeatherObject(jsonObject: [String: Any]) -> WeatherReport? {

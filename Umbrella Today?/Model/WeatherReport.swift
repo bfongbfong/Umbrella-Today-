@@ -59,17 +59,3 @@ class WeatherReport {
         self.main = main
     }
 }
-
-class Temperature {
-    var current: Int
-    var minimum: Int
-    var maximum: Int
-    var feelsLike: Int
-    
-    init(currentInKevlvin: Double, minimumInKelvin: Double, maximumInKelvin: Double, feelsLikeInKelvin: Double) {
-        self.current = Helpers.convertKelvinToFarenheit(kelvinNumber: currentInKevlvin)
-        self.minimum = Helpers.convertKelvinToFarenheit(kelvinNumber: minimumInKelvin)
-        self.maximum = Helpers.convertKelvinToFarenheit(kelvinNumber: maximumInKelvin)
-        self.feelsLike = Helpers.convertKelvinToFarenheit(kelvinNumber: feelsLikeInKelvin)
-    }
-}
