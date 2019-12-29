@@ -1,5 +1,5 @@
 //
-//  jsonParser.swift
+//  JsonParser.swift
 //  Umbrella Today?
 //
 //  Created by Brandon Fong on 12/29/19.

@@ -17,7 +17,7 @@
 		5585763123B87E5700CABA38 /* Temperature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585763023B87E5700CABA38 /* Temperature.swift */; };
 		5585763323B8807900CABA38 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585763223B8807900CABA38 /* City.swift */; };
 		5585763523B93CC000CABA38 /* AutocompleteSearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585763423B93CC000CABA38 /* AutocompleteSearchManager.swift */; };
-		5585763723B93EA400CABA38 /* jsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585763623B93EA400CABA38 /* jsonParser.swift */; };
+		5585763723B93EA400CABA38 /* JsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5585763623B93EA400CABA38 /* JsonParser.swift */; };
 		55C3FE3D23B6B27F00CE7776 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C3FE3C23B6B27F00CE7776 /* AppDelegate.swift */; };
 		55C3FE3F23B6B27F00CE7776 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C3FE3E23B6B27F00CE7776 /* SceneDelegate.swift */; };
 		55C3FE4123B6B27F00CE7776 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C3FE4023B6B27F00CE7776 /* HomeViewController.swift */; };
@@ -40,7 +40,7 @@
 		5585763023B87E5700CABA38 /* Temperature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Temperature.swift; sourceTree = "<group>"; };
 		5585763223B8807900CABA38 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		5585763423B93CC000CABA38 /* AutocompleteSearchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutocompleteSearchManager.swift; sourceTree = "<group>"; };
-		5585763623B93EA400CABA38 /* jsonParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = jsonParser.swift; sourceTree = "<group>"; };
+		5585763623B93EA400CABA38 /* JsonParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonParser.swift; sourceTree = "<group>"; };
 		55C3FE3923B6B27F00CE7776 /* Umbrella Today?.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Umbrella Today?.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55C3FE3C23B6B27F00CE7776 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55C3FE3E23B6B27F00CE7776 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,7 +81,7 @@
 				55C3FE4023B6B27F00CE7776 /* HomeViewController.swift */,
 				5521B1B923B8402E00D0911C /* OpenWeatherManager.swift */,
 				5585763423B93CC000CABA38 /* AutocompleteSearchManager.swift */,
-				5585763623B93EA400CABA38 /* jsonParser.swift */,
+				5585763623B93EA400CABA38 /* JsonParser.swift */,
 				5521B1B723B6ED7B00D0911C /* Helpers.swift */,
 			);
 			path = Controller;
@@ -284,7 +284,7 @@
 				5585763323B8807900CABA38 /* City.swift in Sources */,
 				55C3FE4723B6B27F00CE7776 /* Umbrella_Today_.xcdatamodeld in Sources */,
 				5585763123B87E5700CABA38 /* Temperature.swift in Sources */,
-				5585763723B93EA400CABA38 /* jsonParser.swift in Sources */,
+				5585763723B93EA400CABA38 /* JsonParser.swift in Sources */,
 				5521B1B623B6C90300D0911C /* WeatherReport.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
