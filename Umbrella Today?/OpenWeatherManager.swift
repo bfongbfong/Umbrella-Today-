@@ -1,0 +1,28 @@
+//
+//  OpenWeatherManager.swift
+//  Umbrella Today?
+//
+//  Created by Brandon Fong on 12/28/19.
+//  Copyright © 2019 Fiesta Togo Inc. All rights reserved.
+//
+
+import Foundation
+import Alamofire
+
+class OpenWeatherManager {
+    
+    static let apikey = "8cf99fbd36fd589f46f2813475533328"
+
+    static func getCurrentWeatherData(latitude: Double, longitude: Double, completion: @escaping((_ jsonWeatherObject: [String: Any]?) -> Void)) {
+        AF.request("http://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&APIKEY=\(apikey)").responseJSON(completionHandler: { (response) in
+
+            print(response.value!)
+            
+            if let responseJson = response.value as? [String: Any] {
+                completion(responseJson)
+            } else {
+                completion(nil)
+            }
+        })
+    }
+}

@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  HomeViewController.swift
 //  Umbrella Today?
 //
 //  Created by Brandon Fong on 12/27/19.
@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import CoreLocation
 
-class ViewController: UIViewController {
+class HomeViewController: UIViewController {
     
     // MARK: - Outlets
     @IBOutlet weak var currentTempLabel: UILabel!
@@ -21,7 +21,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var locationLabel: UILabel!
 
     // MARK: - Properties
-    let apikey = "8cf99fbd36fd589f46f2813475533328"
     let homeLat = "40.920295"
     let homeLon = "-74.530521"
     
@@ -29,16 +28,15 @@ class ViewController: UIViewController {
     var locationManager = CLLocationManager()
     var currentLocation: CLLocation!
     
+    // MARK: - View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setup()
-        getLocation()
+        checkLocationServices()
     }
-    
-    func setup() {
-        locationManager.requestWhenInUseAuthorization()
-    }
-    
+}
+
+// MARK: - UI Functions
+extension HomeViewController {
     func updateUI() {
         if weatherReport == nil {
             print("weather report is nil. there was an error with the API or parsing the JSON")
@@ -52,34 +50,91 @@ class ViewController: UIViewController {
         locationLabel.text = weatherReport.location
         descriptionLabel.text = weatherReport.description
     }
+}
+
+// MARK: - CLLocation Manager
+extension HomeViewController {
+    func setupLocationManager() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    }
     
-    func getLocation() {
-        if(CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
-                CLLocationManager.authorizationStatus() ==  .authorizedAlways) {
-              currentLocation = locationManager.location
-            runAPI()
+    func checkLocationServices() {
+        if CLLocationManager.locationServicesEnabled() {
+            // setup our location manager
+            setupLocationManager()
+            checkLocationAuthorization()
+        } else {
+            // show alert telling user they have to enable it.
         }
     }
     
-    func runAPI() {
-       
+    func checkLocationAuthorization() {
+        switch CLLocationManager.authorizationStatus() {
+        case .authorizedWhenInUse:
+            // do map stuff
+            getLocation()
+            break
+        case .authorizedAlways:
+            // no need to ask
+            getLocation()
+            break
+        case .denied:
+            // alert user to go to settings to turn on permissions
+            break
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+            break
+        case .restricted:
+            // alert user that they have been restricted
+            break
+        @unknown default:
+            print("Error: Authorization status was unknown.")
+            break
+        }
+    }
+    
+    func getLocation() {
+        if (CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
+                CLLocationManager.authorizationStatus() ==  .authorizedAlways) {
+              currentLocation = locationManager.location
+            populateWeatherReportData()
+        }
+    }
+}
+
+
+// MARK: - CLLocation Manager Delegate
+extension HomeViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        //
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        //
+    }
+}
+
+// MARK: - Logic Functions
+extension HomeViewController {
+    
+    func populateWeatherReportData() {
+        
         guard currentLocation != nil else { return }
-        AF.request("http://api.openweathermap.org/data/2.5/weather?lat=\(currentLocation.coordinate.latitude)&lon=\(currentLocation.coordinate.longitude)&APIKEY=\(apikey)").responseJSON(completionHandler: { (response) in
-
-            print(response.value!)
-
-            if let responseJson = response.value as? [String: Any] {
+        
+        OpenWeatherManager.getCurrentWeatherData(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude) { (jsonWeatherObject) in
+            
+            if let responseJson = jsonWeatherObject {
                 DispatchQueue.main.async {
-                    // update ui
-                    self.weatherReport = self.parseJson(jsonObject: responseJson)
+                    
+                    self.weatherReport = self.parseJsonWeatherObject(jsonObject: responseJson)
                     self.updateUI()
                 }
             }
-            
-        })
+        }
     }
     
-    func parseJson(jsonObject: [String: Any]) -> WeatherReport? {
+    func parseJsonWeatherObject(jsonObject: [String: Any]) -> WeatherReport? {
         
         guard let temperatureObject = jsonObject["main"] as? [String: Any] else { return nil }
         
