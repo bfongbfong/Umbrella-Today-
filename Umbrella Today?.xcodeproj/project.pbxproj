@@ -78,8 +78,8 @@
 			children = (
 				55C3FE4023B6B27F00CE7776 /* HomeViewController.swift */,
 				5521B1B923B8402E00D0911C /* OpenWeatherManager.swift */,
-				5521B1B723B6ED7B00D0911C /* Helpers.swift */,
 				5585763423B93CC000CABA38 /* AutocompleteSearchManager.swift */,
+				5521B1B723B6ED7B00D0911C /* Helpers.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
