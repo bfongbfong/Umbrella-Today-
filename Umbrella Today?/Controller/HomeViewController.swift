@@ -142,7 +142,7 @@ extension HomeViewController {
 //        }
 //
         
-        AutocompleteSearchManager.searchForCities(cityName: "dongle")
+        AutocompleteSearchManager.searchForCities(cityName: "dog", maxNumberOfResults: 10)
     }
 }
 

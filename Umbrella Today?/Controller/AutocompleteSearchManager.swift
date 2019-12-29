@@ -10,7 +10,8 @@ import Foundation
 
 class AutocompleteSearchManager {
     
-    static func searchForCities(cityName: String) {
+    ///
+    static func searchForCities(cityName: String, maxNumberOfResults: Int) {
         let capitalizedCityName = cityName.capitalized
         let cityNameCharacters = Array(capitalizedCityName)
 
@@ -30,7 +31,7 @@ class AutocompleteSearchManager {
 //                print("range ---- leftIndex:", range.leftIndex)
 //                print("range ---- rightIndex:", range.rightIndex)
                 
-                let cities = getAutocompleteCities(jsonArray: jsonArray, range: range, input: cityNameCharacters)
+                let cities = getAutocompleteCities(jsonArray: jsonArray, range: range, input: cityNameCharacters, maxNumberOfResults: maxNumberOfResults)
                 cities.forEach { (city) in
                     print(city.name)
                 }
@@ -42,7 +43,7 @@ class AutocompleteSearchManager {
         }
     }
     
-    static func getAutocompleteCities(jsonArray: [Any], range: Range, input: [Character]) -> [City] {
+    static func getAutocompleteCities(jsonArray: [Any], range: Range, input: [Character], maxNumberOfResults: Int) -> [City] {
         // it is a modified binary search
         
         var cities = [City]()
@@ -73,7 +74,7 @@ class AutocompleteSearchManager {
         let firstMatchedCity = City(name: cityName, country: countryName)
         cities.append(firstMatchedCity)
         
-        for i in 1...9 {
+        for i in 1...(maxNumberOfResults - 1) {
             guard let cityObject = jsonArray[firstMatchIndex + i] as? [String: Any] else {
                 // i think return empty if the middle element doesn't exist, or isn't a dictionary?
                 return cities
