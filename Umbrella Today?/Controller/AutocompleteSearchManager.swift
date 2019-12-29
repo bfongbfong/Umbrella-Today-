@@ -9,7 +9,8 @@
 import Foundation
 
 class AutocompleteSearchManager {
-    static func searchForCityID(cityName: String) {
+    
+    static func searchForCities(cityName: String) {
         let capitalizedCityName = cityName.capitalized
         let cityNameCharacters = Array(capitalizedCityName)
 
@@ -26,8 +27,8 @@ class AutocompleteSearchManager {
                 var range = Range(leftIndex: 0, rightIndex: jsonArray.count)
 
                 findLetterCheckPointAndSetRange(cityNameCharacters: cityNameCharacters, range: &range)
-                print("range ---- leftIndex:", range.leftIndex)
-                print("range ---- rightIndex:", range.rightIndex)
+//                print("range ---- leftIndex:", range.leftIndex)
+//                print("range ---- rightIndex:", range.rightIndex)
                 
                 let cities = getAutocompleteCities(jsonArray: jsonArray, range: range, input: cityNameCharacters)
                 cities.forEach { (city) in
@@ -194,7 +195,7 @@ class AutocompleteSearchManager {
             print("returning index: \(index + 1), city: \(secondCityName)")
             return index + 1
         } else {
-            print("no result found")
+            print("no results found")
             return nil
         }
     }

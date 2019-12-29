@@ -141,9 +141,8 @@ extension HomeViewController {
 //            }
 //        }
 //
-//        Helpers.readJson()
         
-        Helpers.searchForCityID(cityName: "dumb")
+        AutocompleteSearchManager.searchForCities(cityName: "dongle")
     }
     
     func parseJsonWeatherObject(jsonObject: [String: Any]) -> WeatherReport? {
