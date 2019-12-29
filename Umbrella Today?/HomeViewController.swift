@@ -21,9 +21,6 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var locationLabel: UILabel!
 
     // MARK: - Properties
-    let homeLat = "40.920295"
-    let homeLon = "-74.530521"
-    
     var weatherReport: WeatherReport!
     var locationManager = CLLocationManager()
     var currentLocation: CLLocation!
