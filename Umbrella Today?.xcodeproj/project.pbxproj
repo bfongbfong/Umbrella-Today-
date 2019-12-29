@@ -64,7 +64,6 @@
 		5521B1BB23B8432D00D0911C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				55C3FE3E23B6B27F00CE7776 /* SceneDelegate.swift */,
 				55C3FE4023B6B27F00CE7776 /* HomeViewController.swift */,
 				5521B1B923B8402E00D0911C /* OpenWeatherManager.swift */,
 				5521B1B723B6ED7B00D0911C /* Helpers.swift */,
@@ -109,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				55C3FE3C23B6B27F00CE7776 /* AppDelegate.swift */,
+				55C3FE3E23B6B27F00CE7776 /* SceneDelegate.swift */,
 				5521B1BC23B8438300D0911C /* Model */,
 				5521B1BD23B843C300D0911C /* View */,
 				5521B1BB23B8432D00D0911C /* Controller */,
