@@ -1,5 +1,5 @@
 //
-//  Weather.swift
+//  WeatherReport.swift
 //  Umbrella Today?
 //
 //  Created by Brandon Fong on 12/27/19.
