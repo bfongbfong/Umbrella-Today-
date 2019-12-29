@@ -49,7 +49,7 @@ class AutocompleteSearchManager {
                 
             } catch {
                // handle error
-                print("caught error")
+                print("Error accessing JSON file")
                 return []
             }
         }
