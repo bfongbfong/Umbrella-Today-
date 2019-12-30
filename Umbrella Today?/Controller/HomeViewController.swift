@@ -28,12 +28,17 @@ class HomeViewController: UIViewController {
     // MARK: - View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
         checkLocationServices()
     }
 }
 
 // MARK: - UI Functions
 extension HomeViewController {
+    func setupUI() {
+        
+    }
+    
     func updateUI() {
         if weatherReport == nil {
             print("weather report is nil. there was an error with the API or parsing the JSON")
