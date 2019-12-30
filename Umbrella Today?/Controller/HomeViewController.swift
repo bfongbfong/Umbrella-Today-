@@ -71,21 +71,33 @@ extension HomeViewController {
             
             descriptionLabel.textColor = UIColor.nightDetailText()
             
-            
-            var stringOne = "Swift 3 has come"
-            let stringTwo = "has"
+            let capitalizedDescription = weatherReport?.description.capitalized
 
-            let range = (stringOne as NSString).range(of: stringTwo)
+            let stringOne = "\(capitalizedDescription!),\n\(weatherReport!.humidity!)% humidity. Feels like \(weatherReport!.temperature.feelsLike)º"
+            let stringTwo = "\(weatherReport!.temperature.feelsLike)º"
+            
+            let range1 = (stringOne as NSString).range(of: stringTwo)
+            
+            let range2 = (stringOne as NSString).range(of: "\(weatherReport!.humidity!)%")
+            
+            let range3 = (stringOne as NSString).range(of: capitalizedDescription!)
 
             let attributedText = NSMutableAttributedString.init(string: stringOne)
-            attributedText.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.nightDetailTextHighlights() , range: range)
-            descriptionLabel.attributedText = attributedText
+            attributedText.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.nightDetailTextHighlights(), range: range1)
             
-//            let uppercasedDescription = weatherReport?.description.capitalized
-//            descriptionLabel.text = "\(uppercasedDescription!), \nFeels like \(weatherReport?.temperature.feelsLike ?? 0)"
-        }
+            attributedText.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.nightDetailTextHighlights(), range: range2)
+            
+            attributedText.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.nightDetailTextHighlights(), range: range3)
 
-        
+            let paragraphStyle = NSMutableParagraphStyle()
+
+            paragraphStyle.lineSpacing = 2
+            paragraphStyle.alignment = .center
+
+            attributedText.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, attributedText.length))
+
+            descriptionLabel.attributedText = attributedText
+        }
     }
     
     func showErrorAlert() {
