@@ -46,15 +46,33 @@ class HomeViewController: UIViewController {
     var descriptionTextColor: UIColor!
     var detailTextHighlightsColor: UIColor!
     
+    var loadingView = UIView()
+    
     // MARK: - View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        addWhiteLayer()
         checkLocationServices()
     }
 }
 
 // MARK: - UI Functions
 extension HomeViewController {
+    
+    func addWhiteLayer() {
+        loadingView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+        loadingView.backgroundColor = .white
+        view.addSubview(loadingView)
+        view.bringSubviewToFront(loadingView)
+    }
+    
+    func whiteFadeAwayAnimation() {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.loadingView.alpha = 0
+        }) { (_) in
+            self.loadingView.removeFromSuperview()
+        }
+    }
     
     func updateUI() {
         if weatherReport == nil {
@@ -63,6 +81,8 @@ extension HomeViewController {
         }
         
         checkSunlight()
+        
+        whiteFadeAwayAnimation()
         
         view.backgroundColor = backgroundColor
         currentTempLabel.textColor = temperatureTextColor
@@ -79,14 +99,13 @@ extension HomeViewController {
         
         let capitalizedDescription = weatherReport?.description.capitalized
 
-        let stringOne = "\(capitalizedDescription!),\n\(weatherReport!.humidity!)% humidity. Feels like \(weatherReport!.temperature.feelsLike)º"
-        let stringTwo = "\(weatherReport!.temperature.feelsLike)º"
+        let description = "\(capitalizedDescription!),\n\(weatherReport!.humidity!)% humidity. Feels like \(weatherReport!.temperature.feelsLike)º"
         
-        let range1 = (stringOne as NSString).range(of: stringTwo)
-        let range2 = (stringOne as NSString).range(of: "\(weatherReport!.humidity!)%")
-        let range3 = (stringOne as NSString).range(of: capitalizedDescription!)
+        let range1 = (description as NSString).range(of: "\(weatherReport!.temperature.feelsLike)º")
+        let range2 = (description as NSString).range(of: "\(weatherReport!.humidity!)%")
+        let range3 = (description as NSString).range(of: capitalizedDescription!)
 
-        let attributedText = NSMutableAttributedString.init(string: stringOne)
+        let attributedText = NSMutableAttributedString.init(string: description)
         attributedText.addAttribute(NSAttributedString.Key.foregroundColor, value: detailTextHighlightsColor!, range: range1)
         attributedText.addAttribute(NSAttributedString.Key.foregroundColor, value: detailTextHighlightsColor!, range: range2)
         attributedText.addAttribute(NSAttributedString.Key.foregroundColor, value: detailTextHighlightsColor!, range: range3)
@@ -94,7 +113,7 @@ extension HomeViewController {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 2
         paragraphStyle.alignment = .center
-        attributedText.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range: NSMakeRange(0, attributedText.length))
+        attributedText.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedText.length))
 
         descriptionLabel.attributedText = attributedText
     }
@@ -216,6 +235,7 @@ extension HomeViewController {
 //            }
 //        }
 //
+    
         
 //        AutocompleteSearchManager.searchForCities(cityName: "dog", maxNumberOfResults: 10)
     }

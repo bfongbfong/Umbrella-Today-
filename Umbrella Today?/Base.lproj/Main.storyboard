@@ -21,7 +21,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99º" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PP6-bf-L5v">
-                                <rect key="frame" x="123.5" y="304.5" width="242" height="252"/>
+                                <rect key="frame" x="117" y="304.5" width="242" height="252"/>
                                 <fontDescription key="fontDescription" name="Baloo" family="Baloo" pointSize="160"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -47,7 +47,7 @@
                             <constraint firstItem="i92-4M-Jia" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="0mj-f5-cGe"/>
                             <constraint firstItem="H4v-gT-gnE" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="1hR-qI-gZ4"/>
                             <constraint firstItem="PP6-bf-L5v" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" multiplier="0.95" id="Onc-bb-Ps3"/>
-                            <constraint firstItem="PP6-bf-L5v" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" multiplier="1.18" id="Q2B-wo-xeM"/>
+                            <constraint firstItem="PP6-bf-L5v" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" multiplier="1.15" id="Q2B-wo-xeM"/>
                             <constraint firstItem="H4v-gT-gnE" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="gbq-Qg-2JR"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="H4v-gT-gnE" secondAttribute="trailing" constant="20" id="iDo-wj-HI1"/>
                             <constraint firstItem="H4v-gT-gnE" firstAttribute="top" secondItem="i92-4M-Jia" secondAttribute="bottom" constant="83" id="sip-Gy-mQo"/>
