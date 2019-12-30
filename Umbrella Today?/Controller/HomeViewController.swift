@@ -53,18 +53,36 @@ extension HomeViewController {
             let uppercasedDescription = weatherReport?.description.capitalized
             descriptionLabel.text = "\(uppercasedDescription!), \nFeels like \(weatherReport?.temperature.feelsLike ?? 0)"
         } else {
+            
+            
+            // NIGHT TIME
             // set status bar to light
             view.backgroundColor = UIColor.nightBackground()
-            currentTempLabel.textColor = UIColor.getPaleLetters()
+            currentTempLabel.textColor = UIColor.nightTemperatureText()
             
             // handle these errors later
             currentTempLabel.text = "\(weatherReport?.temperature.current ?? 0)º"
 
             let uppercasedLocation = weatherReport?.location.uppercased()
             locationLabel.text = uppercasedLocation!
-//            locationLabel.textColor = UIColor.()
-            let uppercasedDescription = weatherReport?.description.capitalized
-            descriptionLabel.text = "\(uppercasedDescription!), \nFeels like \(weatherReport?.temperature.feelsLike ?? 0)"
+            locationLabel.addCharacterSpacing(2)
+            locationLabel.textColor = UIColor.nightLocationText()
+            
+            
+            descriptionLabel.textColor = UIColor.nightDetailText()
+            
+            
+            var stringOne = "Swift 3 has come"
+            let stringTwo = "has"
+
+            let range = (stringOne as NSString).range(of: stringTwo)
+
+            let attributedText = NSMutableAttributedString.init(string: stringOne)
+            attributedText.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.nightDetailTextHighlights() , range: range)
+            descriptionLabel.attributedText = attributedText
+            
+//            let uppercasedDescription = weatherReport?.description.capitalized
+//            descriptionLabel.text = "\(uppercasedDescription!), \nFeels like \(weatherReport?.temperature.feelsLike ?? 0)"
         }
 
         

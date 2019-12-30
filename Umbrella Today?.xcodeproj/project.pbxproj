@@ -21,6 +21,7 @@
 		55A2916623B9818F0031F48E /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A2916523B9818F0031F48E /* UIColor+Extensions.swift */; };
 		55A2916723B98C060031F48E /* Arial Rounded Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5585763923B95E1000CABA38 /* Arial Rounded Bold.ttf */; };
 		55A2916823B98C080031F48E /* Baloo-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5585763823B95E0F00CABA38 /* Baloo-Regular.ttf */; };
+		55A2916A23B994370031F48E /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A2916923B994370031F48E /* UILabel+Extensions.swift */; };
 		55C3FE3D23B6B27F00CE7776 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C3FE3C23B6B27F00CE7776 /* AppDelegate.swift */; };
 		55C3FE3F23B6B27F00CE7776 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C3FE3E23B6B27F00CE7776 /* SceneDelegate.swift */; };
 		55C3FE4123B6B27F00CE7776 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C3FE4023B6B27F00CE7776 /* HomeViewController.swift */; };
@@ -47,6 +48,7 @@
 		5585763823B95E0F00CABA38 /* Baloo-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Baloo-Regular.ttf"; sourceTree = "<group>"; };
 		5585763923B95E1000CABA38 /* Arial Rounded Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Arial Rounded Bold.ttf"; sourceTree = "<group>"; };
 		55A2916523B9818F0031F48E /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		55A2916923B994370031F48E /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
 		55C3FE3923B6B27F00CE7776 /* Umbrella Today?.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Umbrella Today?.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55C3FE3C23B6B27F00CE7776 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55C3FE3E23B6B27F00CE7776 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				55A2916523B9818F0031F48E /* UIColor+Extensions.swift */,
+				55A2916923B994370031F48E /* UILabel+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				5521B1B823B6ED7B00D0911C /* Helpers.swift in Sources */,
 				5585762F23B87E3E00CABA38 /* Range.swift in Sources */,
 				55C3FE3D23B6B27F00CE7776 /* AppDelegate.swift in Sources */,
+				55A2916A23B994370031F48E /* UILabel+Extensions.swift in Sources */,
 				5585762D23B8798C00CABA38 /* CityListCheckPoints.swift in Sources */,
 				55C3FE3F23B6B27F00CE7776 /* SceneDelegate.swift in Sources */,
 				5585763323B8807900CABA38 /* City.swift in Sources */,

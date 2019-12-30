@@ -18,11 +18,11 @@ extension UIColor {
         return UIColor(red: 53/255, green: 56/255, blue: 68/255, alpha: 1.0)
     }
     
-    static func dayTemperature() -> UIColor {
+    static func dayTemperatureText() -> UIColor {
         return UIColor(red: 251/255, green: 182/255, blue: 173/255, alpha: 1.0)
     }
     
-    static func nightTemperature() -> UIColor {
+    static func nightTemperatureText() -> UIColor {
         return UIColor(red: 232/255, green: 223/255, blue: 190/255, alpha: 1.0)
     }
     
@@ -49,4 +49,5 @@ extension UIColor {
     static func nightDetailTextHighlights() -> UIColor {
         return UIColor(red: 224/255, green: 201/255, blue: 160/255, alpha: 1.0)
     }
+    
 }

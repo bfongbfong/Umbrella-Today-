@@ -27,13 +27,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H4v-gT-gnE">
-                                <rect key="frame" x="20" y="593" width="374" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="20" y="598" width="374" height="20"/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i92-4M-Jia">
-                                <rect key="frame" x="90" y="486.5" width="234" height="23.5"/>
+                                <rect key="frame" x="90" y="491.5" width="234" height="23.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="234" id="h95-Hq-n78"/>
                                 </constraints>
@@ -51,7 +51,7 @@
                             <constraint firstItem="H4v-gT-gnE" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="gbq-Qg-2JR"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="H4v-gT-gnE" secondAttribute="trailing" constant="20" id="iDo-wj-HI1"/>
                             <constraint firstItem="H4v-gT-gnE" firstAttribute="top" secondItem="i92-4M-Jia" secondAttribute="bottom" constant="83" id="sip-Gy-mQo"/>
-                            <constraint firstItem="i92-4M-Jia" firstAttribute="top" secondItem="PP6-bf-L5v" secondAttribute="bottom" constant="-70" id="zww-h7-xF7"/>
+                            <constraint firstItem="i92-4M-Jia" firstAttribute="top" secondItem="PP6-bf-L5v" secondAttribute="bottom" constant="-65" id="zww-h7-xF7"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
