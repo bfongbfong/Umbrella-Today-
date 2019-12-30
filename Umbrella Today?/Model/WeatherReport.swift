@@ -22,6 +22,8 @@ class WeatherReport {
     var visibility: Int?
     var windDirection: Int?
     var windSpeed: Int?
+    var sunsetTime: Int?
+    var sunriseTime: Int?
     
     init(temperature: Temperature,
          location: String,
@@ -34,7 +36,9 @@ class WeatherReport {
          clouds: Double?,
          visibility: Int?,
          windDirection: Int?,
-         windSpeed: Int?) {
+         windSpeed: Int?,
+         sunsetTime: Int?,
+         sunriseTime: Int?) {
         self.temperature = temperature
         self.location = location
         self.description = description
@@ -47,6 +51,8 @@ class WeatherReport {
         self.visibility = visibility
         self.windDirection = windDirection
         self.windSpeed = windSpeed
+        self.sunsetTime = sunsetTime
+        self.sunriseTime = sunriseTime
     }
     
     init(temperature: Temperature,

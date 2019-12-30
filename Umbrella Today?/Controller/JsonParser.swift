@@ -64,6 +64,16 @@ class JsonParser {
                 thisWeatherReport.windSpeed = windSpeed
             }
         }
+        
+        if let sysObject = jsonObject["sys"] as? [String: Any] {
+            if let sunriseTime = sysObject["sunrise"] as? Int {
+                thisWeatherReport.sunriseTime = sunriseTime
+            }
+            if let sunsetTime = sysObject["sunset"] as? Int {
+                thisWeatherReport.sunsetTime = sunsetTime
+            }
+        }
+        
         return thisWeatherReport
     }
 }

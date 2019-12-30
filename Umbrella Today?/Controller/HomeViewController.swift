@@ -14,30 +14,24 @@ class HomeViewController: UIViewController {
     
     // MARK: - Outlets
     @IBOutlet weak var currentTempLabel: UILabel!
-    @IBOutlet weak var minTempLabel: UILabel!
-    @IBOutlet weak var maxTempLabel: UILabel!
-    @IBOutlet weak var feelsLikeLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
 
     // MARK: - Properties
-    var weatherReport: WeatherReport!
+    var weatherReport: WeatherReport?
     var locationManager = CLLocationManager()
     var currentLocation: CLLocation!
+    var isDaytime = false
     
     // MARK: - View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
         checkLocationServices()
     }
 }
 
 // MARK: - UI Functions
 extension HomeViewController {
-    func setupUI() {
-        
-    }
     
     func updateUI() {
         if weatherReport == nil {
@@ -45,12 +39,40 @@ extension HomeViewController {
             return
         }
         
-        currentTempLabel.text = String(weatherReport.temperature.current)
-        minTempLabel.text = String(weatherReport.temperature.minimum)
-        maxTempLabel.text = String(weatherReport.temperature.maximum)
-        feelsLikeLabel.text = String(weatherReport.temperature.feelsLike)
-        locationLabel.text = weatherReport.location
-        descriptionLabel.text = weatherReport.description
+        checkSunlight()
+        
+        if isDaytime {
+            view.backgroundColor = UIColor.dayBackground()
+            
+            // handle these errors later
+            currentTempLabel.text = "\(weatherReport?.temperature.current ?? 0)º"
+
+            let uppercasedLocation = weatherReport?.location.uppercased()
+            locationLabel.text = uppercasedLocation!
+            locationLabel.textColor = UIColor.dayLocationText()
+            let uppercasedDescription = weatherReport?.description.capitalized
+            descriptionLabel.text = "\(uppercasedDescription!), \nFeels like \(weatherReport?.temperature.feelsLike ?? 0)"
+        } else {
+            // set status bar to light
+            view.backgroundColor = UIColor.nightBackground()
+            currentTempLabel.textColor = UIColor.getPaleLetters()
+            
+            // handle these errors later
+            currentTempLabel.text = "\(weatherReport?.temperature.current ?? 0)º"
+
+            let uppercasedLocation = weatherReport?.location.uppercased()
+            locationLabel.text = uppercasedLocation!
+//            locationLabel.textColor = UIColor.()
+            let uppercasedDescription = weatherReport?.description.capitalized
+            descriptionLabel.text = "\(uppercasedDescription!), \nFeels like \(weatherReport?.temperature.feelsLike ?? 0)"
+        }
+
+        
+    }
+    
+    func showErrorAlert() {
+        // to be called if weather report is ever nil
+        
     }
 }
 
@@ -109,16 +131,35 @@ extension HomeViewController {
 // MARK: - CLLocation Manager Delegate
 extension HomeViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        //
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        //
+        getLocation()
     }
 }
 
 // MARK: - Logic Functions
 extension HomeViewController {
+    
+    func checkSunlight() {
+        let now = Int(NSDate().timeIntervalSince1970)
+        print("right now is \(now) in epoch time")
+        
+        if weatherReport != nil {
+            if weatherReport!.sunriseTime != nil {
+                print("sunrise time: \(weatherReport!.sunriseTime!)")
+            }
+        }
+        if weatherReport != nil {
+            if weatherReport!.sunsetTime != nil {
+                print("sunset time: \(weatherReport!.sunsetTime!)")
+                if now > weatherReport!.sunsetTime! {
+                    // it's night time.
+                    isDaytime = false
+                } else {
+                    // it's daytime.
+                    isDaytime = true
+                }
+            }
+        }
+    }
     
     func populateWeatherReportData() {
         
@@ -147,7 +188,7 @@ extension HomeViewController {
 //        }
 //
         
-        AutocompleteSearchManager.searchForCities(cityName: "dog", maxNumberOfResults: 10)
+//        AutocompleteSearchManager.searchForCities(cityName: "dog", maxNumberOfResults: 10)
     }
 }
 
