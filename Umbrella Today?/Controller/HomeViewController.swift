@@ -21,7 +21,30 @@ class HomeViewController: UIViewController {
     var weatherReport: WeatherReport?
     var locationManager = CLLocationManager()
     var currentLocation: CLLocation!
-    var isDaytime = false
+    var isDaytime = false {
+        didSet {
+            if isDaytime {
+                backgroundColor = UIColor.dayBackground()
+                temperatureTextColor = UIColor.dayTemperatureText()
+                locationTextColor = UIColor.dayLocationText()
+                descriptionTextColor = UIColor.dayDetailText()
+                detailTextHighlightsColor = UIColor.dayDetailTextHighlights()
+            } else {
+                backgroundColor = UIColor.nightBackground()
+                temperatureTextColor = UIColor.nightTemperatureText()
+                locationTextColor = UIColor.nightLocationText()
+                descriptionTextColor = UIColor.nightDetailText()
+                detailTextHighlightsColor = UIColor.nightDetailTextHighlights()
+            }
+        }
+    }
+    
+    // Colors
+    var backgroundColor: UIColor!
+    var temperatureTextColor: UIColor!
+    var locationTextColor: UIColor!
+    var descriptionTextColor: UIColor!
+    var detailTextHighlightsColor: UIColor!
     
     // MARK: - View Controller Life Cycle
     override func viewDidLoad() {
@@ -41,6 +64,8 @@ extension HomeViewController {
         
         checkSunlight()
         
+        // TODO: - change these to simple set all the colors to their local color varables.
+        
         if isDaytime {
             view.backgroundColor = UIColor.dayBackground()
             
@@ -53,8 +78,6 @@ extension HomeViewController {
             let uppercasedDescription = weatherReport?.description.capitalized
             descriptionLabel.text = "\(uppercasedDescription!), \nFeels like \(weatherReport?.temperature.feelsLike ?? 0)"
         } else {
-            
-            
             // NIGHT TIME
             // set status bar to light
             view.backgroundColor = UIColor.nightBackground()
@@ -67,7 +90,6 @@ extension HomeViewController {
             locationLabel.text = uppercasedLocation!
             locationLabel.addCharacterSpacing(2)
             locationLabel.textColor = UIColor.nightLocationText()
-            
             
             descriptionLabel.textColor = UIColor.nightDetailText()
             
