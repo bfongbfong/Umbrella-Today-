@@ -64,62 +64,39 @@ extension HomeViewController {
         
         checkSunlight()
         
-        // TODO: - change these to simple set all the colors to their local color varables.
+        view.backgroundColor = backgroundColor
+        currentTempLabel.textColor = temperatureTextColor
         
-        if isDaytime {
-            view.backgroundColor = UIColor.dayBackground()
-            
-            // handle these errors later
-            currentTempLabel.text = "\(weatherReport?.temperature.current ?? 0)º"
+        // handle these errors later
+        currentTempLabel.text = "\(weatherReport?.temperature.current ?? 0)º"
 
-            let uppercasedLocation = weatherReport?.location.uppercased()
-            locationLabel.text = uppercasedLocation!
-            locationLabel.textColor = UIColor.dayLocationText()
-            let uppercasedDescription = weatherReport?.description.capitalized
-            descriptionLabel.text = "\(uppercasedDescription!), \nFeels like \(weatherReport?.temperature.feelsLike ?? 0)"
-        } else {
-            // NIGHT TIME
-            // set status bar to light
-            view.backgroundColor = UIColor.nightBackground()
-            currentTempLabel.textColor = UIColor.nightTemperatureText()
-            
-            // handle these errors later
-            currentTempLabel.text = "\(weatherReport?.temperature.current ?? 0)º"
+        let uppercasedLocation = weatherReport?.location.uppercased()
+        locationLabel.text = uppercasedLocation!
+        locationLabel.addCharacterSpacing(2)
+        locationLabel.textColor = locationTextColor
+        
+        descriptionLabel.textColor = descriptionTextColor
+        
+        let capitalizedDescription = weatherReport?.description.capitalized
 
-            let uppercasedLocation = weatherReport?.location.uppercased()
-            locationLabel.text = uppercasedLocation!
-            locationLabel.addCharacterSpacing(2)
-            locationLabel.textColor = UIColor.nightLocationText()
-            
-            descriptionLabel.textColor = UIColor.nightDetailText()
-            
-            let capitalizedDescription = weatherReport?.description.capitalized
+        let stringOne = "\(capitalizedDescription!),\n\(weatherReport!.humidity!)% humidity. Feels like \(weatherReport!.temperature.feelsLike)º"
+        let stringTwo = "\(weatherReport!.temperature.feelsLike)º"
+        
+        let range1 = (stringOne as NSString).range(of: stringTwo)
+        let range2 = (stringOne as NSString).range(of: "\(weatherReport!.humidity!)%")
+        let range3 = (stringOne as NSString).range(of: capitalizedDescription!)
 
-            let stringOne = "\(capitalizedDescription!),\n\(weatherReport!.humidity!)% humidity. Feels like \(weatherReport!.temperature.feelsLike)º"
-            let stringTwo = "\(weatherReport!.temperature.feelsLike)º"
-            
-            let range1 = (stringOne as NSString).range(of: stringTwo)
-            
-            let range2 = (stringOne as NSString).range(of: "\(weatherReport!.humidity!)%")
-            
-            let range3 = (stringOne as NSString).range(of: capitalizedDescription!)
+        let attributedText = NSMutableAttributedString.init(string: stringOne)
+        attributedText.addAttribute(NSAttributedString.Key.foregroundColor, value: detailTextHighlightsColor!, range: range1)
+        attributedText.addAttribute(NSAttributedString.Key.foregroundColor, value: detailTextHighlightsColor!, range: range2)
+        attributedText.addAttribute(NSAttributedString.Key.foregroundColor, value: detailTextHighlightsColor!, range: range3)
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 2
+        paragraphStyle.alignment = .center
+        attributedText.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range: NSMakeRange(0, attributedText.length))
 
-            let attributedText = NSMutableAttributedString.init(string: stringOne)
-            attributedText.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.nightDetailTextHighlights(), range: range1)
-            
-            attributedText.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.nightDetailTextHighlights(), range: range2)
-            
-            attributedText.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.nightDetailTextHighlights(), range: range3)
-
-            let paragraphStyle = NSMutableParagraphStyle()
-
-            paragraphStyle.lineSpacing = 2
-            paragraphStyle.alignment = .center
-
-            attributedText.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, attributedText.length))
-
-            descriptionLabel.attributedText = attributedText
-        }
+        descriptionLabel.attributedText = attributedText
     }
     
     func showErrorAlert() {
