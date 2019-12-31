@@ -19,12 +19,21 @@ class ForecastTableViewCell: UITableViewCell {
             if isDaytime {
                 dayLabel.textColor = UIColor.dayLocationText()
                 temperatureLabel.textColor = UIColor.dayTemperatureText()
+                
+                maxTempColor = UIColor.dayForecastMaxTemp()
+                slashColor = UIColor.dayLocationText()
             } else {
                 dayLabel.textColor = UIColor.nightLocationText()
                 temperatureLabel.textColor = UIColor.nightTemperatureText()
+                
+                slashColor = UIColor.nightDetailTextHighlights()
+                maxTempColor = UIColor.nightForecastMaxTemp()
             }
         }
     }
+    
+    var slashColor: UIColor?
+    var maxTempColor: UIColor?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -37,13 +46,23 @@ class ForecastTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func update(day: String, temperatureText: String, weatherImageName: String, isDaytime: Bool) {
+    // TODOL - figure out why colors are reversed
+    
+    // need to pass in min temp
+    func update(day: String, minTemp: Int, maxTemp: Int, weatherImageName: String, isDaytime: Bool) {
         dayLabel.text = day
-        temperatureLabel.text = temperatureText
         weatherImageView.image = UIImage(named: weatherImageName)!
         self.selectionStyle = .none
         self.isDaytime = isDaytime
         self.backgroundColor = .none
-    }
+        let temperatureText = "\(minTemp)º / \(maxTemp)º"
+        
+        let rangeOfSlash = (temperatureText as NSString).range(of: "/")
+        let rangeOfMaxTemp = (temperatureText as NSString).range(of: "\(maxTemp)º")
+        let attributedText = NSMutableAttributedString.init(string: temperatureText)
+        attributedText.addAttribute(NSAttributedString.Key.foregroundColor, value: slashColor!, range: rangeOfSlash)
+        attributedText.addAttribute(NSAttributedString.Key.foregroundColor, value: maxTempColor!, range: rangeOfMaxTemp)
+        temperatureLabel.attributedText = attributedText
 
+    }
 }
