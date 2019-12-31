@@ -39,11 +39,10 @@ class ScrollParentViewController: UIViewController {
         scrollView.showsHorizontalScrollIndicator = false
         let page1 = setupCurrentWeatherVC()
         let page2 = setupFiveDayForecastVC()
-        let page3 = setupCurrentWeatherVC()
         
-        let views: [String: UIView] = ["view": view, "page1": page1.view, "page2": page2.view, "page3": page3.view]
+        let views: [String: UIView] = ["view": view, "page1": page1.view, "page2": page2.view]
         let verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|[page1(==view)]", options: [], metrics: nil, views: views)
-        let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|[page1(==view)][page2(==view)][page3(==view)]|", options: [.alignAllTop, .alignAllBottom], metrics: nil, views: views)
+        let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|[page1(==view)][page2(==view)]|", options: [.alignAllTop, .alignAllBottom], metrics: nil, views: views)
         NSLayoutConstraint.activate(verticalConstraints + horizontalConstraints)
     }
     
