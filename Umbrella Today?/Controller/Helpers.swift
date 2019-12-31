@@ -98,16 +98,16 @@ class Helpers {
                 break
             }
         }
-        
+
         let arrayOfWeekArrays = [monArray, tueArray, wedArray, thuArray, friArray, satArray, sunArray]
-        
+
         for weekArray in arrayOfWeekArrays {
             if weekArray.count != 0 {
                 let middleIndex = weekArray.count / 2
                 returnArray.append(weekArray[middleIndex])
             }
         }
-        
+
         return returnArray
     }
 }

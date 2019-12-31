@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FAC9973DF633E44BB26B9A280381209D"
+               BlueprintIdentifier = "5E7554B8173DAD934F1AC1F8614891A4"
                BuildableName = "Pods_Umbrella_Today_.framework"
                BlueprintName = "Pods-Umbrella Today?"
                ReferencedContainer = "container:Pods.xcodeproj">
