@@ -40,6 +40,7 @@ class ForecastTableViewCell: UITableViewCell {
         dayLabel.text = day
         temperatureLabel.text = temperatureText
         weatherImageView.image = UIImage(named: weatherImageName)!
+        self.selectionStyle = .none
         self.isDaytime = isDaytime
         self.backgroundColor = .none
     }

@@ -168,8 +168,17 @@ extension ScrollParentViewController {
                     // it's night time.
                     isDaytime = false
                 } else {
-                    // it's daytime.
-                    isDaytime = true
+                    if currentWeatherReport != nil {
+                        if currentWeatherReport!.sunriseTime != nil {
+                            if now > currentWeatherReport!.sunriseTime! {
+                                // it's daytime
+                                isDaytime = true
+                            } else {
+                                // it's early morning and still dark
+                                isDaytime = false
+                            }
+                        }
+                    }
                 }
             }
         }
