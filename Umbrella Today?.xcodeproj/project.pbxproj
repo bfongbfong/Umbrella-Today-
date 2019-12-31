@@ -34,6 +34,7 @@
 		55C3FE4923B6B28200CE7776 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55C3FE4823B6B28200CE7776 /* Assets.xcassets */; };
 		55C3FE4C23B6B28200CE7776 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55C3FE4A23B6B28200CE7776 /* LaunchScreen.storyboard */; };
 		55C92A8F23BBA80C0040F854 /* SimpleWeatherReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C92A8E23BBA80C0040F854 /* SimpleWeatherReport.swift */; };
+		55C92A9323BBD76D0040F854 /* FiveDayForecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C92A9223BBD76D0040F854 /* FiveDayForecast.swift */; };
 		740AA9BC6AFAFF17F1BCBC0D /* Pods_Umbrella_Today_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAFD893038799641174FC52B /* Pods_Umbrella_Today_.framework */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +69,7 @@
 		55C3FE4B23B6B28200CE7776 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		55C3FE4D23B6B28200CE7776 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55C92A8E23BBA80C0040F854 /* SimpleWeatherReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleWeatherReport.swift; sourceTree = "<group>"; };
+		55C92A9223BBD76D0040F854 /* FiveDayForecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveDayForecast.swift; sourceTree = "<group>"; };
 		99EC326CFE3E1ADBC87A6EF7 /* Pods-Umbrella Today?.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Umbrella Today?.release.xcconfig"; path = "Target Support Files/Pods-Umbrella Today?/Pods-Umbrella Today?.release.xcconfig"; sourceTree = "<group>"; };
 		FAFD893038799641174FC52B /* Pods_Umbrella_Today_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Umbrella_Today_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -113,6 +115,7 @@
 				5521B1B523B6C90300D0911C /* WeatherReport.swift */,
 				55C92A8E23BBA80C0040F854 /* SimpleWeatherReport.swift */,
 				5585763223B8807900CABA38 /* City.swift */,
+				55C92A9223BBD76D0040F854 /* FiveDayForecast.swift */,
 				5585763023B87E5700CABA38 /* Temperature.swift */,
 				551CF19723BAE8CD00101E57 /* WeatherImages.swift */,
 				5585762C23B8798C00CABA38 /* CityListCheckPoints.swift */,
@@ -331,6 +334,7 @@
 				551CF19C23BB049600101E57 /* ForecastTableViewCell.swift in Sources */,
 				5521B1B823B6ED7B00D0911C /* Helpers.swift in Sources */,
 				55C92A8F23BBA80C0040F854 /* SimpleWeatherReport.swift in Sources */,
+				55C92A9323BBD76D0040F854 /* FiveDayForecast.swift in Sources */,
 				5585762F23B87E3E00CABA38 /* Range.swift in Sources */,
 				55C3FE3D23B6B27F00CE7776 /* AppDelegate.swift in Sources */,
 				55A2916C23BAE4060031F48E /* ScrollParentViewController.swift in Sources */,

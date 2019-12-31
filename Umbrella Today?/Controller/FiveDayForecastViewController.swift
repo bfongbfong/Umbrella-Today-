@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class FiveDayForecastViewController: UIViewController {
     
@@ -20,28 +21,55 @@ class FiveDayForecastViewController: UIViewController {
             }
         }
     }
-
+    
+    var simpleWeatherReports = [SimpleWeatherReport]()
+    let disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = .none
+        setupRxSwift()
     }
 }
 
+// MARK: - RxSwift
+extension FiveDayForecastViewController {
+    func setupRxSwift() {
+        FiveDayForecast.simpleWeatherReports.asObservable()
+            .subscribe(onNext: { weatherReports in
+                print("five day reports accepted: \(weatherReports.count) items")
+                self.simpleWeatherReports = weatherReports
+                for weatherReport in weatherReports {
+                    print(weatherReport.dayOfWeek)
+                }
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+                
+            }).disposed(by: disposeBag)
+    }
+}
+
+// MARK: - UITableView Delegate & Data Source
 extension FiveDayForecastViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return simpleWeatherReports.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ForecastCell") as! ForecastTableViewCell
-        cell.update(day: "SAT", temperatureText: "32º / 42º", weatherImageName: "few_clouds_day_01", isDaytime: isDaytime)
+        let thisReport = simpleWeatherReports[indexPath.row]
+        
+        let dayOfWeekText = thisReport.dayOfWeek
+        let temperatureText = "\(thisReport.minTemp)º / \(thisReport.maxTemp)º"
+        
+        cell.update(day: dayOfWeekText, temperatureText: temperatureText, weatherImageName: "few_clouds_day_01", isDaytime: isDaytime)
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
-    
 }

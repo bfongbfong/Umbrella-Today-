@@ -32,11 +32,11 @@ class Helpers {
         case 1:
             return "MON"
         case 2:
-            return "TUES"
+            return "TUE"
         case 3:
             return "WED"
         case 4:
-            return "THUR"
+            return "THU"
         case 5:
             return "FRI"
         case 6:
@@ -82,11 +82,11 @@ class Helpers {
             switch weatherReport.dayOfWeek {
             case "MON":
                 monArray.append(weatherReport)
-            case "TUES":
+            case "TUE":
                 tueArray.append(weatherReport)
             case "WED":
                 wedArray.append(weatherReport)
-            case "THUR":
+            case "THU":
                 thuArray.append(weatherReport)
             case "FRI":
                 friArray.append(weatherReport)

@@ -15,7 +15,7 @@
         <!--Scroll Parent View Controller-->
         <scene sceneID="SbS-L2-HqE">
             <objects>
-                <viewController id="4ql-uK-jpI" customClass="ScrollParentViewController" customModule="Umbrella_Today_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="4ql-uK-jpI" customClass="ScrollParentViewController" customModule="UmbrellaPal" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3V1-Nf-rmk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -46,7 +46,7 @@
         <!--Current Weather View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="CurrentWeatherViewController" id="BYZ-38-t0r" customClass="CurrentWeatherViewController" customModule="Umbrella_Today_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CurrentWeatherViewController" id="BYZ-38-t0r" customClass="CurrentWeatherViewController" customModule="UmbrellaPal" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -109,19 +109,19 @@
         <!--Five Day Forecast View Controller-->
         <scene sceneID="7kX-iw-9MZ">
             <objects>
-                <viewController storyboardIdentifier="FiveDayForecastViewController" id="Hy4-1X-Qfm" customClass="FiveDayForecastViewController" customModule="Umbrella_Today_" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FiveDayForecastViewController" id="Hy4-1X-Qfm" customClass="FiveDayForecastViewController" customModule="UmbrellaPal" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="czg-0Z-UOt">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Y5G-dj-EjK">
-                                <rect key="frame" x="0.0" y="217.5" width="414" height="461"/>
+                                <rect key="frame" x="0.0" y="208" width="414" height="480"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="461" id="PWO-Uq-mEE"/>
+                                    <constraint firstAttribute="height" constant="480" id="PWO-Uq-mEE"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ForecastCell" rowHeight="60" id="EZk-yb-Mfb" customClass="ForecastTableViewCell" customModule="Umbrella_Today_" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ForecastCell" rowHeight="60" id="EZk-yb-Mfb" customClass="ForecastTableViewCell" customModule="UmbrellaPal" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EZk-yb-Mfb" id="gex-j8-v8O">

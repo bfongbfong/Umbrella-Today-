@@ -175,9 +175,10 @@ extension ScrollParentViewController {
 
                     let arrayOfSimpleWeatherReports = JsonParser.parseJsonFiveDayWeatherObjects(jsonObject: responseJson)
                     let fiveDayReports = Helpers.findFiveDayReport(simpleWeatherReports: arrayOfSimpleWeatherReports)
-                    for report in fiveDayReports {
-                        print("\(report.dayOfWeek) - \(report.time) - \(report.currentTemp)º")
-                    }
+                    FiveDayForecast.simpleWeatherReports.accept(fiveDayReports)
+//                    for report in fiveDayReports {
+//                        print("\(report.dayOfWeek) - \(report.time) - \(report.currentTemp)º")
+//                    }
                 }
             }
         }
