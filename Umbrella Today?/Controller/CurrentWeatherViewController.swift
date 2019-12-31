@@ -54,8 +54,8 @@ class CurrentWeatherViewController: UIViewController {
     // MARK: - View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        let weatherImages = [UIImage(named: "partlycloudy_01")!, UIImage(named: "partlycloudy_02")!, UIImage(named: "partlycloudy_03")!]
-        weatherImage = UIImage.animatedImage(with: weatherImages, duration: 1.0)
+        
+        weatherImage = WeatherImages.rain
         
         addWhiteLayer()
         checkLocationServices()
@@ -206,13 +206,13 @@ extension CurrentWeatherViewController {
         if weatherReport != nil {
             if weatherReport!.sunsetTime != nil {
                 print("sunset time: \(weatherReport!.sunsetTime!)")
-//                if now > weatherReport!.sunsetTime! {
-//                    // it's night time.
-//                    isDaytime = false
-//                } else {
+                if now > weatherReport!.sunsetTime! {
+                    // it's night time.
+                    isDaytime = false
+                } else {
                     // it's daytime.
                     isDaytime = true
-//                }
+                }
             }
         }
     }
