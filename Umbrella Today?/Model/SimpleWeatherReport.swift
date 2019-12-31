@@ -14,12 +14,14 @@ class SimpleWeatherReport {
     var maxTemp: Int
     var description: String
     var dayOfWeek: String
+    var time: String
     
-    init(currentTempInKelvin: Double, minTempInKelvin: Double, maxTempInKelvin: Double, description: String, dayOfWeek: String) {
+    init(currentTempInKelvin: Double, minTempInKelvin: Double, maxTempInKelvin: Double, description: String, dayOfWeek: String, time: String) {
         self.currentTemp = Helpers.convertKelvinToFarenheit(kelvinNumber: currentTempInKelvin)
         self.minTemp = Helpers.convertKelvinToFarenheit(kelvinNumber: minTempInKelvin)
         self.maxTemp = Helpers.convertKelvinToFarenheit(kelvinNumber: maxTempInKelvin)
         self.description = description
         self.dayOfWeek = dayOfWeek
+        self.time = time
     }
 }

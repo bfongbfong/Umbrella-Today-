@@ -77,88 +77,63 @@ class JsonParser {
         return thisWeatherReport
     }
     
-    static func parseJsonFiveDayWeatherObjects(jsonObject: [String: Any]) -> [String: SimpleWeatherReport] {
+    static func parseJsonFiveDayWeatherObjects(jsonObject: [String: Any]) -> [SimpleWeatherReport] {
+        var simpleWeatherReports = [SimpleWeatherReport]()
         
         guard let list = jsonObject["list"] as? [[String: Any]] else {
             print("Error parsing 5 day forecast json data")
-            return [:]
+            return []
         }
         
         for weatherObject in list {
             guard let mainTemp = weatherObject["main"] as? [String: Any] else {
                 print("Error parsing 5 day forecast json data")
-                return [:]
+                return []
             }
             
             guard let currentTemp = mainTemp["temp"] as? Double else {
                 print("Error parsing 5 day forecast json data")
-                return [:]
+                return []
             }
             
             guard let minTemp = mainTemp["temp_min"] as? Double else {
                 print("Error parsing 5 day forecast json data")
-                return [:]
+                return []
             }
             
             guard let maxTemp = mainTemp["temp_max"] as? Double else {
                 print("Error parsing 5 day forecast json data")
-                return [:]
+                return []
             }
             
             guard let unixTimeStamp = weatherObject["dt"] as? Double else {
                 print("Error parsing 5 day forecast json data")
-                return [:]
+                return []
             }
             
             guard let specificWeatherData = weatherObject["weather"] as? [Any] else {
                 print("Error parsing 5 day forecast json data")
-                return [:]
+                return []
             }
             
             guard let firstSpecificWeatherObject = specificWeatherData[0] as? [String: Any] else {
                 print("Error parsing 5 day forecast json data")
-                return [:]
+                return []
             }
             
             guard let description = firstSpecificWeatherObject["description"] as? String else {
                 print("Error parsing 5 day forecast json data")
-                return [:]
+                return []
             }
-                        
-            let date = Date(timeIntervalSince1970: unixTimeStamp)
-            let dateFormatter = DateFormatter()
-            dateFormatter.timeStyle = DateFormatter.Style.short //Set time style
-            dateFormatter.dateStyle = DateFormatter.Style.full //Set date style
-            dateFormatter.timeZone = .current
-            let localDate = dateFormatter.string(from: date)
-            print("local date:", localDate)
-            let dayOfWeek = convertToDayOfWeek(unixTimeStamp: unixTimeStamp)
-            print(dayOfWeek)
+            
+            let dayOfWeek = Helpers.convertToDayOfWeek(unixTimeStamp: unixTimeStamp)
+            let time = Helpers.convertToTime(unixTimeStamp: unixTimeStamp)
+            
+            let simpleWeatherReport = SimpleWeatherReport(currentTempInKelvin: currentTemp, minTempInKelvin: minTemp, maxTempInKelvin: maxTemp, description: description, dayOfWeek: dayOfWeek, time: time)
+
+            simpleWeatherReports.append(simpleWeatherReport)
         }
         
-        return [:]
-    }
-    
-    static func convertToDayOfWeek(unixTimeStamp: Double) -> String {
-        let dayOfWeekNumber = Int(floor(unixTimeStamp/86400) + 4) % 7
-
-        switch dayOfWeekNumber {
-        case 0:
-            return "SUN"
-        case 1:
-            return "MON"
-        case 2:
-            return "TUES"
-        case 3:
-            return "WED"
-        case 4:
-            return "THUR"
-        case 5:
-            return "FRI"
-        case 6:
-            return "SAT"
-        default:
-            return ""
-        }
+        return simpleWeatherReports
     }
 }
