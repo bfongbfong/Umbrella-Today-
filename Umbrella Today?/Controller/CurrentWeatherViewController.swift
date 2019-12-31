@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  CurrentWeatherViewController.swift
 //  Umbrella Today?
 //
 //  Created by Brandon Fong on 12/27/19.
@@ -10,12 +10,13 @@ import UIKit
 import Alamofire
 import CoreLocation
 
-class HomeViewController: UIViewController {
+class CurrentWeatherViewController: UIViewController {
     
     // MARK: - Outlets
     @IBOutlet weak var currentTempLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var weatherImageView: UIImageView!
 
     // MARK: - Properties
     var weatherReport: WeatherReport?
@@ -39,25 +40,30 @@ class HomeViewController: UIViewController {
         }
     }
     
-    // Colors
+    // Changing weather conditions
     var backgroundColor: UIColor!
     var temperatureTextColor: UIColor!
     var locationTextColor: UIColor!
     var descriptionTextColor: UIColor!
     var detailTextHighlightsColor: UIColor!
     
+    var weatherImage: UIImage!
+    
     var loadingView = UIView()
     
     // MARK: - View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        let weatherImages = [UIImage(named: "partlycloudy_01")!, UIImage(named: "partlycloudy_02")!, UIImage(named: "partlycloudy_03")!]
+        weatherImage = UIImage.animatedImage(with: weatherImages, duration: 1.0)
+        
         addWhiteLayer()
         checkLocationServices()
     }
 }
 
 // MARK: - UI Functions
-extension HomeViewController {
+extension CurrentWeatherViewController {
     
     func addWhiteLayer() {
         loadingView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
@@ -86,6 +92,8 @@ extension HomeViewController {
         
         view.backgroundColor = backgroundColor
         currentTempLabel.textColor = temperatureTextColor
+        
+        weatherImageView.image = weatherImage
         
         // handle these errors later
         currentTempLabel.text = "\(weatherReport?.temperature.current ?? 0)º"
@@ -125,7 +133,7 @@ extension HomeViewController {
 }
 
 // MARK: - CLLocation Manager
-extension HomeViewController {
+extension CurrentWeatherViewController {
     func setupLocationManager() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -177,14 +185,14 @@ extension HomeViewController {
 
 
 // MARK: - CLLocation Manager Delegate
-extension HomeViewController: CLLocationManagerDelegate {
+extension CurrentWeatherViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         getLocation()
     }
 }
 
 // MARK: - Logic Functions
-extension HomeViewController {
+extension CurrentWeatherViewController {
     
     func checkSunlight() {
         let now = Int(NSDate().timeIntervalSince1970)
@@ -198,13 +206,13 @@ extension HomeViewController {
         if weatherReport != nil {
             if weatherReport!.sunsetTime != nil {
                 print("sunset time: \(weatherReport!.sunsetTime!)")
-                if now > weatherReport!.sunsetTime! {
-                    // it's night time.
-                    isDaytime = false
-                } else {
+//                if now > weatherReport!.sunsetTime! {
+//                    // it's night time.
+//                    isDaytime = false
+//                } else {
                     // it's daytime.
                     isDaytime = true
-                }
+//                }
             }
         }
     }
