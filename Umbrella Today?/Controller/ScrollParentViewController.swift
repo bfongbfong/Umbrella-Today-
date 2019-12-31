@@ -50,6 +50,8 @@ class ScrollParentViewController: UIViewController {
     private func setupFiveDayForecastVC() -> UIViewController {
         let page = storyboard!.instantiateViewController(identifier: "FiveDayForecastViewController") as! FiveDayForecastViewController
 
+        page.isDaytime = isDaytime
+
         page.view.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(page.view)
         addChild(page)
