@@ -18,6 +18,9 @@ class OpenWeatherManager {
     static let homeLon = "-74.530521"
 
     static func getCurrentWeatherData(latitude: Double, longitude: Double, completion: @escaping((_ jsonWeatherObject: [String: Any]?) -> Void)) {
+       
+//        print("latitude is \(latitude)")
+//        print("longitude is \(longitude)")
         AF.request("http://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&APIKEY=\(apikey)").responseJSON(completionHandler: { (response) in
 
             print(response.value!)
