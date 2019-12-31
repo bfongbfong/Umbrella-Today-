@@ -160,11 +160,11 @@
 			children = (
 				55C3FE3C23B6B27F00CE7776 /* AppDelegate.swift */,
 				55C3FE3E23B6B27F00CE7776 /* SceneDelegate.swift */,
-				55C92A8D23BB158C0040F854 /* Fonts */,
 				5521B1BC23B8438300D0911C /* Model */,
 				5521B1BD23B843C300D0911C /* View */,
 				5521B1BB23B8432D00D0911C /* Controller */,
 				55A2916423B981750031F48E /* Extensions */,
+				55C92A8D23BB158C0040F854 /* Fonts */,
 				55C3FE4223B6B27F00CE7776 /* Main.storyboard */,
 				55C3FE4823B6B28200CE7776 /* Assets.xcassets */,
 				55C3FE4A23B6B28200CE7776 /* LaunchScreen.storyboard */,
