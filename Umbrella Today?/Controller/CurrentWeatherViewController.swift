@@ -57,7 +57,7 @@ class CurrentWeatherViewController: UIViewController {
         
         weatherImage = WeatherImages.rain
         
-        addWhiteLayer()
+//        addWhiteLayer()
 //        checkLocationServices()
         updateUI()
     }
@@ -89,7 +89,7 @@ extension CurrentWeatherViewController {
         
 //        checkSunlight()
         
-        whiteFadeAwayAnimation()
+//        whiteFadeAwayAnimation()
         
         view.backgroundColor = backgroundColor
         currentTempLabel.textColor = temperatureTextColor
@@ -227,7 +227,7 @@ extension CurrentWeatherViewController {
             if let responseJson = jsonWeatherObject {
                 DispatchQueue.main.async {
 
-                    self.weatherReport = JsonParser.parseJsonWeatherObject(jsonObject: responseJson)
+                    self.weatherReport = JsonParser.parseJsonCurrentWeatherObject(jsonObject: responseJson)
                     self.updateUI()
                 }
             }
@@ -237,7 +237,7 @@ extension CurrentWeatherViewController {
 //            if let responseJson = jsonWeatherObject {
 //                DispatchQueue.main.async {
 //
-//                    self.weatherReport = JsonParser.parseJsonWeatherObject(jsonObject: responseJson)
+//                    self.weatherReport = JsonParser.parseJsonCurrentWeatherObject(jsonObject: responseJson)
 //                    self.updateUI()
 //                }
 //            }

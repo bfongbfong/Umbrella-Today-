@@ -14,8 +14,8 @@ class Temperature {
     var maximum: Int
     var feelsLike: Int
     
-    init(currentInKevlvin: Double, minimumInKelvin: Double, maximumInKelvin: Double, feelsLikeInKelvin: Double) {
-        self.current = Helpers.convertKelvinToFarenheit(kelvinNumber: currentInKevlvin)
+    init(currentInKelvin: Double, minimumInKelvin: Double, maximumInKelvin: Double, feelsLikeInKelvin: Double) {
+        self.current = Helpers.convertKelvinToFarenheit(kelvinNumber: currentInKelvin)
         self.minimum = Helpers.convertKelvinToFarenheit(kelvinNumber: minimumInKelvin)
         self.maximum = Helpers.convertKelvinToFarenheit(kelvinNumber: maximumInKelvin)
         self.feelsLike = Helpers.convertKelvinToFarenheit(kelvinNumber: feelsLikeInKelvin)

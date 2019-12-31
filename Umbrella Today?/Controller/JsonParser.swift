@@ -9,7 +9,7 @@
 import Foundation
 
 class JsonParser {
-    static func parseJsonWeatherObject(jsonObject: [String: Any]) -> WeatherReport? {
+    static func parseJsonCurrentWeatherObject(jsonObject: [String: Any]) -> WeatherReport? {
         
         guard let temperatureObject = jsonObject["main"] as? [String: Any] else { return nil }
         
@@ -18,7 +18,7 @@ class JsonParser {
         guard let tempMax = temperatureObject["temp_max"] as? Double else { return nil }
         guard let tempMin = temperatureObject["temp_min"] as? Double else { return nil }
         guard let feelsLike = temperatureObject["feels_like"] as? Double else { return nil }
-        let temperature = Temperature(currentInKevlvin: currentTemp, minimumInKelvin: tempMin, maximumInKelvin: tempMax, feelsLikeInKelvin: feelsLike)
+        let temperature = Temperature(currentInKelvin: currentTemp, minimumInKelvin: tempMin, maximumInKelvin: tempMax, feelsLikeInKelvin: feelsLike)
         
         guard let location = jsonObject["name"] as? String else { return nil }
         
@@ -75,5 +75,67 @@ class JsonParser {
         }
         
         return thisWeatherReport
+    }
+    
+    static func parseJsonFiveDayWeatherObjects(jsonObject: [String: Any]) -> [SimpleWeatherReport] {
+        
+        guard let list = jsonObject["list"] as? [[String: Any]] else {
+            print("Error parsing 5 day forecast json data")
+            return []
+        }
+        
+        for weatherObject in list {
+            guard let mainTemp = weatherObject["main"] as? [String: Any] else {
+                print("Error parsing 5 day forecast json data")
+                return []
+            }
+            
+            guard let currentTemp = mainTemp["temp"] as? Double else {
+                print("Error parsing 5 day forecast json data")
+                return []
+            }
+            
+            guard let minTemp = mainTemp["temp_min"] as? Double else {
+                print("Error parsing 5 day forecast json data")
+                return []
+            }
+            
+            guard let maxTemp = mainTemp["temp_max"] as? Double else {
+                print("Error parsing 5 day forecast json data")
+                return []
+            }
+            
+            guard let unixTimeStamp = weatherObject["dt"] as? Double else {
+                print("Error parsing 5 day forecast json data")
+                return []
+            }
+            
+            guard let specificWeatherData = weatherObject["weather"] as? [Any] else {
+                print("Error parsing 5 day forecast json data")
+                return []
+            }
+            
+            guard let firstSpecificWeatherObject = specificWeatherData[0] as? [String: Any] else {
+                print("Error parsing 5 day forecast json data")
+                return []
+            }
+            
+            guard let description = firstSpecificWeatherObject["description"] as? String else {
+                print("Error parsing 5 day forecast json data")
+                return []
+            }
+            
+            let date = Date(timeIntervalSince1970: unixTimeStamp)
+            let dateFormatter = DateFormatter()
+            dateFormatter.timeStyle = DateFormatter.Style.medium //Set time style
+            dateFormatter.dateStyle = DateFormatter.Style.medium //Set date style
+            dateFormatter.timeZone = .current
+            let localDate = dateFormatter.string(from: date)
+            print("local date:", localDate)
+        }
+        
+        print("list is \(list.count) long")
+        
+        return []
     }
 }
