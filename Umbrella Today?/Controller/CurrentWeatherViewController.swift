@@ -58,7 +58,8 @@ class CurrentWeatherViewController: UIViewController {
         weatherImage = WeatherImages.rain
         
         addWhiteLayer()
-        checkLocationServices()
+//        checkLocationServices()
+        updateUI()
     }
 }
 
@@ -86,7 +87,7 @@ extension CurrentWeatherViewController {
             return
         }
         
-        checkSunlight()
+//        checkSunlight()
         
         whiteFadeAwayAnimation()
         
@@ -178,7 +179,7 @@ extension CurrentWeatherViewController {
         if (CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
                 CLLocationManager.authorizationStatus() ==  .authorizedAlways) {
               currentLocation = locationManager.location
-            populateWeatherReportData()
+//            populateWeatherReportData()
         }
     }
 }
@@ -220,7 +221,6 @@ extension CurrentWeatherViewController {
     func populateWeatherReportData() {
         
         guard currentLocation != nil else { return }
-//        let hurzufID = 707860
         
         OpenWeatherManager.getCurrentWeatherData(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude) { (jsonWeatherObject) in
 

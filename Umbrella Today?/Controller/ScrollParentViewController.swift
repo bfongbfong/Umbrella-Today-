@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class ScrollParentViewController: UIViewController {
     
@@ -14,19 +15,31 @@ class ScrollParentViewController: UIViewController {
 
     var pages = [CurrentWeatherViewController]()
     
+    var locationManager = CLLocationManager()
+    var currentLocation: CLLocation!
+    var currentWeatherReport: WeatherReport!
+    
+    var isDaytime = false {
+        didSet {
+            if isDaytime {
+                view.backgroundColor = UIColor.dayBackground()
+            } else {
+                view.backgroundColor = UIColor.nightBackground()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        
-        view.backgroundColor = UIColor.dayBackground()
-        
+        checkLocationServices()
+    }
+    
+    func setupPages() {
         scrollView.isPagingEnabled = true
         scrollView.showsHorizontalScrollIndicator = false
-        let page1 = setupNewVC()
-        let page2 = setupNewVC()
-        let page3 = setupNewVC()
+        let page1 = setupCurrentWeatherVC()
+        let page2 = setupFiveDayForecastVC()
+        let page3 = setupCurrentWeatherVC()
         
         let views: [String: UIView] = ["view": view, "page1": page1.view, "page2": page2.view, "page3": page3.view]
         let verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|[page1(==view)]", options: [], metrics: nil, views: views)
@@ -34,8 +47,8 @@ class ScrollParentViewController: UIViewController {
         NSLayoutConstraint.activate(verticalConstraints + horizontalConstraints)
     }
     
-    private func setupNewVC() -> CurrentWeatherViewController {
-        let page = storyboard!.instantiateViewController(identifier: "CurrentWeatherViewController") as! CurrentWeatherViewController
+    private func setupFiveDayForecastVC() -> UIViewController {
+        let page = storyboard!.instantiateViewController(identifier: "FiveDayForecastViewController") as! FiveDayForecastViewController
 
         page.view.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(page.view)
@@ -44,15 +57,121 @@ class ScrollParentViewController: UIViewController {
         return page
     }
     
+    private func setupCurrentWeatherVC() -> UIViewController {
+        let page = storyboard!.instantiateViewController(identifier: "CurrentWeatherViewController") as! CurrentWeatherViewController
+        
+        page.weatherReport = currentWeatherReport
+        page.isDaytime = isDaytime
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        page.view.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.addSubview(page.view)
+        addChild(page)
+        page.didMove(toParent: self)
+        return page
     }
-    */
-
 }
+
+// MARK: - CLLocation Manager
+extension ScrollParentViewController {
+    func setupLocationManager() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    }
+    
+    func checkLocationServices() {
+        if CLLocationManager.locationServicesEnabled() {
+            // setup our location manager
+            setupLocationManager()
+            checkLocationAuthorization()
+        } else {
+            // show alert telling user they have to enable it.
+        }
+    }
+    
+    func checkLocationAuthorization() {
+        switch CLLocationManager.authorizationStatus() {
+        case .authorizedWhenInUse:
+            // do map stuff
+            getLocation()
+            break
+        case .authorizedAlways:
+            // no need to ask
+            getLocation()
+            break
+        case .denied:
+            // alert user to go to settings to turn on permissions
+            break
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+            break
+        case .restricted:
+            // alert user that they have been restricted
+            break
+        @unknown default:
+            print("Error: Authorization status was unknown.")
+            break
+        }
+    }
+    
+    func getLocation() {
+        if (CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
+                CLLocationManager.authorizationStatus() ==  .authorizedAlways) {
+              currentLocation = locationManager.location
+            apiCall()
+        }
+    }
+}
+
+
+// MARK: - CLLocation Manager Delegate
+extension ScrollParentViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        getLocation()
+    }
+}
+
+
+extension ScrollParentViewController {
+    func apiCall() {
+        guard currentLocation != nil else { return }
+        
+        OpenWeatherManager.getCurrentWeatherData(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude) { (jsonWeatherObject) in
+
+            if let responseJson = jsonWeatherObject {
+                DispatchQueue.main.async {
+
+                    self.currentWeatherReport = JsonParser.parseJsonWeatherObject(jsonObject: responseJson)
+                    self.checkSunlight()
+                    self.setupPages()
+                }
+            }
+        }
+    }
+}
+
+extension ScrollParentViewController {
+    
+    func checkSunlight() {
+        let now = Int(NSDate().timeIntervalSince1970)
+        print("right now is \(now) in epoch time")
+        
+        if currentWeatherReport != nil {
+            if currentWeatherReport!.sunriseTime != nil {
+                print("sunrise time: \(currentWeatherReport!.sunriseTime!)")
+            }
+        }
+        if currentWeatherReport != nil {
+            if currentWeatherReport!.sunsetTime != nil {
+                print("sunset time: \(currentWeatherReport!.sunsetTime!)")
+                if now > currentWeatherReport!.sunsetTime! {
+                    // it's night time.
+                    isDaytime = false
+                } else {
+                    // it's daytime.
+                    isDaytime = true
+                }
+            }
+        }
+    }
+}
+
