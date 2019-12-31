@@ -103,8 +103,25 @@ class Helpers {
 
         for weekArray in arrayOfWeekArrays {
             if weekArray.count != 0 {
+                
+                // finds the lowest and highest temp from every available report on the day and sets the summary min amd max temp
+                var lowestTemp = Int.max
+                var highestTemp = Int.min
+                for report in weekArray {
+                    if report.minTemp < lowestTemp {
+                        lowestTemp = report.minTemp
+                    }
+                    if report.maxTemp > highestTemp {
+                        highestTemp = report.maxTemp
+                    }
+                }
+                
+                // finds mid-day report to be summary for the day
                 let middleIndex = weekArray.count / 2
-                returnArray.append(weekArray[middleIndex])
+                let midDayReport = weekArray[middleIndex]
+                midDayReport.minTemp = lowestTemp
+                midDayReport.maxTemp = highestTemp
+                returnArray.append(midDayReport)
             }
         }
 

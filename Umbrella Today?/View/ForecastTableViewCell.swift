@@ -58,7 +58,8 @@ class ForecastTableViewCell: UITableViewCell {
         let temperatureText = "\(minTemp)º / \(maxTemp)º"
         
         let rangeOfSlash = (temperatureText as NSString).range(of: "/")
-        let rangeOfMaxTemp = (temperatureText as NSString).range(of: "\(maxTemp)º")
+        // i added a space to the range of max temp in case the numbers for min and max were the same
+        let rangeOfMaxTemp = (temperatureText as NSString).range(of: " \(maxTemp)º")
         let attributedText = NSMutableAttributedString.init(string: temperatureText)
         attributedText.addAttribute(NSAttributedString.Key.foregroundColor, value: slashColor!, range: rangeOfSlash)
         attributedText.addAttribute(NSAttributedString.Key.foregroundColor, value: maxTempColor!, range: rangeOfMaxTemp)
