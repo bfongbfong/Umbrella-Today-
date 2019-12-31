@@ -64,6 +64,10 @@ class Helpers {
         return time
     }
     
+    /// Sifts through array of simple weather objects to find the mid-day temperature for each day.
+    ///
+    /// - Parameter simpleWeatherReports: The array of SimpleWeatherReport objects parsed from the 5 day forecast API call.
+    /// - Returns: The array of mid-day temperatures to represent the week
     static func findFiveDayReports(simpleWeatherReports: [SimpleWeatherReport]) -> [SimpleWeatherReport] {
         var returnArray = [SimpleWeatherReport]()
         var monArray = [SimpleWeatherReport]()
