@@ -68,7 +68,7 @@ class Helpers {
     ///
     /// - Parameter simpleWeatherReports: The array of SimpleWeatherReport objects parsed from the 5 day forecast API call.
     /// - Returns: The array of mid-day temperatures to represent the week
-    static func findFiveDayReports(simpleWeatherReports: [SimpleWeatherReport]) -> [SimpleWeatherReport] {
+    static func findFiveDayReport(simpleWeatherReports: [SimpleWeatherReport]) -> [SimpleWeatherReport] {
         var returnArray = [SimpleWeatherReport]()
         var monArray = [SimpleWeatherReport]()
         var tueArray = [SimpleWeatherReport]()
