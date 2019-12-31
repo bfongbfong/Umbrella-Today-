@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ForecastTableViewCell: UITableViewCell {
+class FiveDayForecastTableViewCell: UITableViewCell {
     
     @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!

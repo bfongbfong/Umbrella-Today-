@@ -57,25 +57,13 @@ class ScrollParentViewController: UIViewController {
         scrollView.showsHorizontalScrollIndicator = false
         let page1 = setupCurrentWeatherVC()
         whiteFadeAwayAnimation()
-        let page2 = setupFiveDayForecastVC()
+        let page2 = setupHourlyForecastVC()
         let page3 = setupFiveDayForecastVC()
         
         let views: [String: UIView] = ["view": view, "page1": page1.view, "page2": page2.view, "page3": page3.view]
         let verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|[page1(==view)]", options: [], metrics: nil, views: views)
         let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|[page1(==view)][page2(==view)][page3(==view)]|", options: [.alignAllTop, .alignAllBottom], metrics: nil, views: views)
         NSLayoutConstraint.activate(verticalConstraints + horizontalConstraints)
-    }
-    
-    private func setupFiveDayForecastVC() -> UIViewController {
-        let page = storyboard!.instantiateViewController(identifier: "FiveDayForecastViewController") as! FiveDayForecastViewController
-
-        page.isDaytime = isDaytime
-
-        page.view.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.addSubview(page.view)
-        addChild(page)
-        page.didMove(toParent: self)
-        return page
     }
     
     private func setupCurrentWeatherVC() -> UIViewController {
@@ -90,6 +78,32 @@ class ScrollParentViewController: UIViewController {
         page.didMove(toParent: self)
         return page
     }
+    
+    private func setupFiveDayForecastVC() -> UIViewController {
+        let page = storyboard!.instantiateViewController(identifier: "FiveDayForecastViewController") as! FiveDayForecastViewController
+
+        page.isDaytime = isDaytime
+
+        page.view.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.addSubview(page.view)
+        addChild(page)
+        page.didMove(toParent: self)
+        return page
+    }
+    
+    private func setupHourlyForecastVC() -> UIViewController {
+        let page = storyboard!.instantiateViewController(identifier: "HourlyForecastViewController") as! HourlyForecastViewController
+
+        page.isDaytime = isDaytime
+
+        page.view.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.addSubview(page.view)
+        addChild(page)
+        page.didMove(toParent: self)
+        return page
+    }
+    
+    
 }
 
 // MARK: - CLLocation Manager
@@ -175,7 +189,8 @@ extension ScrollParentViewController {
 
                     let arrayOfSimpleWeatherReports = JsonParser.parseJsonFiveDayWeatherObjects(jsonObject: responseJson)
                     let fiveDayReports = Helpers.findFiveDayReport(simpleWeatherReports: arrayOfSimpleWeatherReports)
-                    FiveDayForecast.simpleWeatherReports.accept(fiveDayReports)
+                    WeatherReportData.fiveDayForecast.accept(fiveDayReports)
+                    WeatherReportData.hourlyForecast.accept(arrayOfSimpleWeatherReports)
 //                    for report in fiveDayReports {
 //                        print("\(report.dayOfWeek) - \(report.time) - \(report.currentTemp)º")
 //                    }

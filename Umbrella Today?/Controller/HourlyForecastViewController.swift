@@ -1,15 +1,15 @@
 //
-//  FiveDayForecastViewController.swift
+//  HourlyForecastViewController.swift
 //  Umbrella Today?
 //
-//  Created by Brandon Fong on 12/30/19.
+//  Created by Brandon Fong on 12/31/19.
 //  Copyright © 2019 Fiesta Togo Inc. All rights reserved.
 //
 
 import UIKit
 import RxSwift
 
-class FiveDayForecastViewController: UIViewController {
+class HourlyForecastViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     var isDaytime = false {
@@ -35,11 +35,11 @@ class FiveDayForecastViewController: UIViewController {
 }
 
 // MARK: - RxSwift
-extension FiveDayForecastViewController {
+extension HourlyForecastViewController {
     func setupRxSwift() {
-        WeatherReportData.fiveDayForecast.asObservable()
+        WeatherReportData.hourlyForecast.asObservable()
             .subscribe(onNext: { weatherReports in
-                print("five day reports accepted: \(weatherReports.count) items")
+                print("hourly reports accepted: \(weatherReports.count) items")
                 self.simpleWeatherReports = weatherReports
                 for weatherReport in weatherReports {
                     print(weatherReport.dayOfWeek)
@@ -53,24 +53,26 @@ extension FiveDayForecastViewController {
 }
 
 // MARK: - UITableView Delegate & Data Source
-extension FiveDayForecastViewController: UITableViewDelegate, UITableViewDataSource {
+extension HourlyForecastViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return simpleWeatherReports.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FiveDayForecastCell") as! FiveDayForecastTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "HourlyForecastCell") as! HourlyForecastTableViewCell
+        
+        // first one should be current data
         let thisReport = simpleWeatherReports[indexPath.row]
-        
-        let dayOfWeekText = thisReport.dayOfWeek
-        let minTemp = thisReport.minTemp
-        let maxTemp = thisReport.maxTemp
-        
-        cell.update(day: dayOfWeekText, minTemp: minTemp, maxTemp: maxTemp, weatherImageName: "few_clouds_day_01", isDaytime: isDaytime)
+
+        cell.update(time: thisReport.time,
+                    currentTemp: thisReport.currentTemp,
+                    weatherImageName: "few_clouds_day_01",
+                    isDaytime: isDaytime)
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return 60
     }
 }
+

@@ -9,7 +9,6 @@
 import Foundation
 
 class CityListCheckPoints {
-    
     static var beforeA = Range(leftIndex: 0, rightIndex: 18)
     static var letterA = Range(leftIndex: 19, rightIndex: 11227)
     static var letterB = Range(leftIndex: 11228, rightIndex: 28423)
