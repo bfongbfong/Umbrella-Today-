@@ -217,7 +217,6 @@ extension ScrollParentViewController {
                 }
             }
             
-            
             // for testing
 //            isDaytime = true
         }
