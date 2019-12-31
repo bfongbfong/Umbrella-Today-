@@ -63,4 +63,47 @@ class Helpers {
         time = String(timeInCharacters)
         return time
     }
+    
+    static func findFiveDayReports(simpleWeatherReports: [SimpleWeatherReport]) -> [SimpleWeatherReport] {
+        var returnArray = [SimpleWeatherReport]()
+        var monArray = [SimpleWeatherReport]()
+        var tueArray = [SimpleWeatherReport]()
+        var wedArray = [SimpleWeatherReport]()
+        var thuArray = [SimpleWeatherReport]()
+        var friArray = [SimpleWeatherReport]()
+        var satArray = [SimpleWeatherReport]()
+        var sunArray = [SimpleWeatherReport]()
+
+        for weatherReport in simpleWeatherReports {
+            switch weatherReport.dayOfWeek {
+            case "MON":
+                monArray.append(weatherReport)
+            case "TUES":
+                tueArray.append(weatherReport)
+            case "WED":
+                wedArray.append(weatherReport)
+            case "THUR":
+                thuArray.append(weatherReport)
+            case "FRI":
+                friArray.append(weatherReport)
+            case "SAT":
+                satArray.append(weatherReport)
+            case "SUN":
+                sunArray.append(weatherReport)
+            default:
+                break
+            }
+        }
+        
+        let arrayOfWeekArrays = [monArray, tueArray, wedArray, thuArray, friArray, satArray, sunArray]
+        
+        for weekArray in arrayOfWeekArrays {
+            if weekArray.count != 0 {
+                let middleIndex = weekArray.count / 2
+                returnArray.append(weekArray[middleIndex])
+            }
+        }
+        
+        return returnArray
+    }
 }

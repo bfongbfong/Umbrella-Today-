@@ -173,7 +173,11 @@ extension ScrollParentViewController {
             if let responseJson = jsonWeatherObject {
                 DispatchQueue.main.async {
 
-                    let thing = JsonParser.parseJsonFiveDayWeatherObjects(jsonObject: responseJson)
+                    let arrayOfSimpleWeatherReports = JsonParser.parseJsonFiveDayWeatherObjects(jsonObject: responseJson)
+                    let fiveDayReports = Helpers.findFiveDayReports(simpleWeatherReports: arrayOfSimpleWeatherReports)
+                    for report in fiveDayReports {
+                        print("\(report.dayOfWeek) - \(report.time)")
+                    }
                 }
             }
         }
