@@ -17,7 +17,8 @@ class ForecastTableViewCell: UITableViewCell {
     var isDaytime = false {
         didSet {
             if isDaytime {
-
+                dayLabel.textColor = UIColor.dayLocationText()
+                temperatureLabel.textColor = UIColor.dayTemperatureText()
             } else {
                 dayLabel.textColor = UIColor.nightLocationText()
                 temperatureLabel.textColor = UIColor.nightTemperatureText()
