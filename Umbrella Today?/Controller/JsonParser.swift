@@ -74,6 +74,10 @@ class JsonParser {
             }
         }
         
+        if let timeZone = jsonObject["timezone"] as? Double {
+            thisWeatherReport.timeZone = timeZone
+        }
+        
         return thisWeatherReport
     }
     
@@ -127,7 +131,7 @@ class JsonParser {
             }
             
             let dayOfWeek = Helpers.convertToDayOfWeek(unixTimeStamp: unixTimeStamp)
-            let time = Helpers.convertToTime(unixTimeStamp: unixTimeStamp)
+            let time = Helpers.convertToTime(unixTimeStamp: unixTimeStamp, accurateToMinute: false, currentTimeZone: true)
             
             let simpleWeatherReport = SimpleWeatherReport(currentTempInKelvin: currentTemp, minTempInKelvin: minTemp, maxTempInKelvin: maxTemp, description: description, dayOfWeek: dayOfWeek, time: time)
 

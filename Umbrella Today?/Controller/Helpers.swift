@@ -46,21 +46,26 @@ class Helpers {
         }
     }
     
-    static func convertToTime(unixTimeStamp: Double) -> String {
+    static func convertToTime(unixTimeStamp: Double, accurateToMinute: Bool, currentTimeZone: Bool) -> String {
         let date = Date(timeIntervalSince1970: unixTimeStamp)
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = DateFormatter.Style.short //Set time style
-        dateFormatter.timeZone = .current
-        var time = dateFormatter.string(from: date)
         
-        var timeInCharacters = Array(time)
-        if timeInCharacters[1] == ":" {
-            timeInCharacters.removeSubrange(1...4)
-        } else if timeInCharacters[2] == ":" {
-            timeInCharacters.removeSubrange(2...5)
+        if currentTimeZone {
+            dateFormatter.timeZone = .current
         }
         
-        time = String(timeInCharacters)
+        var time = dateFormatter.string(from: date)
+        
+        if !accurateToMinute {
+            var timeInCharacters = Array(time)
+            if timeInCharacters[1] == ":" {
+                timeInCharacters.removeSubrange(1...4)
+            } else if timeInCharacters[2] == ":" {
+                timeInCharacters.removeSubrange(2...5)
+            }
+            time = String(timeInCharacters)
+        }
         return time
     }
     

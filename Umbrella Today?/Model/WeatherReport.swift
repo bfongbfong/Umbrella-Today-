@@ -24,6 +24,7 @@ class WeatherReport: Codable {
     var windSpeed: Int?
     var sunsetTime: Int?
     var sunriseTime: Int?
+    var timeZone: Double?
     
     init(temperature: Temperature,
          location: String,
@@ -38,7 +39,8 @@ class WeatherReport: Codable {
          windDirection: Int?,
          windSpeed: Int?,
          sunsetTime: Int?,
-         sunriseTime: Int?) {
+         sunriseTime: Int?,
+         timeZone: Double?) {
         self.temperature = temperature
         self.location = location
         self.description = description
@@ -53,6 +55,7 @@ class WeatherReport: Codable {
         self.windSpeed = windSpeed
         self.sunsetTime = sunsetTime
         self.sunriseTime = sunriseTime
+        self.timeZone = timeZone
     }
     
     init(temperature: Temperature,
