@@ -18,8 +18,6 @@ class SavedLocationsViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-
-        // Do any additional setup after loading the view.
     }
 }
 
@@ -35,8 +33,8 @@ extension SavedLocationsViewController: UITableViewDelegate, UITableViewDataSour
         
         let thisReport = savedLocations[indexPath.row]
         // get the time zone, and figure out the time based on that.
-        let date = Date()
-        let unixTimeStamp = date.timeIntervalSince1970 + thisReport.timeZone!
+        let currentDate = Date()
+        let unixTimeStamp = currentDate.timeIntervalSince1970 + thisReport.timeZone!
         let time = Helpers.convertToTime(unixTimeStamp: unixTimeStamp, accurateToMinute: true, currentTimeZone: false)
         print("time is \(time)")
         
