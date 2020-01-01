@@ -196,12 +196,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DSD-Wj-QGb">
-                                <rect key="frame" x="0.0" y="208" width="414" height="480"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DSD-Wj-QGb">
+                                <rect key="frame" x="0.0" y="178" width="414" height="540"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="480" id="O5t-0p-kWv"/>
+                                    <constraint firstAttribute="height" constant="540" id="O5t-0p-kWv"/>
                                 </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="LIG-oD-Wm1"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="AQG-2X-QOc"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HourlyForecastCell" rowHeight="60" id="gKu-li-JW0" customClass="HourlyForecastTableViewCell" customModule="UmbrellaPal" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="60"/>
