@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Temperature {
+class Temperature: Codable {
     var current: Int
     var minimum: Int
     var maximum: Int

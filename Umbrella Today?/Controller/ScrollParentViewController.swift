@@ -152,7 +152,7 @@ extension ScrollParentViewController {
         if (CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
                 CLLocationManager.authorizationStatus() ==  .authorizedAlways) {
               currentLocation = locationManager.location
-            apiCall()
+            fireApiCalls()
         }
     }
 }
@@ -167,7 +167,7 @@ extension ScrollParentViewController: CLLocationManagerDelegate {
 
 
 extension ScrollParentViewController {
-    func apiCall() {
+    func fireApiCalls() {
         guard currentLocation != nil else { return }
         
         OpenWeatherManager.getCurrentWeatherData(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude) { (jsonWeatherObject) in

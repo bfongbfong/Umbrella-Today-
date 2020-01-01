@@ -8,7 +8,7 @@
 
 import Foundation
 
-class WeatherReport {
+class WeatherReport: Codable {
     var temperature: Temperature
     var location: String
     var description: String
