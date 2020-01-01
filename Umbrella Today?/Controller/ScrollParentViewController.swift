@@ -178,6 +178,7 @@ extension ScrollParentViewController {
                     self.currentWeatherReport = JsonParser.parseJsonCurrentWeatherObject(jsonObject: responseJson)
                     self.checkSunlight()
                     self.setupPages()
+                    WeatherReportData.currentForecast.accept(self.currentWeatherReport)
                 }
             }
         }

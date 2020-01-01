@@ -23,6 +23,7 @@ class HourlyForecastViewController: UIViewController {
     }
     
     var simpleWeatherReports = [SimpleWeatherReport]()
+    var currentWeatherReport: WeatherReport?
     let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -40,14 +41,33 @@ extension HourlyForecastViewController {
         WeatherReportData.hourlyForecast.asObservable()
             .subscribe(onNext: { weatherReports in
                 print("hourly reports accepted: \(weatherReports.count) items")
-                self.simpleWeatherReports = weatherReports
-                for weatherReport in weatherReports {
-                    print(weatherReport.dayOfWeek)
+                if self.simpleWeatherReports.count == 1 {
+                    self.simpleWeatherReports += weatherReports
+                } else {
+                    self.simpleWeatherReports = weatherReports
                 }
+//                for weatherReport in weatherReports {
+//                    print(weatherReport.dayOfWeek)
+//                }
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
                 
+            }).disposed(by: disposeBag)
+        
+        WeatherReportData.currentForecast.asObservable()
+            .subscribe(onNext: { weatherReport in
+                
+                guard let weatherReport = weatherReport else { return }
+                print("current weather report accepted: \(weatherReport.temperature.current)")
+                self.currentWeatherReport = weatherReport
+                // convert current weather report into simple one
+                let currentWeatherSimple = weatherReport.convertIntoSimpleWeatherReport()
+                self.simpleWeatherReports.insert(currentWeatherSimple, at: 0)
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             }).disposed(by: disposeBag)
     }
 }

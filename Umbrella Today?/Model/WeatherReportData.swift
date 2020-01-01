@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 
 class WeatherReportData {
+    static var currentForecast = BehaviorRelay<WeatherReport?>(value: nil)
     static var fiveDayForecast = BehaviorRelay<[SimpleWeatherReport]>(value: [])
     static var hourlyForecast = BehaviorRelay<[SimpleWeatherReport]>(value: [])
 }
