@@ -194,9 +194,6 @@ extension ScrollParentViewController {
                     let fiveDayReports = Helpers.findFiveDayReport(simpleWeatherReports: arrayOfSimpleWeatherReports)
                     WeatherReportData.fiveDayForecast.accept(fiveDayReports)
                     WeatherReportData.hourlyForecast.accept(arrayOfEightHourlyWeatherReports)
-//                    for report in fiveDayReports {
-//                        print("\(report.dayOfWeek) - \(report.time) - \(report.currentTemp)º")
-//                    }
                 }
             }
         }
