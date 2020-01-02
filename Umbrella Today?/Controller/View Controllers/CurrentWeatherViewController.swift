@@ -249,3 +249,15 @@ extension CurrentWeatherViewController {
     }
 }
 
+
+// MARK: - Navigation
+extension CurrentWeatherViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ToSavedLocationsViewController" {
+            if let savedLocationsViewController = segue.destination as? SavedLocationsViewController {
+                savedLocationsViewController.savedLocations.append(self.weatherReport!)
+            }
+        }
+    }
+}
+

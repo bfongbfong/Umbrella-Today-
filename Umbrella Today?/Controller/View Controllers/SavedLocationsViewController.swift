@@ -41,6 +41,10 @@ extension SavedLocationsViewController: UITableViewDelegate, UITableViewDataSour
         cell.update(location: thisReport.location, time: time, temperature: thisReport.temperature.current, weatherImageName: "rain_01", currentLocation: false)
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
 }
 
     
