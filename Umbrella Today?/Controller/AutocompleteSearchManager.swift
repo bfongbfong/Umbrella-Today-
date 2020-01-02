@@ -103,7 +103,7 @@ class AutocompleteSearchManager {
             
             let cityNameChars = Array(cityName)
             
-            if Array(cityNameChars[0...input.count - 1]) == input {
+            if cityNameChars.count >= input.count && Array(cityNameChars[0...input.count - 1]) == input {
                 guard let countryName = cityObject["country"] as? String else {
                     return cities
                 }
