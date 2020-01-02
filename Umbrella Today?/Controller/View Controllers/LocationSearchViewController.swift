@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class LocationSearchViewController: UIViewController {
     
@@ -14,11 +16,15 @@ class LocationSearchViewController: UIViewController {
     @IBOutlet weak var textField: UITextField!
     
     var searchResultCities = [City]()
+    var savedWeatherReports = [WeatherReport]()
 
+    let disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        listenForSavedLocationsUpdate()
     }
 }
 
@@ -55,6 +61,19 @@ extension LocationSearchViewController {
     }
 }
 
+extension LocationSearchViewController {
+    func listenForSavedLocationsUpdate() {
+        WeatherReportData.savedLocationsWeatherReports.asObservable()
+            .subscribe(onNext: { weatherReports in
+                
+                print("current weather reports accepted: \(weatherReports.count)")
+                self.savedWeatherReports = weatherReports
+                
+            }).disposed(by: disposeBag)
+    }
+
+}
+
 
 // MARK: - UITableView Delegate & Data Source
 extension LocationSearchViewController: UITableViewDelegate, UITableViewDataSource {
@@ -68,6 +87,22 @@ extension LocationSearchViewController: UITableViewDelegate, UITableViewDataSour
         let thisCity = searchResultCities[indexPath.row]
         cell.update(city: thisCity)
         return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedCity = searchResultCities[indexPath.row]
+        OpenWeatherManager.getCurrentWeatherData(cityID: selectedCity.id) { (jsonData) in
+            if let jsonData = jsonData {
+                if let weatherReport = JsonParser.parseJsonCurrentWeatherObject(jsonObject: jsonData) {
+                    self.savedWeatherReports.append(weatherReport)
+                    WeatherReportData.savedLocationsWeatherReports.accept(self.savedWeatherReports)
+                } else {
+                    print("error parsing json for current weather object in LocationSearchVC")
+                }
+            } else {
+                print("Error: get current weather data returned nothing in LocationSearchVC")
+            }
+        }
+        dismiss(animated: true, completion: nil)
     }
 
 }

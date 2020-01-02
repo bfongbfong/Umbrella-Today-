@@ -9,6 +9,8 @@
 import UIKit
 import Alamofire
 import CoreLocation
+import RxSwift
+import RxCocoa
 
 class CurrentWeatherViewController: UIViewController {
     
@@ -51,10 +53,13 @@ class CurrentWeatherViewController: UIViewController {
     
     var loadingView = UIView()
     
+    let disposeBag = DisposeBag()
+    
     // MARK: - View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        listenForCurrentWeatherUpdate()
         weatherImage = WeatherImages.rain
         
 //        addWhiteLayer()
@@ -130,6 +135,24 @@ extension CurrentWeatherViewController {
     func showErrorAlert() {
         // to be called if weather report is ever nil
         
+    }
+}
+
+// MARK: - Setup RxSwift Listeners
+extension CurrentWeatherViewController {
+    func listenForCurrentWeatherUpdate() {
+        WeatherReportData.currentForecast.asObservable()
+            .subscribe(onNext: { weatherReport in
+                
+                guard let weatherReport = weatherReport else { return }
+                print("current weather report accepted: \(weatherReport.temperature.current)")
+//                if self.weatherReport != weatherReport {
+                    self.weatherReport = weatherReport
+                    DispatchQueue.main.async {
+                        self.updateUI()
+                    }
+//                }
+            }).disposed(by: disposeBag)
     }
 }
 
@@ -252,12 +275,12 @@ extension CurrentWeatherViewController {
 
 // MARK: - Navigation
 extension CurrentWeatherViewController {
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ToSavedLocationsViewController" {
-            if let savedLocationsViewController = segue.destination as? SavedLocationsViewController {
-                savedLocationsViewController.savedLocations.append(self.weatherReport!)
-            }
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "ToSavedLocationsViewController" {
+//            if let savedLocationsViewController = segue.destination as? SavedLocationsViewController {
+//                savedLocationsViewController.savedLocations.append(self.weatherReport!)
+//            }
+//        }
+//    }
 }
 

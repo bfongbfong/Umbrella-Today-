@@ -8,7 +8,8 @@
 
 import Foundation
 
-class WeatherReport: Codable {
+class WeatherReport: Codable, Equatable {
+    
     var temperature: Temperature
     var location: String
     var description: String
@@ -71,5 +72,9 @@ class WeatherReport: Codable {
     func convertIntoSimpleWeatherReport() -> SimpleWeatherReport {
         let simpleWeatherReport = SimpleWeatherReport(currentTempInFahrenheit: temperature.current, minTempInFahrenheit: temperature.minimum, maxTempInFahrenheit: temperature.maximum, description: description, dayOfWeek: "", time: "NOW")
         return simpleWeatherReport
+    }
+    
+    static func == (lhs: WeatherReport, rhs: WeatherReport) -> Bool {
+        return lhs.location == rhs.location
     }
 }

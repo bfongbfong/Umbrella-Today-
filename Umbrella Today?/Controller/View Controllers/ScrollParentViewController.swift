@@ -179,11 +179,12 @@ extension ScrollParentViewController {
                     self.checkSunlight()
                     self.setupPages()
                     WeatherReportData.currentForecast.accept(self.currentWeatherReport)
+                    WeatherReportData.savedLocationsWeatherReports.accept([self.currentWeatherReport])
                 }
             }
         }
         
-        OpenWeatherManager.getFiveDayForecast(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude) { (jsonWeatherObject) in
+        OpenWeatherManager.getFiveDayAndHourlyForecast(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude) { (jsonWeatherObject) in
             
             if let responseJson = jsonWeatherObject {
                 DispatchQueue.main.async {

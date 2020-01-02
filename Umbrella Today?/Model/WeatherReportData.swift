@@ -14,5 +14,5 @@ class WeatherReportData {
     static var currentForecast = BehaviorRelay<WeatherReport?>(value: nil)
     static var fiveDayForecast = BehaviorRelay<[SimpleWeatherReport]>(value: [])
     static var hourlyForecast = BehaviorRelay<[SimpleWeatherReport]>(value: [])
-    static var savedLocations = BehaviorRelay<[WeatherReport]>(value: [])
+    static var savedLocationsWeatherReports = BehaviorRelay<[WeatherReport]>(value: [])
 }

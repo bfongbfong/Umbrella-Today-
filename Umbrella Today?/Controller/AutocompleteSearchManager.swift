@@ -84,11 +84,16 @@ class AutocompleteSearchManager {
             return []
         }
         
+        guard let cityId = cityObject["id"] as? Int else {
+            print("city id not found")
+            return []
+        }
+        
         if let stateName = cityObject["state"] as? String {
-            let firstMatchedCity = City(name: cityName, state: stateName, country: countryName)
+            let firstMatchedCity = City(name: cityName, state: stateName, country: countryName, id: cityId)
             cities.append(firstMatchedCity)
         } else {
-            let firstMatchedCity = City(name: cityName, country: countryName)
+            let firstMatchedCity = City(name: cityName, country: countryName, id: cityId)
             cities.append(firstMatchedCity)
         }
         
@@ -108,12 +113,16 @@ class AutocompleteSearchManager {
                     return cities
                 }
                 
+                guard let cityId = cityObject["id"] as? Int else {
+                    return cities
+                }
+                
                 if let stateName = cityObject["state"] as? String {
-                    let thisCity = City(name: cityName, state: stateName, country: countryName)
+                    let thisCity = City(name: cityName, state: stateName, country: countryName, id: cityId)
                     cities.append(thisCity)
 
                 } else {
-                    let thisCity = City(name: cityName, country: countryName)
+                    let thisCity = City(name: cityName, country: countryName, id: cityId)
                     cities.append(thisCity)
                 }
             }

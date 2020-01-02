@@ -48,7 +48,7 @@ class OpenWeatherManager {
         })
     }
     
-    static func getFiveDayForecast(latitude: Double, longitude: Double, completion: @escaping((_ jsonWeatherObject: [String: Any]?) -> Void)) {
+    static func getFiveDayAndHourlyForecast(latitude: Double, longitude: Double, completion: @escaping((_ jsonWeatherObject: [String: Any]?) -> Void)) {
         AF.request("http://api.openweathermap.org/data/2.5/forecast?lat=\(latitude)&lon=\(longitude)&APIKEY=\(apikey)").responseJSON(completionHandler: { (response) in
 
             print(response.value!)
