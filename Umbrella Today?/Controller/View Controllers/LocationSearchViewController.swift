@@ -90,6 +90,8 @@ extension LocationSearchViewController: UITableViewDelegate, UITableViewDataSour
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedCity = searchResultCities[indexPath.row]
+//        WeatherReportData.savedCities.accept(selectedCity)
+        
         OpenWeatherManager.getCurrentWeatherData(cityID: selectedCity.id) { (jsonData) in
             if let jsonData = jsonData {
                 if let weatherReport = JsonParser.parseJsonCurrentWeatherObject(jsonObject: jsonData) {

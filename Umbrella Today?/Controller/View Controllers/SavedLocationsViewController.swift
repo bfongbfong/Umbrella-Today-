@@ -15,6 +15,7 @@ class SavedLocationsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var savedLocationsWeatherReports = [WeatherReport]()
+//    var savedCities = [City]()
     
     let disposeBag = DisposeBag()
     
@@ -67,7 +68,25 @@ extension SavedLocationsViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        WeatherReportData.currentForecast.accept(savedLocationsWeatherReports[indexPath.row])
+        let selectedWeatherReport = savedLocationsWeatherReports[indexPath.row]
+        WeatherReportData.currentForecast.accept(selectedWeatherReport)
+        // TODO - what to do here. add logic to add hourly and daily info into the UI
+        
+        OpenWeatherManager.getFiveDayAndHourlyForecast(cityID: selectedWeatherReport.id) { (jsonData) in
+            if let jsonData = jsonData {
+                
+                DispatchQueue.main.async {
+                    let arrayOfSimpleWeatherReports = JsonParser.parseJsonFiveDayWeatherObjects(jsonObject: jsonData)
+                    let arrayOfEightHourlyWeatherReports = Array(arrayOfSimpleWeatherReports[0...7])
+                    let fiveDayReports = Helpers.findFiveDayReport(simpleWeatherReports: arrayOfSimpleWeatherReports)
+                    WeatherReportData.fiveDayForecast.accept(fiveDayReports)
+                    WeatherReportData.hourlyForecast.accept(arrayOfEightHourlyWeatherReports)
+                }
+                
+            } else {
+                print("Error: get five day and hourly weather data returned nothing in SavedLocationsVC")
+            }
+        }
         dismiss(animated: true, completion: nil)
     }
 }

@@ -38,6 +38,7 @@ class HourlyForecastViewController: UIViewController {
 // MARK: - RxSwift
 extension HourlyForecastViewController {
     func listenForForecastUpdates() {
+        // Listens for update in hourly forecast to display in tableview
         WeatherReportData.hourlyForecast.asObservable()
             .subscribe(onNext: { weatherReports in
                 print("hourly reports accepted: \(weatherReports.count) items")

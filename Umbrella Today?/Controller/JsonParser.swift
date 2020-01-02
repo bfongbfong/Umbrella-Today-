@@ -26,8 +26,12 @@ class JsonParser {
         guard let weatherObject = weatherArray[0] as? [String: Any] else { return nil }
         guard let description = weatherObject["description"] as? String else { return nil }
         guard let main = weatherObject["main"] as? String else { return nil }
+        guard let id = jsonObject["id"] as? Int else {
+            print("ERROR PARSING FOR ID")
+            return nil
+        }
                         
-        let thisWeatherReport = WeatherReport(temperature: temperature, location: location, description: description, main: main)
+        let thisWeatherReport = WeatherReport(temperature: temperature, location: location, description: description, main: main, id: id)
         
         if let rainObject = jsonObject["rain"] as? [String: Any] {
             if let rain1hr = rainObject["1hr"] as? Double {

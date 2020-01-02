@@ -14,6 +14,7 @@ class WeatherReport: Codable, Equatable {
     var location: String
     var description: String
     var main: String
+    var id: Int
     
     var humidity: Int?
     var pressure: Int?
@@ -31,6 +32,7 @@ class WeatherReport: Codable, Equatable {
          location: String,
          description: String,
          main: String,
+         id: Int,
          rain1hr: Double?,
          humidity: Int?,
          pressure: Int?,
@@ -46,6 +48,7 @@ class WeatherReport: Codable, Equatable {
         self.location = location
         self.description = description
         self.main = main
+        self.id = id
         self.rain1hr = rain1hr
         self.humidity = humidity
         self.pressure = pressure
@@ -62,11 +65,13 @@ class WeatherReport: Codable, Equatable {
     init(temperature: Temperature,
          location: String,
          description: String,
-         main: String) {
+         main: String,
+         id: Int) {
         self.temperature = temperature
         self.location = location
         self.description = description
         self.main = main
+        self.id = id
     }
     
     func convertIntoSimpleWeatherReport() -> SimpleWeatherReport {

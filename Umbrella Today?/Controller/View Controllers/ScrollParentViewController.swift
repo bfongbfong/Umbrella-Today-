@@ -203,11 +203,6 @@ extension ScrollParentViewController {
             }
         }
     }
-    
-    
-    func setupListeners() {
-        WeatherReportData.currentForecast.asObservable()
-    }
 }
 
 extension ScrollParentViewController {
