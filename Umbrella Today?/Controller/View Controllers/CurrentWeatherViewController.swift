@@ -146,12 +146,13 @@ extension CurrentWeatherViewController {
                 
                 guard let weatherReport = weatherReport else { return }
                 print("current weather report accepted: \(weatherReport.temperature.current)")
-//                if self.weatherReport != weatherReport {
-                    self.weatherReport = weatherReport
-                    DispatchQueue.main.async {
-                        self.updateUI()
-                    }
-//                }
+                self.weatherReport = weatherReport
+                
+//                let currentReportSimple = self.weatherReport!.convertIntoSimpleWeatherReportForFirstHourlyResult()
+                
+                DispatchQueue.main.async {
+                    self.updateUI()
+                }
             }).disposed(by: disposeBag)
     }
 }

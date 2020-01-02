@@ -79,8 +79,10 @@ extension SavedLocationsViewController: UITableViewDelegate, UITableViewDataSour
                 
                 DispatchQueue.main.async {
                     let arrayOfSimpleWeatherReports = JsonParser.parseJsonFiveDayWeatherObjects(jsonObject: jsonData)
-                    let arrayOfEightHourlyWeatherReports = Array(arrayOfSimpleWeatherReports[0...7])
+                    var arrayOfEightHourlyWeatherReports = Array(arrayOfSimpleWeatherReports[0...7])
                     let fiveDayReports = Helpers.findFiveDayReport(simpleWeatherReports: arrayOfSimpleWeatherReports)
+                    let simpleCurrentReport = selectedWeatherReport.convertIntoSimpleWeatherReportForFirstHourlyResult()
+                    arrayOfEightHourlyWeatherReports.insert(simpleCurrentReport, at: 0)
                     WeatherReportData.fiveDayForecast.accept(fiveDayReports)
                     WeatherReportData.hourlyForecast.accept(arrayOfEightHourlyWeatherReports)
                 }

@@ -194,6 +194,10 @@ extension ScrollParentViewController {
                         DispatchQueue.main.async {
 
                             let arrayOfSimpleWeatherReports = JsonParser.parseJsonFiveDayWeatherObjects(jsonObject: responseJson)
+                            if arrayOfSimpleWeatherReports.count < 8 {
+                                print("Error: API didn't send back enough forecasts.")
+                                return
+                            }
                             var arrayOfEightHourlyWeatherReports = Array(arrayOfSimpleWeatherReports[0...7])
                             let fiveDayReports = Helpers.findFiveDayReport(simpleWeatherReports: arrayOfSimpleWeatherReports)
                             
