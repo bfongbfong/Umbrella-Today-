@@ -13,7 +13,7 @@ class AutocompleteSearchManager {
     /// Accesses JSON file of city objects to complete city autocomplete search.
     ///
     /// - Parameters:
-    ///     - cityName: String of input for autocomplete search
+    ///     - input: String of input for autocomplete search
     ///     - maxNumberOfResults: The maximum number of results desired to be returned
     /// - Returns: An array of cities
     ///
@@ -21,18 +21,18 @@ class AutocompleteSearchManager {
     /// Then, calls getAutoCompleteCities() , which runs a binary search to find the first element that satisfies the autocomplete input within the range.
     ///
     /// (Ex: executes binary search within range of "L" for city names matching "Lon", then returns the amount specified by maxNumerOfResults)
-    static func searchForCities(cityName: String, maxNumberOfResults: Int) -> [City] {
-        let capitalizedCityName = cityName.capitalized
+    static func searchForCities(input: String, maxNumberOfResults: Int, completion: @escaping((_ cities: [City]) -> Void)) {
+        let capitalizedCityName = input.capitalized
         let cityNameCharacters = Array(capitalizedCityName)
 
-        if let path = Bundle.main.url(forResource: "city.list.sorted", withExtension: "json") {
+        if let path = Bundle.main.url(forResource: "cities.us.fromAPI", withExtension: "json") {
             do {
                 let data = try Data(contentsOf: path)
                 let jsonResult = try JSONSerialization.jsonObject(with: data, options: [])
                 
                 guard let jsonArray = jsonResult as? [Any] else {
                     print("Data of file could not be made casted into an array")
-                    return []
+                    return
                 }
                 
                 var range = Range(leftIndex: 0, rightIndex: jsonArray.count)
@@ -45,15 +45,15 @@ class AutocompleteSearchManager {
 //                cities.forEach { (city) in
 //                    print(city.name)
 //                }
-                return cities
+                completion(cities)
                 
             } catch {
                // handle error
                 print("Error accessing JSON file")
-                return []
+                return
             }
         }
-        return []
+        return
     }
     
     /// Finds first alphanumeric city name within JSON file, and returns an array of cities that match.
@@ -84,8 +84,13 @@ class AutocompleteSearchManager {
             return []
         }
         
-        let firstMatchedCity = City(name: cityName, country: countryName)
-        cities.append(firstMatchedCity)
+        if let stateName = cityObject["state"] as? String {
+            let firstMatchedCity = City(name: cityName, state: stateName, country: countryName)
+            cities.append(firstMatchedCity)
+        } else {
+            let firstMatchedCity = City(name: cityName, country: countryName)
+            cities.append(firstMatchedCity)
+        }
         
         for i in 1...(maxNumberOfResults - 1) {
             guard let cityObject = jsonArray[firstMatchIndex + i] as? [String: Any] else {
@@ -103,8 +108,14 @@ class AutocompleteSearchManager {
                     return cities
                 }
                 
-                let thisCity = City(name: cityName, country: countryName)
-                cities.append(thisCity)
+                if let stateName = cityObject["state"] as? String {
+                    let thisCity = City(name: cityName, state: stateName, country: countryName)
+                    cities.append(thisCity)
+
+                } else {
+                    let thisCity = City(name: cityName, country: countryName)
+                    cities.append(thisCity)
+                }
             }
         }
         
@@ -213,14 +224,15 @@ class AutocompleteSearchManager {
         }
         
         let secondCityNameCharacters = Array(secondCityName)
-        
-        if Array(cityNameCharacters[0...input.count - 1]) == input {
+                
+        if cityNameCharacters.count >= input.count && Array(cityNameCharacters[0...input.count - 1]) == input {
             print("returning index: \(index), city: \(cityName)")
             return index
-        } else if Array(secondCityNameCharacters[0...input.count - 1]) == input {
+        } else if secondCityNameCharacters.count >= input.count && Array(secondCityNameCharacters[0...input.count - 1]) == input {
             print("returning index: \(index + 1), city: \(secondCityName)")
             return index + 1
         } else {
+            // overlay label on top of table view that says no results found.
             print("no results found")
             return nil
         }

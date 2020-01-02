@@ -1,28 +1,26 @@
-index of element with first letter A is 19. Name is A Cañiza
-index of element with first letter B is 11228. Name is BABOR - VILLE
-index of element with first letter C is 28424. Name is C. Militar Sarabia
-index of element with first letter D is 43724. Name is DIberville
-index of element with first letter E is 50917. Name is EUR
-index of element with first letter F is 55877. Name is Faa'a
-index of element with first letter G is 60740. Name is G'ovren
-index of element with first letter H is 69777. Name is H. Rivera Colon
-index of element with first letter I is 77538. Name is I-n-Alakam
-index of element with first letter J is 80082. Name is J and L Trailer Court
-index of element with first letter K is 82855. Name is K'alak'i T'bilisi
-index of element with first letter L is 93011. Name is L'Abbaye
-index of element with first letter M is 105040. Name is MOUNT ALBERT
-index of element with first letter N is 120273. Name is N. S. das Graças
-index of element with first letter O is 127407. Name is O Barco de Valdeorras
-index of element with first letter P is 132483. Name is PAJOK Pogee,
-index of element with first letter Q is 145630. Name is Qaanaaq
-index of element with first letter R is 146707. Name is R Corner
-index of element with first letter S is 154650. Name is S-chanf
-index of element with first letter T is 179075. Name is Ta
-index of element with first letter U is 188216. Name is U Thong
-index of element with first letter V is 190220. Name is Vaala
-index of element with first letter W is 197212. Name is Wa
-index of element with first letter X is 203784. Name is Xacmaz
-index of element with first letter Y is 204663. Name is Y
-index of element with first letter Z is 206441. Name is Zaamslag
-jsonArray count is 209579
-
+First A city named Abbeville found at index 1
+First B city named Babbitt found at index 817
+First C city named Cabarrus County found at index 2387
+First D city named DIberville found at index 4281
+First E city named Eads found at index 4952
+First F city named Fabens found at index 5676
+First G city named Gaberonne found at index 6446
+First H city named Haakon County found at index 7304
+First I city named Iberia Parish found at index 8387
+First J city named J and L Trailer Court found at index 8598
+First K city named K. I. Sawyer Air Force Base found at index 8877
+First L city named LAnse found at index 9291
+First M city named Mabank found at index 10587
+First N city named Nabesna found at index 12249
+First O city named OFallon found at index 13015
+First P city named Pablo found at index 13546
+First Q city named Quail Valley found at index 14681
+First R city named R Corner found at index 14711
+First S city named Sabattus found at index 15517
+First T city named Tabor found at index 17431
+First U city named USAR Center found at index 18037
+First V city named Vacaville found at index 18163
+First W city named WaKeeney found at index 18424
+First X city named Xenia found at index 19849
+First Y city named Y found at index 19850
+First Z city named Zachary found at index 19945
