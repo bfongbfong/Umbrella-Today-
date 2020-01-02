@@ -41,9 +41,6 @@ extension FiveDayForecastViewController {
             .subscribe(onNext: { weatherReports in
                 print("five day reports accepted: \(weatherReports.count) items")
                 self.simpleWeatherReports = weatherReports
-//                for weatherReport in weatherReports {
-//                    print(weatherReport.dayOfWeek)
-//                }
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }

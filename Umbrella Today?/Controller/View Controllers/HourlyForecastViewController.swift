@@ -42,11 +42,22 @@ extension HourlyForecastViewController {
         WeatherReportData.hourlyForecast.asObservable()
             .subscribe(onNext: { weatherReports in
                 print("hourly reports accepted: \(weatherReports.count) items")
-                if self.simpleWeatherReports.count == 1 {
-                    self.simpleWeatherReports += weatherReports
-                } else {
-                    self.simpleWeatherReports = weatherReports
-                }
+                
+                // this logic needs to be fixed.
+                
+                // if the data is already there for another day, it needs to be replaced with data for the new day
+                
+                
+//                if self.simpleWeatherReports.count == 1 {
+//                    self.simpleWeatherReports += weatherReports
+//                } else {
+//                    self.simpleWeatherReports = weatherReports
+//                }
+                self.simpleWeatherReports = weatherReports
+
+                
+                
+                
 //                for weatherReport in weatherReports {
 //                    print(weatherReport.dayOfWeek)
 //                }
@@ -57,20 +68,20 @@ extension HourlyForecastViewController {
             }).disposed(by: disposeBag)
         
         // Listens for update in current forecast, to add it as first element in table view (the NOW weather)
-        WeatherReportData.currentForecast.asObservable()
-            .subscribe(onNext: { weatherReport in
-                
-                guard let weatherReport = weatherReport else { return }
-                print("current weather report accepted: \(weatherReport.temperature.current)")
-                self.currentWeatherReport = weatherReport
-                // convert current weather report into simple one
-                let currentWeatherSimple = weatherReport.convertIntoSimpleWeatherReport()
-                self.simpleWeatherReports.insert(currentWeatherSimple, at: 0)
-                
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            }).disposed(by: disposeBag)
+//        WeatherReportData.currentForecast.asObservable()
+//            .subscribe(onNext: { weatherReport in
+//
+//                guard let weatherReport = weatherReport else { return }
+//                print("current weather report accepted: \(weatherReport.temperature.current)")
+//                self.currentWeatherReport = weatherReport
+//                // convert current weather report into simple one
+//                let currentWeatherSimple = weatherReport.convertIntoSimpleWeatherReportForFirstHourlyResult()
+//                self.simpleWeatherReports.insert(currentWeatherSimple, at: 0)
+//
+//                DispatchQueue.main.async {
+//                    self.tableView.reloadData()
+//                }
+//            }).disposed(by: disposeBag)
     }
 }
 

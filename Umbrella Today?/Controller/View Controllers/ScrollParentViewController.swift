@@ -178,27 +178,31 @@ extension ScrollParentViewController {
         OpenWeatherManager.getCurrentWeatherData(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude) { (jsonWeatherObject) in
 
             if let responseJson = jsonWeatherObject {
-                DispatchQueue.main.async {
 
-                    self.currentWeatherReport = JsonParser.parseJsonCurrentWeatherObject(jsonObject: responseJson)
+                self.currentWeatherReport = JsonParser.parseJsonCurrentWeatherObject(jsonObject: responseJson)
+                WeatherReportData.currentForecast.accept(self.currentWeatherReport)
+                WeatherReportData.savedLocationsWeatherReports.accept([self.currentWeatherReport])
+                
+                DispatchQueue.main.async {
                     self.checkSunlight()
                     self.setupPages()
-                    WeatherReportData.currentForecast.accept(self.currentWeatherReport)
-                    WeatherReportData.savedLocationsWeatherReports.accept([self.currentWeatherReport])
                 }
-            }
-        }
-        
-        OpenWeatherManager.getFiveDayAndHourlyForecast(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude) { (jsonWeatherObject) in
-            
-            if let responseJson = jsonWeatherObject {
-                DispatchQueue.main.async {
+                
+                OpenWeatherManager.getFiveDayAndHourlyForecast(latitude: self.currentLocation.coordinate.latitude, longitude: self.currentLocation.coordinate.longitude) { (jsonWeatherObject) in
+                    
+                    if let responseJson = jsonWeatherObject {
+                        DispatchQueue.main.async {
 
-                    let arrayOfSimpleWeatherReports = JsonParser.parseJsonFiveDayWeatherObjects(jsonObject: responseJson)
-                    let arrayOfEightHourlyWeatherReports = Array(arrayOfSimpleWeatherReports[0...7])
-                    let fiveDayReports = Helpers.findFiveDayReport(simpleWeatherReports: arrayOfSimpleWeatherReports)
-                    WeatherReportData.fiveDayForecast.accept(fiveDayReports)
-                    WeatherReportData.hourlyForecast.accept(arrayOfEightHourlyWeatherReports)
+                            let arrayOfSimpleWeatherReports = JsonParser.parseJsonFiveDayWeatherObjects(jsonObject: responseJson)
+                            var arrayOfEightHourlyWeatherReports = Array(arrayOfSimpleWeatherReports[0...7])
+                            let fiveDayReports = Helpers.findFiveDayReport(simpleWeatherReports: arrayOfSimpleWeatherReports)
+                            
+                            let currentWeatherSimple = self.currentWeatherReport.convertIntoSimpleWeatherReportForFirstHourlyResult()
+                            arrayOfEightHourlyWeatherReports.insert(currentWeatherSimple, at: 0)
+                            WeatherReportData.fiveDayForecast.accept(fiveDayReports)
+                            WeatherReportData.hourlyForecast.accept(arrayOfEightHourlyWeatherReports)
+                        }
+                    }
                 }
             }
         }

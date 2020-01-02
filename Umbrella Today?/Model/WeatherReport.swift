@@ -74,7 +74,7 @@ class WeatherReport: Codable, Equatable {
         self.id = id
     }
     
-    func convertIntoSimpleWeatherReport() -> SimpleWeatherReport {
+    func convertIntoSimpleWeatherReportForFirstHourlyResult() -> SimpleWeatherReport {
         let simpleWeatherReport = SimpleWeatherReport(currentTempInFahrenheit: temperature.current, minTempInFahrenheit: temperature.minimum, maxTempInFahrenheit: temperature.maximum, description: description, dayOfWeek: "", time: "NOW")
         return simpleWeatherReport
     }

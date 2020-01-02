@@ -119,16 +119,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "097F49AE-68C2-4E3C-A4A0-BF8160FE4B7D"
+            uuid = "012AA430-A892-49B9-AD33-090E2D9123FF"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Umbrella Today?/Controller/AutocompleteSearchManager.swift"
+            filePath = "Umbrella Today?/Controller/View Controllers/HourlyForecastViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "211"
-            endingLineNumber = "211"
-            landmarkName = "findFirstMatchIndex(jsonArray:range:input:)"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "listenForForecastUpdates()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

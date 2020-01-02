@@ -39,6 +39,8 @@ extension SavedLocationsViewController {
                     self.tableView.reloadData()
                 }
             }).disposed(by: disposeBag)
+        
+        
     }
 }
 
