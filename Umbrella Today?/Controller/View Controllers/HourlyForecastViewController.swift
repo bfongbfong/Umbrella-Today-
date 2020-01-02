@@ -31,13 +31,13 @@ class HourlyForecastViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = .none
-        setupRxSwift()
+        listenForForecastUpdates()
     }
 }
 
 // MARK: - RxSwift
 extension HourlyForecastViewController {
-    func setupRxSwift() {
+    func listenForForecastUpdates() {
         WeatherReportData.hourlyForecast.asObservable()
             .subscribe(onNext: { weatherReports in
                 print("hourly reports accepted: \(weatherReports.count) items")
@@ -55,6 +55,7 @@ extension HourlyForecastViewController {
                 
             }).disposed(by: disposeBag)
         
+        // Listens for update in current forecast, to add it as first element in table view (the NOW weather)
         WeatherReportData.currentForecast.asObservable()
             .subscribe(onNext: { weatherReport in
                 

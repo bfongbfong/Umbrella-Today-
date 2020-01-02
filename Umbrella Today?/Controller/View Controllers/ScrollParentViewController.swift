@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreLocation
+import RxSwift
+import RxCocoa
 
 class ScrollParentViewController: UIViewController {
     
@@ -20,6 +22,8 @@ class ScrollParentViewController: UIViewController {
     var currentWeatherReport: WeatherReport!
     
     var loadingView = UIView()
+    
+    let disposeBag = DisposeBag()
     
     var isDaytime = false {
         didSet {
@@ -166,6 +170,7 @@ extension ScrollParentViewController: CLLocationManagerDelegate {
 }
 
 
+// MARK: - API Calls
 extension ScrollParentViewController {
     func fireApiCalls() {
         guard currentLocation != nil else { return }
@@ -197,6 +202,11 @@ extension ScrollParentViewController {
                 }
             }
         }
+    }
+    
+    
+    func setupListeners() {
+        WeatherReportData.currentForecast.asObservable()
     }
 }
 
