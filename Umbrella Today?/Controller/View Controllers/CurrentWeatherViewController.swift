@@ -11,6 +11,7 @@ import Alamofire
 import CoreLocation
 import RxSwift
 import RxCocoa
+import FirebaseAuth
 
 class CurrentWeatherViewController: UIViewController {
     
@@ -66,6 +67,27 @@ class CurrentWeatherViewController: UIViewController {
 //        addWhiteLayer()
 //        checkLocationServices()
         updateUI()
+    }
+    
+    // Navigate to User auth or User info
+    @IBAction func userButtonTapped(_ sender: Any) {
+        if let user = Auth.auth().currentUser {
+            print(user)
+            // there's a user
+            if let userInfoVC = storyboard!.instantiateViewController(identifier: "UserInfoViewController") as? UserInfoViewController {
+                
+                if let name = user.displayName {
+                    print("display name exists")
+                    userInfoVC.greetingLabel.text = "Hello, \(name)"
+                }
+                present(userInfoVC, animated: true, completion: nil)
+            }
+        } else {
+            // there's no user
+            if let authenticationNavController = storyboard!.instantiateViewController(identifier: "UserInfoViewController") as? UINavigationController {
+                present(authenticationNavController, animated: true, completion: nil)
+            }
+        }
     }
 }
 
