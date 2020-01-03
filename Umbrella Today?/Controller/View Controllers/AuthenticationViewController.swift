@@ -1,5 +1,5 @@
 //
-//  LoginViewController.swift
+//  AuthenticationViewController.swift
 //  Umbrella Today?
 //
 //  Created by Brandon Fong on 1/2/20.
@@ -8,13 +8,10 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class AuthenticationViewController: UIViewController {
 
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var signupButton: UIButton!
     @IBOutlet weak var loginButton: UIButton!
-    @IBOutlet weak var errorLabel: UILabel!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,11 +19,12 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func loginButtonTapped(_ sender: Any) {
-        
+    @IBAction func signupTapped(_ sender: Any) {
     }
     
-
+    @IBAction func loginTapped(_ sender: Any) {
+    }
+    
     /*
     // MARK: - Navigation
 
