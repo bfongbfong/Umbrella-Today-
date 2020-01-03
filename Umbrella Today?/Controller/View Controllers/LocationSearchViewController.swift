@@ -93,14 +93,10 @@ extension LocationSearchViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedCity = searchResultCities[indexPath.row]
         
-        // i think maybe this should be called in the vc underneath it.. but how?
         OpenWeatherManager.getCurrentWeatherData(cityID: selectedCity.id) { (jsonData) in
             if let jsonData = jsonData {
                 if let weatherReport = JsonParser.parseJsonCurrentWeatherObject(jsonObject: jsonData) {
                     self.savedWeatherReports.append(weatherReport)
-//                    print("LOCATION SEARCH VC - sending: \(self.savedWeatherReports.count) with newest being in \(weatherReport.location)")
-//                    WeatherReportData.savedLocationsWeatherReports.accept(self.savedWeatherReports)
-                    // pass on a single one instead
                     
                     print("LOCATION SEARCH VC - sending addition \(weatherReport.location)")
                     WeatherReportData.savedLocationsWeatherReports.accept([weatherReport])
