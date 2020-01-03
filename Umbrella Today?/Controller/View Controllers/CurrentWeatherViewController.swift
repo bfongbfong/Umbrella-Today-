@@ -19,6 +19,7 @@ class CurrentWeatherViewController: UIViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var weatherImageView: UIImageView!
+    @IBOutlet weak var buttonToSavedLocations: UIButton!
 
     // MARK: - Properties
     var weatherReport: WeatherReport?
@@ -130,6 +131,8 @@ extension CurrentWeatherViewController {
         attributedText.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedText.length))
 
         descriptionLabel.attributedText = attributedText
+        
+        buttonToSavedLocations.tintColor = temperatureTextColor
     }
     
     func showErrorAlert() {

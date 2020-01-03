@@ -69,12 +69,12 @@ class Helpers {
         return time
     }
     
-    static func createArrayOfNextSixDaysOfWeek() -> [String] {
+    static func createArrayOfNextSevenDaysOfWeek() -> [String] {
         let todaysDate = Date()
         let rightNow = todaysDate.timeIntervalSince1970
         let todaysDayOfWeek = convertToDayOfWeek(unixTimeStamp: rightNow)
         let week = Week()
-        return week.generateWeekFrom(dayOfWeek: todaysDayOfWeek, amountOfDays: 6)
+        return week.generateWeekFrom(dayOfWeek: todaysDayOfWeek, amountOfDays: 7)
     }
     
     /// Sifts through array of simple weather objects to find the mid-day temperature for each day.
@@ -114,7 +114,7 @@ class Helpers {
         
         // so maybe out these into some kind of circular linked list?
         
-        let arrayOfDaysOfWeek = createArrayOfNextSixDaysOfWeek()
+        let arrayOfDaysOfWeek = createArrayOfNextSevenDaysOfWeek()
         
         var arrayOfWeekArrays = [[SimpleWeatherReport]]()
         
@@ -138,6 +138,13 @@ class Helpers {
                 break
             }
         }
+        
+        // remove empty elements in array
+        arrayOfWeekArrays = arrayOfWeekArrays.filter {
+            $0.count != 0
+        }
+        
+        // if it's like 10 pm, meaning it won't include it's own day in the weekly forecast, then go into next day.
         
         for weekArray in arrayOfWeekArrays {
             if weekArray.count != 0 {

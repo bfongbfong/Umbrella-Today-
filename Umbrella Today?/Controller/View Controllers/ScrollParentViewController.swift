@@ -270,44 +270,44 @@ extension ScrollParentViewController {
         queue.addOperation(operation4)
     }
     
-    func oldMethod() {
-        OpenWeatherManager.getCurrentWeatherData(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude) { (jsonWeatherObject) in
-
-            if let responseJson = jsonWeatherObject {
-
-                self.currentWeatherReport = JsonParser.parseJsonCurrentWeatherObject(jsonObject: responseJson)
-                WeatherReportData.currentForecast.accept(self.currentWeatherReport)
-                
-                WeatherReport.currentLocation = self.currentWeatherReport
-                
-                DispatchQueue.main.async {
-                    self.checkSunlight()
-                    self.setupPages()
-                }
-                
-                OpenWeatherManager.getFiveDayAndHourlyForecast(latitude: self.currentLocation.coordinate.latitude, longitude: self.currentLocation.coordinate.longitude) { (jsonWeatherObject) in
-                    
-                    if let responseJson = jsonWeatherObject {
-                        DispatchQueue.main.async {
-
-                            let arrayOfSimpleWeatherReports = JsonParser.parseJsonFiveDayWeatherObjects(jsonObject: responseJson)
-                            if arrayOfSimpleWeatherReports.count < 8 {
-                                print("Error: API didn't send back enough forecasts.")
-                                return
-                            }
-                            var arrayOfEightHourlyWeatherReports = Array(arrayOfSimpleWeatherReports[0...7])
-                            let fiveDayReports = Helpers.findFiveDayReport(simpleWeatherReports: arrayOfSimpleWeatherReports)
-                            
-                            let currentWeatherSimple = self.currentWeatherReport.convertIntoSimpleWeatherReportForFirstHourlyResult()
-                            arrayOfEightHourlyWeatherReports.insert(currentWeatherSimple, at: 0)
-                            WeatherReportData.fiveDayForecast.accept(fiveDayReports)
-                            WeatherReportData.hourlyForecast.accept(arrayOfEightHourlyWeatherReports)
-                        }
-                    }
-                }
-            }
-        }
-    }
+//    func oldMethod() {
+//        OpenWeatherManager.getCurrentWeatherData(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude) { (jsonWeatherObject) in
+//
+//            if let responseJson = jsonWeatherObject {
+//
+//                self.currentWeatherReport = JsonParser.parseJsonCurrentWeatherObject(jsonObject: responseJson)
+//                WeatherReportData.currentForecast.accept(self.currentWeatherReport)
+//
+//                WeatherReport.currentLocation = self.currentWeatherReport
+//
+//                DispatchQueue.main.async {
+//                    self.checkSunlight()
+//                    self.setupPages()
+//                }
+//
+//                OpenWeatherManager.getFiveDayAndHourlyForecast(latitude: self.currentLocation.coordinate.latitude, longitude: self.currentLocation.coordinate.longitude) { (jsonWeatherObject) in
+//
+//                    if let responseJson = jsonWeatherObject {
+//                        DispatchQueue.main.async {
+//
+//                            let arrayOfSimpleWeatherReports = JsonParser.parseJsonFiveDayWeatherObjects(jsonObject: responseJson)
+//                            if arrayOfSimpleWeatherReports.count < 8 {
+//                                print("Error: API didn't send back enough forecasts.")
+//                                return
+//                            }
+//                            var arrayOfEightHourlyWeatherReports = Array(arrayOfSimpleWeatherReports[0...7])
+//                            let fiveDayReports = Helpers.findFiveDayReport(simpleWeatherReports: arrayOfSimpleWeatherReports)
+//
+//                            let currentWeatherSimple = self.currentWeatherReport.convertIntoSimpleWeatherReportForFirstHourlyResult()
+//                            arrayOfEightHourlyWeatherReports.insert(currentWeatherSimple, at: 0)
+//                            WeatherReportData.fiveDayForecast.accept(fiveDayReports)
+//                            WeatherReportData.hourlyForecast.accept(arrayOfEightHourlyWeatherReports)
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
     
     func checkSunlight() {
         let now = Int(NSDate().timeIntervalSince1970)
