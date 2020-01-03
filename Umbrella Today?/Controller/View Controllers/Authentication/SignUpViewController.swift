@@ -21,6 +21,18 @@ class SignUpViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        errorLabel.alpha = 0
+        firstNameTextField.autocapitalizationType = UITextAutocapitalizationType.words
+        lastNameTextField.autocapitalizationType = UITextAutocapitalizationType.words
+        firstNameTextField.delegate = self
+        firstNameTextField.tag = 0
+        lastNameTextField.delegate = self
+        lastNameTextField.tag = 1
+        emailTextField.delegate = self
+        emailTextField.tag = 2
+        passwordTextField.delegate = self
+        passwordTextField.tag = 3
+
     }
     
     override func viewDidLayoutSubviews() {
@@ -28,9 +40,7 @@ class SignUpViewController: UIViewController {
         setupUI()
     }
     
-    
     func setupUI() {
-        errorLabel.alpha = 0
         Helpers.styleTextField(firstNameTextField)
         Helpers.styleTextField(lastNameTextField)
         Helpers.styleTextField(emailTextField)
@@ -52,14 +62,16 @@ class SignUpViewController: UIViewController {
         
         if error != nil {
             // There was an error. Show error message
-            showError(error!)
+            Helpers.showError(error!, errorLabel: self.errorLabel)
+            return
         }
         
         // Create the user
         Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
             if error != nil {
                 print(error!.localizedDescription)
-                self.showError("Error creating user.")
+                Helpers.showError("Error creating user.", errorLabel: self.errorLabel)
+                return
             } else {
                 // User was created successfully, now store the first and last name
                 let db = Firestore.firestore()
@@ -68,7 +80,8 @@ class SignUpViewController: UIViewController {
                     
                     if error != nil {
                         print(error!.localizedDescription)
-                        self.showError("Error: User data could not be saved on the database.")
+                        Helpers.showError("Error: User data could not be saved on the database.", errorLabel: self.errorLabel)
+                        return
                     }
                     
                 }
@@ -80,13 +93,29 @@ class SignUpViewController: UIViewController {
         transitionToHome()
     }
     
-    func showError(_ errorMessage: String) {
-        errorLabel.text = errorMessage
-        errorLabel.alpha = 1
-    }
-    
     func transitionToHome() {
-//        self.view.window!.rootViewController?.dismissViewControllerAnimated(false, completion: nil)
         dismiss(animated: true, completion: nil)
+    }
+}
+
+extension SignUpViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField.tag == 3 {
+            // password textfield
+            signupButtonTapped("Enter on textfield")
+            textField.resignFirstResponder()
+            return true
+        }
+        
+        
+       // Try to find next responder
+       if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
+          nextField.becomeFirstResponder()
+       } else {
+          // Not found, so remove keyboard.
+          textField.resignFirstResponder()
+       }
+       // Do not add a line break
+       return false
     }
 }

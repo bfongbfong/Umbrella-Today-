@@ -297,13 +297,13 @@ class Helpers {
             return "Please fill in all fields."
         }
         
+        if !email.isValidEmail {
+            return "Please enter a valid email."
+        }
+        
         if !password.isValidPassword {
             // Password isn't secure enough
             return "Please ensure your password has at least six characters, at least one letter and one number."
-        }
-        
-        if !email.isValidEmail {
-            return "Please enter a valid email."
         }
         
         return nil
@@ -367,6 +367,30 @@ extension Helpers {
         button.layer.borderColor = UIColor.black.cgColor
         button.layer.cornerRadius = 25.0
         button.tintColor = UIColor.black
+    }
+    
+    static func showError(_ errorMessage: String, errorLabel: UILabel) {
+        if errorLabel.alpha == 1 {
+            errorLabel.text = errorMessage
+            return
+        }
+        
+        let queue = OperationQueue()
+
+        let changeAlpha = BlockOperation {
+            DispatchQueue.main.async {
+                errorLabel.alpha = 1
+            }
+        }
+        let showError = BlockOperation {
+            DispatchQueue.main.async {
+                errorLabel.text = errorMessage
+            }
+        }
+        
+        changeAlpha.addDependency(showError)
+        queue.addOperation(showError)
+        queue.addOperation(changeAlpha)
     }
 }
 
