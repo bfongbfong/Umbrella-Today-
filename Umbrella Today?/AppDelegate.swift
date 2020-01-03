@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         FirebaseApp.configure()
+        FirebaseManager.listenForUserChange()
+        
         PersistenceManager.persistedWeatherReports = PersistenceManager.loadWeatherReports()
         print("loaded \(PersistenceManager.persistedWeatherReports.count) item(s)")
         // used to wipe storage empty

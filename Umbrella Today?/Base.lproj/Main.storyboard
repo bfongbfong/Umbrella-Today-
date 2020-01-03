@@ -677,17 +677,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="2Dj-OA-nwU">
-                                <rect key="frame" x="40" y="377" width="334" height="142.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="2Dj-OA-nwU">
+                                <rect key="frame" x="40" y="336.5" width="334" height="233"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello, Brandon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IeT-zQ-efQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="334" height="52.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="IeT-zQ-efQ">
+                                        <rect key="frame" x="0.0" y="0.0" width="334" height="50"/>
+                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="45"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.45000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="Fut-LG-d5I">
+                                        <rect key="frame" x="0.0" y="70" width="334" height="52.5"/>
                                         <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="45"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ux-yh-H28">
-                                        <rect key="frame" x="0.0" y="92.5" width="334" height="50"/>
+                                        <rect key="frame" x="0.0" y="142.5" width="334" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="led-hG-JL2"/>
                                         </constraints>
@@ -696,24 +702,32 @@
                                             <action selector="logoutButtonTapped:" destination="cE3-23-q9i" eventType="touchUpInside" id="cS0-Jp-9gL"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cP8-dt-zev">
+                                        <rect key="frame" x="0.0" y="212.5" width="334" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="6ux-yh-H28" firstAttribute="height" secondItem="IeT-zQ-efQ" secondAttribute="height" multiplier="0.952381" id="cjD-tz-IwE"/>
+                                    <constraint firstItem="IeT-zQ-efQ" firstAttribute="height" secondItem="6ux-yh-H28" secondAttribute="height" id="Mtr-Wh-Qq3"/>
                                 </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="2Dj-OA-nwU" firstAttribute="centerX" secondItem="eSg-Jz-CEO" secondAttribute="centerX" id="64w-qd-eVs"/>
+                            <constraint firstItem="2Dj-OA-nwU" firstAttribute="centerY" secondItem="p4X-Dg-wGq" secondAttribute="centerY" id="7R8-qY-9oW"/>
                             <constraint firstItem="p4X-Dg-wGq" firstAttribute="trailing" secondItem="2Dj-OA-nwU" secondAttribute="trailing" constant="40" id="FFG-bu-PzY"/>
-                            <constraint firstItem="2Dj-OA-nwU" firstAttribute="centerY" secondItem="eSg-Jz-CEO" secondAttribute="centerY" id="Lpr-uv-kRp"/>
                             <constraint firstItem="2Dj-OA-nwU" firstAttribute="leading" secondItem="p4X-Dg-wGq" secondAttribute="leading" constant="40" id="zlV-AE-fwV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="p4X-Dg-wGq"/>
                     </view>
                     <connections>
+                        <outlet property="errorLabel" destination="cP8-dt-zev" id="VEz-qy-vVw"/>
                         <outlet property="greetingLabel" destination="IeT-zQ-efQ" id="7rs-ZQ-bvU"/>
                         <outlet property="logoutButton" destination="6ux-yh-H28" id="DTR-X3-OQl"/>
+                        <outlet property="nameLabel" destination="Fut-LG-d5I" id="hTa-he-vbB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="own-zd-lGU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

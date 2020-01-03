@@ -71,20 +71,23 @@ class CurrentWeatherViewController: UIViewController {
     
     // Navigate to User auth or User info
     @IBAction func userButtonTapped(_ sender: Any) {
-        if let user = Auth.auth().currentUser {
+        if let user = FirebaseManager.currentUser {
             print(user)
             // there's a user
             if let userInfoVC = storyboard!.instantiateViewController(identifier: "UserInfoViewController") as? UserInfoViewController {
                 
                 if let name = user.displayName {
                     print("display name exists")
-                    userInfoVC.greetingLabel.text = "Hello, \(name)"
+                    userInfoVC.nameOfUser = name
+                } else if let email = user.email {
+                    userInfoVC.nameOfUser = email
                 }
+                
                 present(userInfoVC, animated: true, completion: nil)
             }
         } else {
             // there's no user
-            if let authenticationNavController = storyboard!.instantiateViewController(identifier: "UserInfoViewController") as? UINavigationController {
+            if let authenticationNavController = storyboard!.instantiateViewController(identifier: "AuthenticationNavigationController") as? UINavigationController {
                 present(authenticationNavController, animated: true, completion: nil)
             }
         }
