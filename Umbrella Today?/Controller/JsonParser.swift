@@ -93,6 +93,11 @@ class JsonParser {
             return []
         }
         
+        guard let timeZone = jsonObject["timezone"] as? Double else {
+            print("time zone not parsed in 5 day report")
+            return []
+        }
+        
         for weatherObject in list {
             guard let mainTemp = weatherObject["main"] as? [String: Any] else {
                 print("Error parsing 5 day forecast json data")
@@ -135,7 +140,7 @@ class JsonParser {
             }
             
             let dayOfWeek = Helpers.convertToDayOfWeek(unixTimeStamp: unixTimeStamp)
-            let time = Helpers.convertToTime(unixTimeStamp: unixTimeStamp, accurateToMinute: false, currentTimeZone: true)
+            let time = Helpers.convertToTime(timeZoneOffset: timeZone, accurateToMinute: false, currentTimeZone: true)
             
             let simpleWeatherReport = SimpleWeatherReport(currentTempInKelvin: currentTemp, minTempInKelvin: minTemp, maxTempInKelvin: maxTemp, description: description, dayOfWeek: dayOfWeek, time: time)
 

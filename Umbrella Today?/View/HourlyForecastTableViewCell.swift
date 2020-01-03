@@ -49,9 +49,9 @@ class HourlyForecastTableViewCell: UITableViewCell {
     // TODOL - figure out why colors are reversed
     
     // need to pass in min temp
-    func update(time: String, currentTemp: Int, weatherImageName: String, isDaytime: Bool) {
+    func update(time: String, currentTemp: Int, description: String, isDaytime: Bool) {
         dayLabel.text = time
-        weatherImageView.image = UIImage(named: weatherImageName)!
+        weatherImageView.image = WeatherImages.getImage(weatherDescription: description, isDaytime: isDaytime)
         self.selectionStyle = .none
         self.isDaytime = isDaytime
         self.backgroundColor = .none

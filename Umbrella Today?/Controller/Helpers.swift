@@ -16,7 +16,6 @@ class Helpers {
     static func convertToDayOfWeek(unixTimeStamp: Double) -> String {
         let secondsFromGMT = Double(TimeZone.current.secondsFromGMT())
         let dayOfWeekNumber = Int(floor((unixTimeStamp + secondsFromGMT)/86400) + 4) % 7
-        
         // to test if method is working correctly.
 //        let date = Date(timeIntervalSince1970: unixTimeStamp)
 //        let dateFormatter = DateFormatter()
@@ -46,13 +45,17 @@ class Helpers {
         }
     }
     
-    static func convertToTime(unixTimeStamp: Double, accurateToMinute: Bool, currentTimeZone: Bool) -> String {
+    static func convertToTime(timeZoneOffset: Double, accurateToMinute: Bool, currentTimeZone: Bool) -> String {
+        let unixTimeStamp = Date().timeIntervalSince1970
+        
         let date = Date(timeIntervalSince1970: unixTimeStamp)
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = DateFormatter.Style.short //Set time style
         
         if currentTimeZone {
             dateFormatter.timeZone = .current
+        } else {
+            dateFormatter.timeZone = TimeZone(secondsFromGMT: Int(timeZoneOffset))
         }
         
         var time = dateFormatter.string(from: date)

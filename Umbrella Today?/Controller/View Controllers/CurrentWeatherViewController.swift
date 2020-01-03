@@ -51,8 +51,6 @@ class CurrentWeatherViewController: UIViewController {
     var descriptionTextColor: UIColor!
     var detailTextHighlightsColor: UIColor!
     
-    var weatherImage: UIImage!
-    
     var loadingView = UIView()
     
     let disposeBag = DisposeBag()
@@ -62,7 +60,6 @@ class CurrentWeatherViewController: UIViewController {
         super.viewDidLoad()
         
         listenForCurrentWeatherUpdate()
-        weatherImage = WeatherImages.rain
         
 //        addWhiteLayer()
 //        checkLocationServices()
@@ -121,7 +118,7 @@ extension CurrentWeatherViewController {
         view.backgroundColor = backgroundColor
         currentTempLabel.textColor = temperatureTextColor
         
-        weatherImageView.image = weatherImage
+        weatherImageView.image = WeatherImages.getImage(weatherDescription: weatherReport!.description, isDaytime: isDaytime)
         
         // handle these errors later
         currentTempLabel.text = "\(weatherReport?.temperature.current ?? 0)º"

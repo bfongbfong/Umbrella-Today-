@@ -99,7 +99,7 @@ extension HourlyForecastViewController: UITableViewDelegate, UITableViewDataSour
 
         cell.update(time: thisReport.time,
                     currentTemp: thisReport.currentTemp,
-                    weatherImageName: "few_clouds_day_01",
+                    description: thisReport.description,
                     isDaytime: isDaytime)
         return cell
     }

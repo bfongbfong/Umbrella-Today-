@@ -62,8 +62,13 @@ extension FiveDayForecastViewController: UITableViewDelegate, UITableViewDataSou
         let dayOfWeekText = thisReport.dayOfWeek
         let minTemp = thisReport.minTemp
         let maxTemp = thisReport.maxTemp
+        let description = thisReport.description
         
-        cell.update(day: dayOfWeekText, minTemp: minTemp, maxTemp: maxTemp, weatherImageName: "few_clouds_day_01", isDaytime: isDaytime)
+        cell.update(day: dayOfWeekText,
+                    minTemp: minTemp,
+                    maxTemp: maxTemp,
+                    description: description,
+                    isDaytime: isDaytime)
         return cell
     }
     

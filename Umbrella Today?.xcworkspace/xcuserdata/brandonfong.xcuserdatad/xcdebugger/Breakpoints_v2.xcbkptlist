@@ -231,65 +231,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "3392F4D4-26E3-4C4E-8B25-45CF72DCFFAF"
+            uuid = "827E4AD4-6913-46E2-9A4D-374480AB1D7F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Umbrella Today?/Controller/View Controllers/SavedLocationsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
-            landmarkName = "listenForSavedLocationsUpdate()"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
+            landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "9D2D173E-3748-4A89-96F1-50BEE0C348C6"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Umbrella Today?/Controller/FirebaseManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "17"
-            endingLineNumber = "17"
-            landmarkName = "listenForUserChange()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "9D2D173E-3748-4A89-96F1-50BEE0C348C6 - d9bb2e72a74394cf"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static UmbrellaPal.FirebaseManager.listenForUserChange() -&gt; ()"
-                  moduleName = "UmbrellaPal"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/brandonfong/Documents/Coding/iOS%20Projects/Umbrella%20Today%3F/Umbrella%20Today%3F/Controller/FirebaseManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "17"
-                  endingLineNumber = "17"
-                  offsetFromSymbolStart = "68">
-               </Location>
-               <Location
-                  uuid = "9D2D173E-3748-4A89-96F1-50BEE0C348C6 - 958be40540441732"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.FIRAuth, Swift.Optional&lt;__C.FIRUser&gt;) -&gt; () in static UmbrellaPal.FirebaseManager.listenForUserChange() -&gt; ()"
-                  moduleName = "UmbrellaPal"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/brandonfong/Documents/Coding/iOS%20Projects/Umbrella%20Today%3F/Umbrella%20Today%3F/Controller/FirebaseManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "18"
-                  endingLineNumber = "18"
-                  offsetFromSymbolStart = "160">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

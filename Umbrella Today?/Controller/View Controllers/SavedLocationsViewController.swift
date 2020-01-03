@@ -33,19 +33,6 @@ class SavedLocationsViewController: UIViewController {
 
 extension SavedLocationsViewController {
     func listenForSavedLocationsUpdate() {
-        // listener to get first time loading data for current location weather
-//        WeatherReportData.savedLocationsWeatherReports.asObservable()
-//            .take(1)
-//            .subscribe(onNext: { weatherReports in
-//
-//                print("first element taken from listener: \(weatherReports[0].location), the rest from local storage")
-//                // ScrollParentVC sends the current weather
-//                self.savedLocationsWeatherReports = weatherReports
-//                self.savedLocationsWeatherReports += PersistenceManager.loadWeatherReports()
-//                self.tableView.reloadData()
-//
-//            }).disposed(by: disposeBag)
-        
         // listener for every time besides first time.
         WeatherReportData.savedLocationsWeatherReports.asObservable()
             .skip(1)
@@ -58,23 +45,12 @@ extension SavedLocationsViewController {
                     self.savedLocationsWeatherReports = weatherReports
                 }
                 
-                
-                
-//                if weatherReports.count == 1 {
-//                    self.savedLocationsWeatherReports += weatherReports
-//                } else {
-//                    self.savedLocationsWeatherReports = weatherReports
-//                }
-                
-                
                 self.persistSavedLocations()
                 
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                 }
             }).disposed(by: disposeBag)
-        
-        
     }
     
     private func persistSavedLocations() {
@@ -98,9 +74,10 @@ extension SavedLocationsViewController: UITableViewDelegate, UITableViewDataSour
         // get the time zone, and figure out the time based on that.
         let location = thisReport.location
 
-        let currentDate = Date()
-        let unixTimeStamp = currentDate.timeIntervalSince1970 + thisReport.timeZone!
-        let time = Helpers.convertToTime(unixTimeStamp: unixTimeStamp, accurateToMinute: true, currentTimeZone: false)
+//        let currentDate = Date()
+//        let unixTimeStamp = currentDate.timeIntervalSince1970 + thisReport.timeZone!
+        let timeZoneOffset = thisReport.timeZone!
+        let time = Helpers.convertToTime(timeZoneOffset: timeZoneOffset, accurateToMinute: true, currentTimeZone: false)
         // bug - the time isn't even right
 //        print("time is \(time)")
         
