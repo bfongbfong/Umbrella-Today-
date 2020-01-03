@@ -11,6 +11,8 @@
 		550FDBB123BD00DE0088EACC /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550FDBB023BD00DE0088EACC /* PersistenceManager.swift */; };
 		550FDBB323BD059B0088EACC /* SavedLocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550FDBB223BD059B0088EACC /* SavedLocationsViewController.swift */; };
 		550FDBB623BD07A10088EACC /* SavedLocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550FDBB523BD07A10088EACC /* SavedLocationTableViewCell.swift */; };
+		551BFA7823BF000D00E98456 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551BFA7723BF000D00E98456 /* SignUpViewController.swift */; };
+		551BFA7C23BF003900E98456 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551BFA7B23BF003900E98456 /* LoginViewController.swift */; };
 		551CF19823BAE8CD00101E57 /* WeatherImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551CF19723BAE8CD00101E57 /* WeatherImages.swift */; };
 		551CF19A23BB039A00101E57 /* FiveDayForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551CF19923BB039A00101E57 /* FiveDayForecastViewController.swift */; };
 		551CF19C23BB049600101E57 /* FiveDayForecastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551CF19B23BB049600101E57 /* FiveDayForecastTableViewCell.swift */; };
@@ -53,6 +55,8 @@
 		550FDBB023BD00DE0088EACC /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 		550FDBB223BD059B0088EACC /* SavedLocationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedLocationsViewController.swift; sourceTree = "<group>"; };
 		550FDBB523BD07A10088EACC /* SavedLocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedLocationTableViewCell.swift; sourceTree = "<group>"; };
+		551BFA7723BF000D00E98456 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		551BFA7B23BF003900E98456 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		551CF19723BAE8CD00101E57 /* WeatherImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherImages.swift; sourceTree = "<group>"; };
 		551CF19923BB039A00101E57 /* FiveDayForecastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveDayForecastViewController.swift; sourceTree = "<group>"; };
 		551CF19B23BB049600101E57 /* FiveDayForecastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveDayForecastTableViewCell.swift; sourceTree = "<group>"; };
@@ -122,6 +126,8 @@
 				551CF19923BB039A00101E57 /* FiveDayForecastViewController.swift */,
 				550FDBB223BD059B0088EACC /* SavedLocationsViewController.swift */,
 				55A079A723BD1B68002BD11D /* LocationSearchViewController.swift */,
+				551BFA7723BF000D00E98456 /* SignUpViewController.swift */,
+				551BFA7B23BF003900E98456 /* LoginViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -376,6 +382,7 @@
 				55C92A9523BC0B950040F854 /* HourlyForecastViewController.swift in Sources */,
 				5585762F23B87E3E00CABA38 /* Range.swift in Sources */,
 				55C3FE3D23B6B27F00CE7776 /* AppDelegate.swift in Sources */,
+				551BFA7C23BF003900E98456 /* LoginViewController.swift in Sources */,
 				55A2916C23BAE4060031F48E /* ScrollParentViewController.swift in Sources */,
 				550FDBB623BD07A10088EACC /* SavedLocationTableViewCell.swift in Sources */,
 				55A2916A23B994370031F48E /* UILabel+Extensions.swift in Sources */,
@@ -387,6 +394,7 @@
 				555A1A5923BE7DBD00953214 /* DayOfWeek.swift in Sources */,
 				551CF19A23BB039A00101E57 /* FiveDayForecastViewController.swift in Sources */,
 				55C3FE4723B6B27F00CE7776 /* Umbrella_Today_.xcdatamodeld in Sources */,
+				551BFA7823BF000D00E98456 /* SignUpViewController.swift in Sources */,
 				5585763123B87E5700CABA38 /* Temperature.swift in Sources */,
 				55A2916623B9818F0031F48E /* UIColor+Extensions.swift in Sources */,
 				5585763723B93EA400CABA38 /* JsonParser.swift in Sources */,
