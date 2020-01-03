@@ -282,7 +282,60 @@ class Helpers {
         }
     }
     
+    /// Check the sign up fields and validates that the data is correct. If everything is corrent, it returns nil. Otherwise, it returns an error message
+    ///
+    /// - Parameters:
+    ///     - firstName: User's first name.
+    ///     - lastName: User's last name.
+    ///     - email: User's email.
+    ///     - password: User's password.
+    /// - Returns: Optional string of error message.
+    static func validateFields(firstName: String, lastName: String, email: String, password: String) -> String? {
+        
+        // Check that all fields are filled in
+        if firstName == "" || lastName == "" || email == "" || password == "" {
+            return "Please fill in all fields."
+        }
+        
+        if !password.isValidPassword {
+            // Password isn't secure enough
+            return "Please ensure your password has at least six characters, at least one letter and one number."
+        }
+        
+        if !email.isValidEmail {
+            return "Please enter a valid email."
+        }
+        
+        return nil
+    }
+    
+    /// Check the log in fields and validates that the data is correct. If everything is corrent, it returns nil. Otherwise, it returns an error message
+    ///
+    /// - Parameters:
+    ///     - email: User's email.
+    ///     - password: User's password.
+    /// - Returns: Optional string of error message.
+    static func validateFields(email: String, password: String) -> String? {
+        
+        // Check that all fields are filled in
+        if email == "" || password == "" {
+            return "Please fill in all fields."
+        }
+        
+        if !email.isValidEmail {
+            return "Please enter a valid email."
+        }
+        
+        return nil
+    }
+}
+
+// MARK: - Styling
+extension Helpers {
+    
     static func styleTextField(_ textfield: UITextField) {
+        
+        textfield.clipsToBounds = true
         
         // Create the bottom line
         let bottomLine = CALayer()
@@ -290,7 +343,7 @@ class Helpers {
         bottomLine.frame = CGRect(x: 0, y: textfield.frame.height - 2, width: textfield.frame.width, height: 2)
         
         bottomLine.backgroundColor = UIColor.init(red: 48/255, green: 173/255, blue: 99/255, alpha: 1).cgColor
-        
+                
         // Remove border on text field
         textfield.borderStyle = .none
         
@@ -314,12 +367,6 @@ class Helpers {
         button.layer.borderColor = UIColor.black.cgColor
         button.layer.cornerRadius = 25.0
         button.tintColor = UIColor.black
-    }
-    
-    static func isPasswordValid(_ password: String) -> Bool {
-        
-        let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{8,}")
-        return passwordTest.evaluate(with: password)
     }
 }
 

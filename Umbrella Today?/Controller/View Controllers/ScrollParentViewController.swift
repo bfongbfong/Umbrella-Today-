@@ -253,6 +253,7 @@ extension ScrollParentViewController {
                         let fiveDayReports = Helpers.findFiveDayReport(simpleWeatherReports: arrayOfSimpleWeatherReports)
                         
                         // one time, something on the line below was unwrapped to nil
+                        // reason was because currentWeatherReport needs to be retrieved in op 1
                         let currentWeatherSimple = self.currentWeatherReport.convertIntoSimpleWeatherReportForFirstHourlyResult()
                         arrayOfEightHourlyWeatherReports.insert(currentWeatherSimple, at: 0)
                         WeatherReportData.fiveDayForecast.accept(fiveDayReports)
@@ -264,6 +265,7 @@ extension ScrollParentViewController {
         
         operation3.addDependency(operation2)
         operation2.addDependency(operation1)
+        operation4.addDependency(operation1)
         queue.addOperation(operation1)
         queue.addOperation(operation2)
         queue.addOperation(operation3)

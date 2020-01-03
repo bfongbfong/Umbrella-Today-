@@ -8,15 +8,15 @@
 
 import UIKit
 import CoreData
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        FirebaseApp.configure()
         PersistenceManager.persistedWeatherReports = PersistenceManager.loadWeatherReports()
         print("loaded \(PersistenceManager.persistedWeatherReports.count) item(s)")
         // used to wipe storage empty
@@ -26,10 +26,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        PersistenceManager.persistedWeatherReports.forEach { (report) in
 //            print(report.location)
 //        }
-        
-//        WeatherReportData.savedLocationsWeatherReports.accept(savedLocationsWeatherReports)
-//        PersistenceManager.listenForChangesToSavedLocationsAndPersist()
-        
         return true
     }
 

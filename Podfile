@@ -10,5 +10,9 @@ target 'Umbrella Today?' do
 pod 'Alamofire', '~> 5.0.0-rc.3'
 pod 'RxSwift', '~> 5'
 pod 'RxCocoa', '~> 5'
-
+pod 'Firebase/Analytics'
+pod 'Firebase/Auth'
+pod 'Firebase/Core'
+pod 'Firebase/Firestore'
 end
+
