@@ -16,7 +16,9 @@ class LocationSearchViewController: UIViewController {
     @IBOutlet weak var textField: UITextField!
     
     var searchResultCities = [City]()
-    var savedWeatherReports = [WeatherReport]()
+//    var savedWeatherReports = [WeatherReport]()
+    var savedWeatherReport: WeatherReport?
+
 
     let disposeBag = DisposeBag()
     
@@ -73,6 +75,48 @@ extension LocationSearchViewController {
 //
 //            }).disposed(by: disposeBag)
     }
+    
+    func findAndSendDataForSelectedCity(city: City) {
+        let queue = OperationQueue()
+        let group = DispatchGroup()
+        
+        let operation1 = BlockOperation {
+            group.enter()
+            OpenWeatherManager.getCurrentWeatherData(cityID: city.id) { (jsonData) in
+                if let jsonData = jsonData {
+                    if let weatherReport = JsonParser.parseJsonCurrentWeatherObject(jsonObject: jsonData) {
+                        self.savedWeatherReport = weatherReport
+                    } else {
+                        print("error parsing json for current weather object in LocationSearchVC")
+                    }
+                } else {
+                    print("Error: get current weather data returned nothing in LocationSearchVC")
+                }
+                group.leave()
+            }
+            group.wait()
+        }
+        
+        let operation2 = BlockOperation {
+            AutocompleteSearchManager.searchForCities(input: self.savedWeatherReport!.location, maxNumberOfResults: 1) { (arrayOfCities) in
+                let foundCity = arrayOfCities[0]
+                let abbreviatedState = Helpers.convertStateToAbbr(stateName: foundCity.state!)
+                self.savedWeatherReport!.state = abbreviatedState
+            }
+        }
+        
+        let operation3 = BlockOperation {
+            print("LOCATION SEARCH VC - sending addition \(self.savedWeatherReport!.location)")
+            WeatherReportData.savedLocationsWeatherReports.accept([self.savedWeatherReport!])
+        }
+        
+        operation2.addDependency(operation1)
+        operation3.addDependency(operation2)
+        queue.addOperation(operation1)
+        queue.addOperation(operation2)
+        queue.addOperation(operation3)
+        
+    }
 
 }
 
@@ -93,22 +137,8 @@ extension LocationSearchViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedCity = searchResultCities[indexPath.row]
         
-        OpenWeatherManager.getCurrentWeatherData(cityID: selectedCity.id) { (jsonData) in
-            if let jsonData = jsonData {
-                if let weatherReport = JsonParser.parseJsonCurrentWeatherObject(jsonObject: jsonData) {
-                    self.savedWeatherReports.append(weatherReport)
-                    
-                    print("LOCATION SEARCH VC - sending addition \(weatherReport.location)")
-                    WeatherReportData.savedLocationsWeatherReports.accept([weatherReport])
-                    
-                } else {
-                    print("error parsing json for current weather object in LocationSearchVC")
-                }
-            } else {
-                print("Error: get current weather data returned nothing in LocationSearchVC")
-            }
-        }
+        findAndSendDataForSelectedCity(city: selectedCity)
         dismiss(animated: true, completion: nil)
     }
-
 }
+
