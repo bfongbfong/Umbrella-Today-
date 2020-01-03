@@ -79,7 +79,6 @@ extension LoginViewController: UITextFieldDelegate {
             return true
         }
         
-        
        // Try to find next responder
        if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
           nextField.becomeFirstResponder()

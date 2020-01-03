@@ -49,6 +49,7 @@
 		55C92A8F23BBA80C0040F854 /* SimpleWeatherReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C92A8E23BBA80C0040F854 /* SimpleWeatherReport.swift */; };
 		55C92A9323BBD76D0040F854 /* WeatherReportData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C92A9223BBD76D0040F854 /* WeatherReportData.swift */; };
 		55C92A9523BC0B950040F854 /* HourlyForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C92A9423BC0B950040F854 /* HourlyForecastViewController.swift */; };
+		55CC3E8A23BFC30B001A38C1 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CC3E8923BFC30B001A38C1 /* UserInfoViewController.swift */; };
 		740AA9BC6AFAFF17F1BCBC0D /* Pods_Umbrella_Today_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAFD893038799641174FC52B /* Pods_Umbrella_Today_.framework */; };
 /* End PBXBuildFile section */
 
@@ -98,6 +99,7 @@
 		55C92A8E23BBA80C0040F854 /* SimpleWeatherReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleWeatherReport.swift; sourceTree = "<group>"; };
 		55C92A9223BBD76D0040F854 /* WeatherReportData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherReportData.swift; sourceTree = "<group>"; };
 		55C92A9423BC0B950040F854 /* HourlyForecastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastViewController.swift; sourceTree = "<group>"; };
+		55CC3E8923BFC30B001A38C1 /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		99EC326CFE3E1ADBC87A6EF7 /* Pods-Umbrella Today?.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Umbrella Today?.release.xcconfig"; path = "Target Support Files/Pods-Umbrella Today?/Pods-Umbrella Today?.release.xcconfig"; sourceTree = "<group>"; };
 		FAFD893038799641174FC52B /* Pods_Umbrella_Today_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Umbrella_Today_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -143,6 +145,7 @@
 				551BFA7D23BF00E100E98456 /* AuthenticationViewController.swift */,
 				551BFA7723BF000D00E98456 /* SignUpViewController.swift */,
 				551BFA7B23BF003900E98456 /* LoginViewController.swift */,
+				55CC3E8923BFC30B001A38C1 /* UserInfoViewController.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -412,6 +415,7 @@
 				550FDBB323BD059B0088EACC /* SavedLocationsViewController.swift in Sources */,
 				5521B1B823B6ED7B00D0911C /* Helpers.swift in Sources */,
 				55C92A8F23BBA80C0040F854 /* SimpleWeatherReport.swift in Sources */,
+				55CC3E8A23BFC30B001A38C1 /* UserInfoViewController.swift in Sources */,
 				55C92A9323BBD76D0040F854 /* WeatherReportData.swift in Sources */,
 				55C92A9523BC0B950040F854 /* HourlyForecastViewController.swift in Sources */,
 				5585762F23B87E3E00CABA38 /* Range.swift in Sources */,
