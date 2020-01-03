@@ -16,6 +16,7 @@ class WeatherReport: Codable, Equatable {
     var main: String
     var id: Int
     
+    var state: String?
     var humidity: Int?
     var pressure: Int?
     var rain1hr: Double?
@@ -33,6 +34,7 @@ class WeatherReport: Codable, Equatable {
          description: String,
          main: String,
          id: Int,
+         state: String?,
          rain1hr: Double?,
          humidity: Int?,
          pressure: Int?,
@@ -49,6 +51,7 @@ class WeatherReport: Codable, Equatable {
         self.description = description
         self.main = main
         self.id = id
+        self.state = state
         self.rain1hr = rain1hr
         self.humidity = humidity
         self.pressure = pressure

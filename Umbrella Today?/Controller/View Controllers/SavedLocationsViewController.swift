@@ -67,9 +67,7 @@ extension SavedLocationsViewController {
 //                }
                 
                 
-                var savedLocationsWithoutFirst = self.savedLocationsWeatherReports
-                savedLocationsWithoutFirst.removeFirst()
-                PersistenceManager.persistWeatherReports(savedLocationsWithoutFirst)
+                self.persistSavedLocations()
                 
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
@@ -77,6 +75,12 @@ extension SavedLocationsViewController {
             }).disposed(by: disposeBag)
         
         
+    }
+    
+    private func persistSavedLocations() {
+        var savedLocationsWithoutFirst = self.savedLocationsWeatherReports
+        savedLocationsWithoutFirst.removeFirst()
+        PersistenceManager.persistWeatherReports(savedLocationsWithoutFirst)
     }
 }
 
@@ -92,13 +96,15 @@ extension SavedLocationsViewController: UITableViewDelegate, UITableViewDataSour
         
         let thisReport = savedLocationsWeatherReports[indexPath.row]
         // get the time zone, and figure out the time based on that.
+        let location = thisReport.location
+
         let currentDate = Date()
         let unixTimeStamp = currentDate.timeIntervalSince1970 + thisReport.timeZone!
         let time = Helpers.convertToTime(unixTimeStamp: unixTimeStamp, accurateToMinute: true, currentTimeZone: false)
         // bug - the time isn't even right
 //        print("time is \(time)")
         
-        cell.update(location: thisReport.location, time: time, temperature: thisReport.temperature.current, weatherImageName: "rain_01", currentLocation: false)
+        cell.update(location: location, time: time, temperature: thisReport.temperature.current, weatherImageName: "rain_01", currentLocation: false)
         return cell
     }
     
@@ -129,6 +135,21 @@ extension SavedLocationsViewController: UITableViewDelegate, UITableViewDataSour
             }
         }
         dismiss(animated: true, completion: nil)
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        if indexPath.row != 0 {
+            return true
+        } else {
+            return false
+        }
+    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            savedLocationsWeatherReports.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+        persistSavedLocations()
     }
 }
 

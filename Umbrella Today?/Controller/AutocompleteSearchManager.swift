@@ -97,7 +97,7 @@ class AutocompleteSearchManager {
             cities.append(firstMatchedCity)
         }
         
-        for i in 1...(maxNumberOfResults - 1) {
+        for i in 0...(maxNumberOfResults - 1) {
             guard let cityObject = jsonArray[firstMatchIndex + i] as? [String: Any] else {
                 // i think return empty if the middle element doesn't exist, or isn't a dictionary?
                 return cities

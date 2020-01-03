@@ -178,21 +178,105 @@ extension ScrollParentViewController {
     func fireApiCalls() {
         guard currentLocation != nil else { return }
         
+//        oldMethod()
+        newMethod()
+        
+    }
+}
+
+extension ScrollParentViewController {
+    
+    func newMethod() {
+        let queue = OperationQueue()
+        
+        let group = DispatchGroup()
+
+        let operation1 = BlockOperation {
+            group.enter()
+            OpenWeatherManager.getCurrentWeatherData(latitude: self.currentLocation.coordinate.latitude, longitude: self.currentLocation.coordinate.longitude) { (jsonWeatherObject) in
+
+                if let responseJson = jsonWeatherObject {
+
+                    self.currentWeatherReport = JsonParser.parseJsonCurrentWeatherObject(jsonObject: responseJson)
+                    WeatherReportData.currentForecast.accept(self.currentWeatherReport)
+                    
+                    WeatherReport.currentLocation = self.currentWeatherReport
+                    print("operation 1 done")
+                    group.leave()
+                }
+            }
+            group.wait()
+        }
+        
+        let operation2 = BlockOperation {
+            group.enter()
+            if let currentWeatherReport = WeatherReport.currentLocation {
+                AutocompleteSearchManager.searchForCities(input: currentWeatherReport.location, maxNumberOfResults: 1) { (arrayOfCities) in
+                    if let state = arrayOfCities[0].state {
+                        print("state is:", state)
+                        let stateAbbr = Helpers.convertStateToAbbr(stateName: state)
+                        print("abbreviated state is:", stateAbbr)
+                        if WeatherReport.currentLocation != nil {
+                            WeatherReport.currentLocation!.state = stateAbbr
+                        }
+                        
+                        print("Operation 2 done")
+                    }
+                    group.leave()
+                }
+            }
+            group.wait()
+        }
+    
+        let operation3 = BlockOperation {
+            DispatchQueue.main.async {
+                print("operation 3 - main thread")
+                self.checkSunlight()
+                self.setupPages()
+            }
+        }
+        
+        let operation4 = BlockOperation {
+            OpenWeatherManager.getFiveDayAndHourlyForecast(latitude: self.currentLocation.coordinate.latitude, longitude: self.currentLocation.coordinate.longitude) { (jsonWeatherObject) in
+                
+                print("operation 4")
+                if let responseJson = jsonWeatherObject {
+                    DispatchQueue.main.async {
+                        print("operation 4 main thread")
+                        
+                        let arrayOfSimpleWeatherReports = JsonParser.parseJsonFiveDayWeatherObjects(jsonObject: responseJson)
+                        if arrayOfSimpleWeatherReports.count < 8 {
+                            print("Error: API didn't send back enough forecasts.")
+                            return
+                        }
+                        var arrayOfEightHourlyWeatherReports = Array(arrayOfSimpleWeatherReports[0...7])
+                        let fiveDayReports = Helpers.findFiveDayReport(simpleWeatherReports: arrayOfSimpleWeatherReports)
+                        
+                        // one time, something on the line below was unwrapped to nil
+                        let currentWeatherSimple = self.currentWeatherReport.convertIntoSimpleWeatherReportForFirstHourlyResult()
+                        arrayOfEightHourlyWeatherReports.insert(currentWeatherSimple, at: 0)
+                        WeatherReportData.fiveDayForecast.accept(fiveDayReports)
+                        WeatherReportData.hourlyForecast.accept(arrayOfEightHourlyWeatherReports)
+                    }
+                }
+            }
+        }
+        
+        operation3.addDependency(operation2)
+        operation2.addDependency(operation1)
+        queue.addOperation(operation1)
+        queue.addOperation(operation2)
+        queue.addOperation(operation3)
+        queue.addOperation(operation4)
+    }
+    
+    func oldMethod() {
         OpenWeatherManager.getCurrentWeatherData(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude) { (jsonWeatherObject) in
 
             if let responseJson = jsonWeatherObject {
 
                 self.currentWeatherReport = JsonParser.parseJsonCurrentWeatherObject(jsonObject: responseJson)
                 WeatherReportData.currentForecast.accept(self.currentWeatherReport)
-  
-                // what it will be
-//                let loadedReports = PersistenceManager.loadWeatherReports()
-//                print("SCROLL PARENT VC - sending weather report for \(self.currentWeatherReport.location) to savedLocationsWeatherReports")
-//                WeatherReportData.savedLocationsWeatherReports.accept([self.currentWeatherReport] + loadedReports)
-                
-//                print("SCROLL PARENT VC - sending weather report for \(self.currentWeatherReport.location) to savedLocationsWeatherReports")
-//                WeatherReportData.savedLocationsWeatherReports.accept([self.currentWeatherReport])
-                // when you send this, saved locations vc & location search VC aren't loaded yet, and will respond when they are loaded.
                 
                 WeatherReport.currentLocation = self.currentWeatherReport
                 
@@ -224,9 +308,6 @@ extension ScrollParentViewController {
             }
         }
     }
-}
-
-extension ScrollParentViewController {
     
     func checkSunlight() {
         let now = Int(NSDate().timeIntervalSince1970)

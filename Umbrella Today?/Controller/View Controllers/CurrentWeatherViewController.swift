@@ -92,10 +92,6 @@ extension CurrentWeatherViewController {
             return
         }
         
-//        checkSunlight()
-        
-//        whiteFadeAwayAnimation()
-        
         view.backgroundColor = backgroundColor
         currentTempLabel.textColor = temperatureTextColor
         
@@ -103,9 +99,13 @@ extension CurrentWeatherViewController {
         
         // handle these errors later
         currentTempLabel.text = "\(weatherReport?.temperature.current ?? 0)º"
+        var uppercasedLocation = "\(weatherReport!.location.uppercased())"
 
-        let uppercasedLocation = weatherReport?.location.uppercased()
-        locationLabel.text = uppercasedLocation!
+        if let state = weatherReport!.state {
+            uppercasedLocation = "\(weatherReport!.location.uppercased()), \(state)"
+        }
+        
+        locationLabel.text = uppercasedLocation
         locationLabel.addCharacterSpacing(2)
         locationLabel.textColor = locationTextColor
         
