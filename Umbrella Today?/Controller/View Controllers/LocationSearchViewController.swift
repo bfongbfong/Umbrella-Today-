@@ -63,13 +63,15 @@ extension LocationSearchViewController {
 
 extension LocationSearchViewController {
     func listenForSavedLocationsUpdate() {
-        WeatherReportData.savedLocationsWeatherReports.asObservable()
-            .subscribe(onNext: { weatherReports in
-                
-                print("current weather reports accepted: \(weatherReports.count)")
-                self.savedWeatherReports = weatherReports
-                
-            }).disposed(by: disposeBag)
+        
+        // the only reaosn this is here, is so i can get the beginning of the array, and attach the new part to send it back
+//        WeatherReportData.savedLocationsWeatherReports.asObservable()
+//            .subscribe(onNext: { weatherReports in
+//
+//                print("LOCATION SEARCH VC - receiving: \(weatherReports.count) report(s)")
+//                self.savedWeatherReports = weatherReports
+//
+//            }).disposed(by: disposeBag)
     }
 
 }
@@ -90,13 +92,19 @@ extension LocationSearchViewController: UITableViewDelegate, UITableViewDataSour
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedCity = searchResultCities[indexPath.row]
-//        WeatherReportData.savedCities.accept(selectedCity)
         
+        // i think maybe this should be called in the vc underneath it.. but how?
         OpenWeatherManager.getCurrentWeatherData(cityID: selectedCity.id) { (jsonData) in
             if let jsonData = jsonData {
                 if let weatherReport = JsonParser.parseJsonCurrentWeatherObject(jsonObject: jsonData) {
                     self.savedWeatherReports.append(weatherReport)
-                    WeatherReportData.savedLocationsWeatherReports.accept(self.savedWeatherReports)
+//                    print("LOCATION SEARCH VC - sending: \(self.savedWeatherReports.count) with newest being in \(weatherReport.location)")
+//                    WeatherReportData.savedLocationsWeatherReports.accept(self.savedWeatherReports)
+                    // pass on a single one instead
+                    
+                    print("LOCATION SEARCH VC - sending addition \(weatherReport.location)")
+                    WeatherReportData.savedLocationsWeatherReports.accept([weatherReport])
+                    
                 } else {
                     print("error parsing json for current weather object in LocationSearchVC")
                 }

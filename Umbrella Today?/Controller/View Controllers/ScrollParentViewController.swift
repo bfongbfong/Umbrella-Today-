@@ -124,6 +124,7 @@ extension ScrollParentViewController {
             checkLocationAuthorization()
         } else {
             // show alert telling user they have to enable it.
+            print("user has to enable location services")
         }
     }
     
@@ -139,12 +140,14 @@ extension ScrollParentViewController {
             break
         case .denied:
             // alert user to go to settings to turn on permissions
+            print("location services are denied")
             break
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
             break
         case .restricted:
             // alert user that they have been restricted
+            print("location services are restricted")
             break
         @unknown default:
             print("Error: Authorization status was unknown.")
@@ -181,7 +184,15 @@ extension ScrollParentViewController {
 
                 self.currentWeatherReport = JsonParser.parseJsonCurrentWeatherObject(jsonObject: responseJson)
                 WeatherReportData.currentForecast.accept(self.currentWeatherReport)
+  
+                // what it will be
+//                let loadedReports = PersistenceManager.loadWeatherReports()
+//                print("SCROLL PARENT VC - sending weather report for \(self.currentWeatherReport.location) to savedLocationsWeatherReports")
+//                WeatherReportData.savedLocationsWeatherReports.accept([self.currentWeatherReport] + loadedReports)
+                
+                print("SCROLL PARENT VC - sending weather report for \(self.currentWeatherReport.location) to savedLocationsWeatherReports")
                 WeatherReportData.savedLocationsWeatherReports.accept([self.currentWeatherReport])
+                // when you send this, saved locations vc & location search VC aren't loaded yet, and will respond when they are loaded.
                 
                 DispatchQueue.main.async {
                     self.checkSunlight()
@@ -217,16 +228,16 @@ extension ScrollParentViewController {
     
     func checkSunlight() {
         let now = Int(NSDate().timeIntervalSince1970)
-        print("right now is \(now) in epoch time")
+//        print("right now is \(now) in epoch time")
         
         if currentWeatherReport != nil {
             if currentWeatherReport!.sunriseTime != nil {
-                print("sunrise time: \(currentWeatherReport!.sunriseTime!)")
+//                print("sunrise time: \(currentWeatherReport!.sunriseTime!)")
             }
         }
         if currentWeatherReport != nil {
             if currentWeatherReport!.sunsetTime != nil {
-                print("sunset time: \(currentWeatherReport!.sunsetTime!)")
+//                print("sunset time: \(currentWeatherReport!.sunsetTime!)")
                 if now > currentWeatherReport!.sunsetTime! {
                     // it's night time.
                     isDaytime = false

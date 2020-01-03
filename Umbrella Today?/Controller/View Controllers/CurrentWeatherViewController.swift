@@ -221,16 +221,16 @@ extension CurrentWeatherViewController {
     
     func checkSunlight() {
         let now = Int(NSDate().timeIntervalSince1970)
-        print("right now is \(now) in epoch time")
+//        print("right now is \(now) in epoch time")
         
         if weatherReport != nil {
             if weatherReport!.sunriseTime != nil {
-                print("sunrise time: \(weatherReport!.sunriseTime!)")
+//                print("sunrise time: \(weatherReport!.sunriseTime!)")
             }
         }
         if weatherReport != nil {
             if weatherReport!.sunsetTime != nil {
-                print("sunset time: \(weatherReport!.sunsetTime!)")
+//                print("sunset time: \(weatherReport!.sunsetTime!)")
                 if now > weatherReport!.sunsetTime! {
                     // it's night time.
                     isDaytime = false
@@ -276,12 +276,12 @@ extension CurrentWeatherViewController {
 
 // MARK: - Navigation
 extension CurrentWeatherViewController {
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "ToSavedLocationsViewController" {
-//            if let savedLocationsViewController = segue.destination as? SavedLocationsViewController {
-//                savedLocationsViewController.savedLocations.append(self.weatherReport!)
-//            }
-//        }
-//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ToSavedLocationsViewController" {
+            if let savedLocationsViewController = segue.destination as? SavedLocationsViewController {
+                savedLocationsViewController.savedLocationsWeatherReports.append(self.weatherReport!)
+            }
+        }
+    }
 }
 

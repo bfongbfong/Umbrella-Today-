@@ -7,16 +7,23 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 class PersistenceManager {
     
+    static let disposeBag = DisposeBag()
+    
     static var savedWeatherReportsDataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("SavedWeatherReports.plist")
+    
+    static var persistedWeatherReports = [WeatherReport]()
 
     static func persistWeatherReports(_ weatherReports: [WeatherReport]) {
         let encoder = PropertyListEncoder()
         do {
             let data = try encoder.encode(weatherReports)
             try data.write(to: self.savedWeatherReportsDataFilePath!)
+            print("Succeeded persisting \(weatherReports.count) item(s)")
         } catch {
             print("Weather reports couldn't be encoded. Error: \(error)")
         }
@@ -34,6 +41,21 @@ class PersistenceManager {
             print("Error: \(error)")
         }
         
+        print("loaded \(returnArray.count) item(s)")
+        
         return returnArray
+    }
+    
+    static func listenForChangesToSavedLocationsAndPersist() {
+//
+//        print("file path: ", FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+//        WeatherReportData.savedLocationsWeatherReports.asObservable()
+//            .subscribe(onNext: { savedLocationsWeatherReports in
+//
+//                print("Persistenting \(savedLocationsWeatherReports.count) item(s)")
+//
+//                persistWeatherReports(savedLocationsWeatherReports)
+//
+//            }).disposed(by: disposeBag)
     }
 }

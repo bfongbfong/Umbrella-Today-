@@ -16,6 +16,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        PersistenceManager.persistedWeatherReports = PersistenceManager.loadWeatherReports()
+        print("loaded \(PersistenceManager.persistedWeatherReports.count) item(s)")
+        
+//        WeatherReportData.savedLocationsWeatherReports.accept(savedLocationsWeatherReports)
+//        PersistenceManager.listenForChangesToSavedLocationsAndPersist()
+        
         return true
     }
 

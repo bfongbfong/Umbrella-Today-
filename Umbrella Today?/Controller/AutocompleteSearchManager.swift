@@ -172,7 +172,7 @@ class AutocompleteSearchManager {
                 
                 // Optimization: check if it is an exact match
                 if midPointCityCharacters.count == input.count {
-                    print("there's an exact match at index: \(middleIndex). City: \(middlePointCityName)")
+//                    print("there's an exact match at index: \(middleIndex). City: \(middlePointCityName)")
                     // Move left to see if leftward city names are exactly the same as well. Returns first same city name.
                     
                     var index = middleIndex
@@ -183,7 +183,7 @@ class AutocompleteSearchManager {
 //                                    print("the city name \(cityName), to the left at \(index - 1) is the same.")
                                     index -= 1
                                 } else {
-                                    print("the city name to the left: \(cityName), is not the same, so I'm returning \(index)")
+//                                    print("the city name to the left: \(cityName), is not the same, so I'm returning \(index)")
                                     return index
                                 }
                             }
@@ -191,7 +191,7 @@ class AutocompleteSearchManager {
                     }
                 }
                 
-                print("found a city that satisfies the autocorrect of \(String(input)). it is: \(middlePointCityName) at index: \(middleIndex), moving LEFT")
+//                print("found a city that satisfies the autocorrect of \(String(input)). it is: \(middlePointCityName) at index: \(middleIndex), moving LEFT")
       
                 rightIndex = middleIndex - 1
             }
@@ -235,14 +235,14 @@ class AutocompleteSearchManager {
         let secondCityNameCharacters = Array(secondCityName)
                 
         if cityNameCharacters.count >= input.count && Array(cityNameCharacters[0...input.count - 1]) == input {
-            print("returning index: \(index), city: \(cityName)")
+//            print("returning index: \(index), city: \(cityName)")
             return index
         } else if secondCityNameCharacters.count >= input.count && Array(secondCityNameCharacters[0...input.count - 1]) == input {
-            print("returning index: \(index + 1), city: \(secondCityName)")
+//            print("returning index: \(index + 1), city: \(secondCityName)")
             return index + 1
         } else {
             // overlay label on top of table view that says no results found.
-            print("no results found")
+//            print("no results found")
             return nil
         }
     }

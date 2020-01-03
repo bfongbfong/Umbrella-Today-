@@ -24,16 +24,51 @@ class SavedLocationsViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         listenForSavedLocationsUpdate()
+        if savedLocationsWeatherReports.count == 1 {
+            savedLocationsWeatherReports += PersistenceManager.loadWeatherReports()
+        }
     }
 }
 
 extension SavedLocationsViewController {
     func listenForSavedLocationsUpdate() {
+        // listener to get first time loading data for current location weather
+//        WeatherReportData.savedLocationsWeatherReports.asObservable()
+//            .take(1)
+//            .subscribe(onNext: { weatherReports in
+//
+//                print("first element taken from listener: \(weatherReports[0].location), the rest from local storage")
+//                // ScrollParentVC sends the current weather
+//                self.savedLocationsWeatherReports = weatherReports
+//                self.savedLocationsWeatherReports += PersistenceManager.loadWeatherReports()
+//                self.tableView.reloadData()
+//
+//            }).disposed(by: disposeBag)
+        
+        // listener for every time besides first time.
         WeatherReportData.savedLocationsWeatherReports.asObservable()
+            .skip(1)
             .subscribe(onNext: { weatherReports in
                 
-                print("current weather reports accepted: \(weatherReports.count)")
-                self.savedLocationsWeatherReports = weatherReports
+                print("SAVED LOCATIONS VC - receiving: \(weatherReports.count) report(s)")
+                if weatherReports.count == 1 {
+                    self.savedLocationsWeatherReports += weatherReports
+                } else {
+                    self.savedLocationsWeatherReports = weatherReports
+                }
+                
+                
+                
+//                if weatherReports.count == 1 {
+//                    self.savedLocationsWeatherReports += weatherReports
+//                } else {
+//                    self.savedLocationsWeatherReports = weatherReports
+//                }
+                
+                
+                var savedLocationsWithoutFirst = self.savedLocationsWeatherReports
+                savedLocationsWithoutFirst.removeFirst()
+                PersistenceManager.persistWeatherReports(savedLocationsWithoutFirst)
                 
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
@@ -59,7 +94,8 @@ extension SavedLocationsViewController: UITableViewDelegate, UITableViewDataSour
         let currentDate = Date()
         let unixTimeStamp = currentDate.timeIntervalSince1970 + thisReport.timeZone!
         let time = Helpers.convertToTime(unixTimeStamp: unixTimeStamp, accurateToMinute: true, currentTimeZone: false)
-        print("time is \(time)")
+        // bug - the time isn't even right
+//        print("time is \(time)")
         
         cell.update(location: thisReport.location, time: time, temperature: thisReport.temperature.current, weatherImageName: "rain_01", currentLocation: false)
         return cell
