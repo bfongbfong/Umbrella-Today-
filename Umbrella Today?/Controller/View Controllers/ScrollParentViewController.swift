@@ -190,9 +190,11 @@ extension ScrollParentViewController {
 //                print("SCROLL PARENT VC - sending weather report for \(self.currentWeatherReport.location) to savedLocationsWeatherReports")
 //                WeatherReportData.savedLocationsWeatherReports.accept([self.currentWeatherReport] + loadedReports)
                 
-                print("SCROLL PARENT VC - sending weather report for \(self.currentWeatherReport.location) to savedLocationsWeatherReports")
-                WeatherReportData.savedLocationsWeatherReports.accept([self.currentWeatherReport])
+//                print("SCROLL PARENT VC - sending weather report for \(self.currentWeatherReport.location) to savedLocationsWeatherReports")
+//                WeatherReportData.savedLocationsWeatherReports.accept([self.currentWeatherReport])
                 // when you send this, saved locations vc & location search VC aren't loaded yet, and will respond when they are loaded.
+                
+                WeatherReport.currentLocation = self.currentWeatherReport
                 
                 DispatchQueue.main.async {
                     self.checkSunlight()

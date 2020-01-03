@@ -82,4 +82,6 @@ class WeatherReport: Codable, Equatable {
     static func == (lhs: WeatherReport, rhs: WeatherReport) -> Bool {
         return lhs.location == rhs.location
     }
+    
+    static var currentLocation: WeatherReport?
 }

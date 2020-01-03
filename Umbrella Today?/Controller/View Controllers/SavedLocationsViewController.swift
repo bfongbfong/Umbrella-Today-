@@ -24,7 +24,8 @@ class SavedLocationsViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         listenForSavedLocationsUpdate()
-        if savedLocationsWeatherReports.count == 1 {
+        if let currentLocationWeatherReport = WeatherReport.currentLocation {
+            savedLocationsWeatherReports.append(currentLocationWeatherReport)
             savedLocationsWeatherReports += PersistenceManager.loadWeatherReports()
         }
     }

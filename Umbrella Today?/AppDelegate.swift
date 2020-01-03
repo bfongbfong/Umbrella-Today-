@@ -19,6 +19,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         PersistenceManager.persistedWeatherReports = PersistenceManager.loadWeatherReports()
         print("loaded \(PersistenceManager.persistedWeatherReports.count) item(s)")
+        // used to wipe storage empty
+//        PersistenceManager.persistWeatherReports([])
+        
+        // used to see what has been loaded
+//        PersistenceManager.persistedWeatherReports.forEach { (report) in
+//            print(report.location)
+//        }
         
 //        WeatherReportData.savedLocationsWeatherReports.accept(savedLocationsWeatherReports)
 //        PersistenceManager.listenForChangesToSavedLocationsAndPersist()

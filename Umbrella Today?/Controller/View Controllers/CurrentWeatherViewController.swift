@@ -249,10 +249,11 @@ extension CurrentWeatherViewController {
         OpenWeatherManager.getCurrentWeatherData(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude) { (jsonWeatherObject) in
 
             if let responseJson = jsonWeatherObject {
+                self.weatherReport = JsonParser.parseJsonCurrentWeatherObject(jsonObject: responseJson)
+                
                 DispatchQueue.main.async {
-
-                    self.weatherReport = JsonParser.parseJsonCurrentWeatherObject(jsonObject: responseJson)
                     self.updateUI()
+                    
                 }
             }
         }
@@ -276,12 +277,12 @@ extension CurrentWeatherViewController {
 
 // MARK: - Navigation
 extension CurrentWeatherViewController {
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ToSavedLocationsViewController" {
-            if let savedLocationsViewController = segue.destination as? SavedLocationsViewController {
-                savedLocationsViewController.savedLocationsWeatherReports.append(self.weatherReport!)
-            }
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "ToSavedLocationsViewController" {
+//            if let savedLocationsViewController = segue.destination as? SavedLocationsViewController {
+//                savedLocationsViewController.savedLocationsWeatherReports.append(self.weatherReport!)
+//            }
+//        }
+//    }
 }
 
