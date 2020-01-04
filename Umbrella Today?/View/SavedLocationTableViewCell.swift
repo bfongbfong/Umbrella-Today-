@@ -17,22 +17,21 @@ class SavedLocationTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        locationLabel.textColor = UIColor.dayLocationText()
+        temperatureLabel.textColor = UIColor.dayTemperatureText()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
     
-    func update(location: String, time: String, temperature: Int, weatherImageName: String, currentLocation: Bool) {
+    func update(location: String, time: String, temperature: Int, description: String, currentLocation: Bool) {
         
-        locationLabel.text = location
+        locationLabel.text = location.uppercased()
         timeLabel.text = time
         temperatureLabel.text = "\(temperature)º"
-        weatherImageView.image = UIImage(named: weatherImageName)!
-        
+        weatherImageView.image = WeatherImages.getImage(weatherDescription: description, isDaytime: true)
     }
 
 }

@@ -50,6 +50,10 @@ extension UIColor {
         return UIColor(red: 224/255, green: 201/255, blue: 160/255, alpha: 1.0)
     }
     
+    static func myYellow() -> UIColor {
+        return UIColor(red: 255/255, green: 222/255, blue: 122/255, alpha: 1.0)
+    }
+    
     // these two I derived myself so they might be incorrect
     
     static func dayForecastMaxTemp() -> UIColor {

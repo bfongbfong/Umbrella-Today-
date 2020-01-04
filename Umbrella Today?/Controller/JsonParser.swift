@@ -85,7 +85,7 @@ class JsonParser {
         return thisWeatherReport
     }
     
-    static func parseJsonFiveDayWeatherObjects(jsonObject: [String: Any]) -> [SimpleWeatherReport] {
+    static func parseJsonFiveDayWeatherObjects(jsonObject: [String: Any], byCityId: Bool) -> [SimpleWeatherReport] {
         var simpleWeatherReports = [SimpleWeatherReport]()
         
         guard let list = jsonObject["list"] as? [[String: Any]] else {
@@ -93,7 +93,22 @@ class JsonParser {
             return []
         }
         
-        guard let timeZone = jsonObject["timezone"] as? Double else {
+        var timeZone: Double?
+        // need to account for when API sends me data formatted different ways.
+        
+        // if timezone is from json object
+        if let thisTimeZone = jsonObject["timezone"] as? Double {
+            timeZone = thisTimeZone
+        }
+    
+        // if timezone is a subscript of city, which is from json object
+        if let city = jsonObject["city"] as? [String: Any] {
+            if let thisTimeZone = city["timezone"] as? Double {
+                timeZone = thisTimeZone
+            }
+        }
+        
+        guard let unwrappedTimeZone = timeZone else {
             print("time zone not parsed in 5 day report")
             return []
         }
@@ -140,7 +155,7 @@ class JsonParser {
             }
             
             let dayOfWeek = Helpers.convertToDayOfWeek(unixTimeStamp: unixTimeStamp)
-            let time = Helpers.convertToTime(timeZoneOffset: timeZone, accurateToMinute: false, currentTimeZone: true)
+            let time = Helpers.convertToTime(unixTimeStamp: unixTimeStamp, timeZoneOffset: unwrappedTimeZone, accurateToMinute: false, currentTimeZone: true)
             
             let simpleWeatherReport = SimpleWeatherReport(currentTempInKelvin: currentTemp, minTempInKelvin: minTemp, maxTempInKelvin: maxTemp, description: description, dayOfWeek: dayOfWeek, time: time)
 

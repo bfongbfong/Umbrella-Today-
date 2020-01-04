@@ -135,22 +135,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "49B83902-AD1B-46B5-9827-207A8E6486C3"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Umbrella Today?/Controller/JsonParser.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
-            landmarkName = "parseJsonFiveDayWeatherObjects(jsonObject:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "113127B6-5DE8-49FC-ACC1-E44F46D7F9F9"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -231,16 +215,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "827E4AD4-6913-46E2-9A4D-374480AB1D7F"
+            uuid = "03C6390E-B997-4EB2-B6F8-05DCF9CA8D8B"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Umbrella Today?/Controller/View Controllers/SavedLocationsViewController.swift"
+            filePath = "Umbrella Today?/Controller/View Controllers/ScrollParentViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
-            landmarkName = "tableView(_:cellForRowAt:)"
+            startingLineNumber = "247"
+            endingLineNumber = "247"
+            landmarkName = "newMethod()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

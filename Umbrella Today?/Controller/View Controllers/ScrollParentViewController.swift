@@ -201,7 +201,7 @@ extension ScrollParentViewController {
                     WeatherReportData.currentForecast.accept(self.currentWeatherReport)
                     
                     WeatherReport.currentLocation = self.currentWeatherReport
-                    print("operation 1 done")
+//                    print("operation 1 done")
                     group.leave()
                 }
             }
@@ -213,14 +213,14 @@ extension ScrollParentViewController {
             if let currentWeatherReport = WeatherReport.currentLocation {
                 AutocompleteSearchManager.searchForCities(input: currentWeatherReport.location, maxNumberOfResults: 1) { (arrayOfCities) in
                     if let state = arrayOfCities[0].state {
-                        print("state is:", state)
+//                        print("state is:", state)
                         let stateAbbr = Helpers.convertStateToAbbr(stateName: state)
-                        print("abbreviated state is:", stateAbbr)
+//                        print("abbreviated state is:", stateAbbr)
                         if WeatherReport.currentLocation != nil {
                             WeatherReport.currentLocation!.state = stateAbbr
                         }
                         
-                        print("Operation 2 done")
+//                        print("Operation 2 done")
                     }
                     group.leave()
                 }
@@ -230,7 +230,7 @@ extension ScrollParentViewController {
     
         let operation3 = BlockOperation {
             DispatchQueue.main.async {
-                print("operation 3 - main thread")
+//                print("operation 3 - main thread")
                 self.checkSunlight()
                 self.setupPages()
             }
@@ -239,12 +239,12 @@ extension ScrollParentViewController {
         let operation4 = BlockOperation {
             OpenWeatherManager.getFiveDayAndHourlyForecast(latitude: self.currentLocation.coordinate.latitude, longitude: self.currentLocation.coordinate.longitude) { (jsonWeatherObject) in
                 
-                print("operation 4")
+//                print("operation 4")
                 if let responseJson = jsonWeatherObject {
                     DispatchQueue.main.async {
-                        print("operation 4 main thread")
+//                        print("operation 4 main thread")
                         
-                        let arrayOfSimpleWeatherReports = JsonParser.parseJsonFiveDayWeatherObjects(jsonObject: responseJson)
+                        let arrayOfSimpleWeatherReports = JsonParser.parseJsonFiveDayWeatherObjects(jsonObject: responseJson, byCityId: false)
                         if arrayOfSimpleWeatherReports.count < 8 {
                             print("Error: API didn't send back enough forecasts.")
                             return

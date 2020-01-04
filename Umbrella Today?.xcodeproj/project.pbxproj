@@ -188,8 +188,8 @@
 		5521B1BD23B843C300D0911C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				551CF19B23BB049600101E57 /* FiveDayForecastTableViewCell.swift */,
 				550FDBAE23BC10310088EACC /* HourlyForecastTableViewCell.swift */,
+				551CF19B23BB049600101E57 /* FiveDayForecastTableViewCell.swift */,
 				550FDBB523BD07A10088EACC /* SavedLocationTableViewCell.swift */,
 				55A079A923BD1C39002BD11D /* AutocompleteCitySearchTableViewCell.swift */,
 			);

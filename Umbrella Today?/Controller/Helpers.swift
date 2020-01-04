@@ -45,8 +45,7 @@ class Helpers {
         }
     }
     
-    static func convertToTime(timeZoneOffset: Double, accurateToMinute: Bool, currentTimeZone: Bool) -> String {
-        let unixTimeStamp = Date().timeIntervalSince1970
+    static func convertToTime(unixTimeStamp: Double, timeZoneOffset: Double, accurateToMinute: Bool, currentTimeZone: Bool) -> String {
         
         let date = Date(timeIntervalSince1970: unixTimeStamp)
         let dateFormatter = DateFormatter()

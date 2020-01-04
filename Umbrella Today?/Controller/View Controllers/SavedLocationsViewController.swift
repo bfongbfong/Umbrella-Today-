@@ -23,6 +23,7 @@ class SavedLocationsViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorStyle = .none
         listenForSavedLocationsUpdate()
         if let currentLocationWeatherReport = WeatherReport.currentLocation {
             savedLocationsWeatherReports.append(currentLocationWeatherReport)
@@ -72,16 +73,14 @@ extension SavedLocationsViewController: UITableViewDelegate, UITableViewDataSour
         
         let thisReport = savedLocationsWeatherReports[indexPath.row]
         // get the time zone, and figure out the time based on that.
+        let description = thisReport.description
         let location = thisReport.location
-
-//        let currentDate = Date()
-//        let unixTimeStamp = currentDate.timeIntervalSince1970 + thisReport.timeZone!
         let timeZoneOffset = thisReport.timeZone!
-        let time = Helpers.convertToTime(timeZoneOffset: timeZoneOffset, accurateToMinute: true, currentTimeZone: false)
-        // bug - the time isn't even right
-//        print("time is \(time)")
+        let unixTimeStamp = Date().timeIntervalSince1970
         
-        cell.update(location: location, time: time, temperature: thisReport.temperature.current, weatherImageName: "rain_01", currentLocation: false)
+        let time = Helpers.convertToTime(unixTimeStamp: unixTimeStamp, timeZoneOffset: timeZoneOffset, accurateToMinute: true, currentTimeZone: false)
+        
+        cell.update(location: location, time: time, temperature: thisReport.temperature.current, description: description, currentLocation: false)
         return cell
     }
     
@@ -98,7 +97,12 @@ extension SavedLocationsViewController: UITableViewDelegate, UITableViewDataSour
             if let jsonData = jsonData {
                 
                 DispatchQueue.main.async {
-                    let arrayOfSimpleWeatherReports = JsonParser.parseJsonFiveDayWeatherObjects(jsonObject: jsonData)
+                    let arrayOfSimpleWeatherReports = JsonParser.parseJsonFiveDayWeatherObjects(jsonObject: jsonData, byCityId: true)
+                    // index out of range
+                    if arrayOfSimpleWeatherReports.count < 8 {
+                        print("json parsing for five day weather reports returned empty array (saved locations vc)")
+                        return
+                    }
                     var arrayOfEightHourlyWeatherReports = Array(arrayOfSimpleWeatherReports[0...7])
                     let fiveDayReports = Helpers.findFiveDayReport(simpleWeatherReports: arrayOfSimpleWeatherReports)
                     let simpleCurrentReport = selectedWeatherReport.convertIntoSimpleWeatherReportForFirstHourlyResult()

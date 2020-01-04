@@ -51,7 +51,8 @@ class FiveDayForecastTableViewCell: UITableViewCell {
     // need to pass in min temp
     func update(day: String, minTemp: Int, maxTemp: Int, description: String, isDaytime: Bool) {
         dayLabel.text = day
-        weatherImageView.image = WeatherImages.getImage(weatherDescription: description, isDaytime: isDaytime)
+        // weather images for days of the week should always be day time images
+        weatherImageView.image = WeatherImages.getImage(weatherDescription: description, isDaytime: true)
         self.selectionStyle = .none
         self.isDaytime = isDaytime
         self.backgroundColor = .none
