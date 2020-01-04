@@ -122,15 +122,6 @@ extension ScrollParentViewController {
 
 // MARK: - CLLocation Manager
 extension ScrollParentViewController: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        getLocation()
-    }
-    
-    func setupLocationManager() {
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-    }
-    
     func checkLocationServices() {
         if CLLocationManager.locationServicesEnabled() {
             // setup our location manager
@@ -139,10 +130,15 @@ extension ScrollParentViewController: CLLocationManagerDelegate {
         } else {
             // show alert telling user they have to enable it.
             print("user has to enable location services")
-            let alert = UIAlertController(title: "Location Permissions Denied", message: "Please enable location services in your device's settings.", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Location Services Not Enabled", message: "Please enable location services in your device's settings.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alert, animated: true)
         }
+    }
+    
+    func setupLocationManager() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
     }
     
     func checkLocationAuthorization() {
@@ -178,6 +174,10 @@ extension ScrollParentViewController: CLLocationManagerDelegate {
               currentLocation = locationManager.location
             fireApiCalls()
         }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        getLocation()
     }
 }
 
