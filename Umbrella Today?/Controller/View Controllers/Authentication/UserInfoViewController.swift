@@ -11,13 +11,16 @@ import FirebaseAuth
 
 class UserInfoViewController: UIViewController {
 
+    // MARK: - Outlets
     @IBOutlet weak var greetingLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet weak var errorLabel: UILabel!
     
+    // MARK: - Properties
     var nameOfUser: String?
     
+    // MARK: - View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -26,7 +29,10 @@ class UserInfoViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
     }
-    
+}
+
+// MARK: - Setup
+extension UserInfoViewController {
     func setupUI() {
         errorLabel.alpha = 0
         Helpers.styleFilledButton(logoutButton)
@@ -39,7 +45,10 @@ class UserInfoViewController: UIViewController {
             nameLabel.text = ""
         }
     }
-    
+}
+
+// MARK: - IBActions & Objc Functions
+extension UserInfoViewController {
     @IBAction func logoutButtonTapped(_ sender: Any) {
         do {
             try Auth.auth().signOut()
