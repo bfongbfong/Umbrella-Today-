@@ -275,37 +275,11 @@ extension ScrollParentViewController {
 extension ScrollParentViewController {
     // MARK: Check Sunlight
     func checkSunlight() {
-        let now = Int(NSDate().timeIntervalSince1970)
-//        print("right now is \(now) in epoch time")
-        
+        let now = NSDate().timeIntervalSince1970
         if currentWeatherReport != nil {
-            if currentWeatherReport!.sunriseTime != nil {
-//                print("sunrise time: \(currentWeatherReport!.sunriseTime!)")
+            if currentWeatherReport.sunriseTime != nil && currentWeatherReport.sunsetTime != nil {
+                isDaytime = Helpers.checkIfIsDaytime(unixTimeStamp: now, sunriseTime: Double(currentWeatherReport.sunriseTime!), sunsetTime: Double(currentWeatherReport!.sunsetTime!))
             }
-        }
-        if currentWeatherReport != nil {
-            if currentWeatherReport!.sunsetTime != nil {
-//                print("sunset time: \(currentWeatherReport!.sunsetTime!)")
-                if now > currentWeatherReport!.sunsetTime! {
-                    // it's night time.
-                    isDaytime = false
-                } else {
-                    if currentWeatherReport != nil {
-                        if currentWeatherReport!.sunriseTime != nil {
-                            if now > currentWeatherReport!.sunriseTime! {
-                                // it's daytime
-                                isDaytime = true
-                            } else {
-                                // it's early morning and still dark
-                                isDaytime = false
-                            }
-                        }
-                    }
-                }
-            }
-            
-            // for testing
-//            isDaytime = true
         }
     }
 }
