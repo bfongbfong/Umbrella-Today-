@@ -11,7 +11,10 @@ import RxSwift
 
 class FiveDayForecastViewController: UIViewController {
     
+    // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
+    
+    // MARK: - Properties
     var isDaytime = false {
         didSet {
             if isDaytime {
@@ -23,8 +26,11 @@ class FiveDayForecastViewController: UIViewController {
     }
     
     var simpleWeatherReports = [SimpleWeatherReport]()
+    
+    // RxSwift
     let disposeBag = DisposeBag()
     
+    // MARK: - View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
