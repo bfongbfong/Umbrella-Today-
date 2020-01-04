@@ -14,11 +14,13 @@ class SavedLocationTableViewCell: UITableViewCell {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var weatherImageView: UIImageView!
+    @IBOutlet weak var yellowLine: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         locationLabel.textColor = UIColor.dayLocationText()
         temperatureLabel.textColor = UIColor.dayTemperatureText()
+        yellowLine.backgroundColor = UIColor.myYellow()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

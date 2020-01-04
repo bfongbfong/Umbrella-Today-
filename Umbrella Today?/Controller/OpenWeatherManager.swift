@@ -51,8 +51,8 @@ class OpenWeatherManager {
     static func getFiveDayAndHourlyForecast(latitude: Double, longitude: Double, completion: @escaping((_ jsonWeatherObject: [String: Any]?) -> Void)) {
         AF.request("http://api.openweathermap.org/data/2.5/forecast?lat=\(latitude)&lon=\(longitude)&APIKEY=\(apikey)").responseJSON(completionHandler: { (response) in
 
-            print("=======================FIVE DAY RESULTS WITH LAT AND LON===================")
-            print(response.value!)
+//            print("=======================FIVE DAY RESULTS WITH LAT AND LON===================")
+//            print(response.value!)
             
             if let responseJson = response.value as? [String: Any] {
                 completion(responseJson)
@@ -65,8 +65,8 @@ class OpenWeatherManager {
     static func getFiveDayAndHourlyForecast(cityID: Int, completion: @escaping((_ jsonWeatherObject: [String: Any]?) -> Void)) {
         AF.request("http://api.openweathermap.org/data/2.5/forecast?id=\(cityID)&APIKEY=\(apikey)").responseJSON(completionHandler: { (response) in
 
-            print("=======================FIVE DAY RESULTS WITH CITY NAME===================")
-            print(response.value!)
+//            print("=======================FIVE DAY RESULTS WITH CITY NAME===================")
+//            print(response.value!)
             
             if let responseJson = response.value as? [String: Any] {
                 completion(responseJson)

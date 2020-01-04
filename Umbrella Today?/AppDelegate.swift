@@ -28,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        PersistenceManager.persistedWeatherReports.forEach { (report) in
 //            print(report.location)
 //        }
+        
         return true
     }
 

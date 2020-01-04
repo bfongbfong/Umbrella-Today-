@@ -125,6 +125,9 @@ extension ScrollParentViewController {
         } else {
             // show alert telling user they have to enable it.
             print("user has to enable location services")
+            let alert = UIAlertController(title: "Location Permissions Denied", message: "Please enable location services in your device's settings.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true)
         }
     }
     
@@ -133,25 +136,25 @@ extension ScrollParentViewController {
         case .authorizedWhenInUse:
             // do map stuff
             getLocation()
-            break
         case .authorizedAlways:
             // no need to ask
             getLocation()
-            break
         case .denied:
             // alert user to go to settings to turn on permissions
             print("location services are denied")
-            break
+            let alert = UIAlertController(title: "Location Permissions Denied", message: "Please enable location services in your device's settings.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true)
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
-            break
         case .restricted:
             // alert user that they have been restricted
             print("location services are restricted")
-            break
+            let alert = UIAlertController(title: "Location Permissions Denied", message: "Location services have been restricted.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true)
         @unknown default:
             print("Error: Authorization status was unknown.")
-            break
         }
     }
     
@@ -177,10 +180,7 @@ extension ScrollParentViewController: CLLocationManagerDelegate {
 extension ScrollParentViewController {
     func fireApiCalls() {
         guard currentLocation != nil else { return }
-        
-//        oldMethod()
         newMethod()
-        
     }
 }
 
@@ -252,8 +252,6 @@ extension ScrollParentViewController {
                         var arrayOfEightHourlyWeatherReports = Array(arrayOfSimpleWeatherReports[0...7])
                         let fiveDayReports = Helpers.findFiveDayReport(simpleWeatherReports: arrayOfSimpleWeatherReports)
                         
-                        // one time, something on the line below was unwrapped to nil
-                        // reason was because currentWeatherReport needs to be retrieved in op 1
                         let currentWeatherSimple = self.currentWeatherReport.convertIntoSimpleWeatherReportForFirstHourlyResult()
                         arrayOfEightHourlyWeatherReports.insert(currentWeatherSimple, at: 0)
                         WeatherReportData.fiveDayForecast.accept(fiveDayReports)
@@ -271,45 +269,6 @@ extension ScrollParentViewController {
         queue.addOperation(operation3)
         queue.addOperation(operation4)
     }
-    
-//    func oldMethod() {
-//        OpenWeatherManager.getCurrentWeatherData(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude) { (jsonWeatherObject) in
-//
-//            if let responseJson = jsonWeatherObject {
-//
-//                self.currentWeatherReport = JsonParser.parseJsonCurrentWeatherObject(jsonObject: responseJson)
-//                WeatherReportData.currentForecast.accept(self.currentWeatherReport)
-//
-//                WeatherReport.currentLocation = self.currentWeatherReport
-//
-//                DispatchQueue.main.async {
-//                    self.checkSunlight()
-//                    self.setupPages()
-//                }
-//
-//                OpenWeatherManager.getFiveDayAndHourlyForecast(latitude: self.currentLocation.coordinate.latitude, longitude: self.currentLocation.coordinate.longitude) { (jsonWeatherObject) in
-//
-//                    if let responseJson = jsonWeatherObject {
-//                        DispatchQueue.main.async {
-//
-//                            let arrayOfSimpleWeatherReports = JsonParser.parseJsonFiveDayWeatherObjects(jsonObject: responseJson)
-//                            if arrayOfSimpleWeatherReports.count < 8 {
-//                                print("Error: API didn't send back enough forecasts.")
-//                                return
-//                            }
-//                            var arrayOfEightHourlyWeatherReports = Array(arrayOfSimpleWeatherReports[0...7])
-//                            let fiveDayReports = Helpers.findFiveDayReport(simpleWeatherReports: arrayOfSimpleWeatherReports)
-//
-//                            let currentWeatherSimple = self.currentWeatherReport.convertIntoSimpleWeatherReportForFirstHourlyResult()
-//                            arrayOfEightHourlyWeatherReports.insert(currentWeatherSimple, at: 0)
-//                            WeatherReportData.fiveDayForecast.accept(fiveDayReports)
-//                            WeatherReportData.hourlyForecast.accept(arrayOfEightHourlyWeatherReports)
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
     
     func checkSunlight() {
         let now = Int(NSDate().timeIntervalSince1970)

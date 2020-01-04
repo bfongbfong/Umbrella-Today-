@@ -12,6 +12,7 @@
 		550FDBB123BD00DE0088EACC /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550FDBB023BD00DE0088EACC /* PersistenceManager.swift */; };
 		550FDBB323BD059B0088EACC /* SavedLocationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550FDBB223BD059B0088EACC /* SavedLocationsViewController.swift */; };
 		550FDBB623BD07A10088EACC /* SavedLocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550FDBB523BD07A10088EACC /* SavedLocationTableViewCell.swift */; };
+		551A0FAC23C02F2300F4E5F1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551A0FAB23C02F2300F4E5F1 /* Constants.swift */; };
 		551BFA7823BF000D00E98456 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551BFA7723BF000D00E98456 /* SignUpViewController.swift */; };
 		551BFA7C23BF003900E98456 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551BFA7B23BF003900E98456 /* LoginViewController.swift */; };
 		551BFA7E23BF00E100E98456 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551BFA7D23BF00E100E98456 /* AuthenticationViewController.swift */; };
@@ -61,6 +62,7 @@
 		550FDBB023BD00DE0088EACC /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 		550FDBB223BD059B0088EACC /* SavedLocationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedLocationsViewController.swift; sourceTree = "<group>"; };
 		550FDBB523BD07A10088EACC /* SavedLocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedLocationTableViewCell.swift; sourceTree = "<group>"; };
+		551A0FAB23C02F2300F4E5F1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		551BFA7723BF000D00E98456 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		551BFA7B23BF003900E98456 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		551BFA7D23BF00E100E98456 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				5585762C23B8798C00CABA38 /* CityListCheckPoints.swift */,
 				5585762E23B87E3E00CABA38 /* Range.swift */,
 				555A1A5823BE7DBD00953214 /* DayOfWeek.swift */,
+				551A0FAB23C02F2300F4E5F1 /* Constants.swift */,
 				555A1A5623BE3A9400953214 /* cities.us.fromAPI.json */,
 				55A079AD23BD2D65002BD11D /* city.list.withoutUS.json */,
 				5585762A23B8794000CABA38 /* IndexesOfAlphabeticalCheckPointsInCityList.txt */,
@@ -444,6 +447,7 @@
 				5521B1B623B6C90300D0911C /* WeatherReport.swift in Sources */,
 				55617CB823BF9D4100D1EBC4 /* String+Extensions.swift in Sources */,
 				550FDBAF23BC10310088EACC /* HourlyForecastTableViewCell.swift in Sources */,
+				551A0FAC23C02F2300F4E5F1 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

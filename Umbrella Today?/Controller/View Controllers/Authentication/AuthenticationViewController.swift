@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AuthenticationViewController: UIViewController {
+class AuthenticationViewController: UIViewController, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var signupButton: UIButton!
     @IBOutlet weak var loginButton: UIButton!
@@ -16,6 +16,16 @@ class AuthenticationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
+    }
+    
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
     
     func setupUI() {
