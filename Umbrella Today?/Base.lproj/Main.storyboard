@@ -715,47 +715,50 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="2Dj-OA-nwU">
-                                <rect key="frame" x="40" y="336.5" width="334" height="233"/>
+                                <rect key="frame" x="40" y="300" width="334" height="125"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="IeT-zQ-efQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="334" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="334" height="52.5"/>
                                         <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="45"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.45000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="Fut-LG-d5I">
-                                        <rect key="frame" x="0.0" y="70" width="334" height="52.5"/>
+                                        <rect key="frame" x="0.0" y="72.5" width="334" height="52.5"/>
                                         <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="45"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ux-yh-H28">
-                                        <rect key="frame" x="0.0" y="142.5" width="334" height="50"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="led-hG-JL2"/>
-                                        </constraints>
-                                        <state key="normal" title="Log Out"/>
-                                        <connections>
-                                            <action selector="logoutButtonTapped:" destination="cE3-23-q9i" eventType="touchUpInside" id="cS0-Jp-9gL"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cP8-dt-zev">
-                                        <rect key="frame" x="0.0" y="212.5" width="334" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstItem="IeT-zQ-efQ" firstAttribute="height" secondItem="6ux-yh-H28" secondAttribute="height" id="Mtr-Wh-Qq3"/>
-                                </constraints>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cP8-dt-zev">
+                                <rect key="frame" x="40" y="565" width="334" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ux-yh-H28">
+                                <rect key="frame" x="100" y="465" width="214" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="led-hG-JL2"/>
+                                </constraints>
+                                <state key="normal" title="LOG OUT"/>
+                                <connections>
+                                    <action selector="logoutButtonTapped:" destination="cE3-23-q9i" eventType="touchUpInside" id="cS0-Jp-9gL"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="cP8-dt-zev" firstAttribute="trailing" secondItem="2Dj-OA-nwU" secondAttribute="trailing" id="2jF-BA-dDt"/>
+                            <constraint firstItem="cP8-dt-zev" firstAttribute="top" secondItem="6ux-yh-H28" secondAttribute="bottom" constant="20" id="48E-S1-xq3"/>
                             <constraint firstItem="2Dj-OA-nwU" firstAttribute="centerX" secondItem="eSg-Jz-CEO" secondAttribute="centerX" id="64w-qd-eVs"/>
-                            <constraint firstItem="2Dj-OA-nwU" firstAttribute="centerY" secondItem="p4X-Dg-wGq" secondAttribute="centerY" id="7R8-qY-9oW"/>
+                            <constraint firstItem="2Dj-OA-nwU" firstAttribute="centerY" secondItem="p4X-Dg-wGq" secondAttribute="centerY" multiplier="0.8" id="7R8-qY-9oW"/>
                             <constraint firstItem="p4X-Dg-wGq" firstAttribute="trailing" secondItem="2Dj-OA-nwU" secondAttribute="trailing" constant="40" id="FFG-bu-PzY"/>
+                            <constraint firstItem="p4X-Dg-wGq" firstAttribute="trailing" secondItem="6ux-yh-H28" secondAttribute="trailing" constant="100" id="hjk-u8-ZNJ"/>
+                            <constraint firstItem="6ux-yh-H28" firstAttribute="top" secondItem="2Dj-OA-nwU" secondAttribute="bottom" constant="40" id="m7U-1U-0la"/>
+                            <constraint firstItem="6ux-yh-H28" firstAttribute="leading" secondItem="p4X-Dg-wGq" secondAttribute="leading" constant="100" id="ttY-9x-Eej"/>
+                            <constraint firstItem="cP8-dt-zev" firstAttribute="leading" secondItem="2Dj-OA-nwU" secondAttribute="leading" id="x3k-Yn-h4q"/>
                             <constraint firstItem="2Dj-OA-nwU" firstAttribute="leading" secondItem="p4X-Dg-wGq" secondAttribute="leading" constant="40" id="zlV-AE-fwV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="p4X-Dg-wGq"/>
