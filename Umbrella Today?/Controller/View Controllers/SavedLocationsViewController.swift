@@ -12,13 +12,16 @@ import RxCocoa
 
 class SavedLocationsViewController: UIViewController {
     
+    // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
     
+    // MARK: - Properties
     var savedLocationsWeatherReports = [WeatherReport]()
-//    var savedCities = [City]()
-    
+
+    // RxSwift
     let disposeBag = DisposeBag()
     
+    // MARK: - View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -32,14 +35,15 @@ class SavedLocationsViewController: UIViewController {
     }
 }
 
+// MARK: - Retrieve Data
 extension SavedLocationsViewController {
     func listenForSavedLocationsUpdate() {
-        // listener for every time besides first time.
+        // listener for every time besides first time. Because the first time is when this VC is loaded.
         WeatherReportData.savedLocationsWeatherReports.asObservable()
             .skip(1)
             .subscribe(onNext: { weatherReports in
                 
-                print("SAVED LOCATIONS VC - receiving: \(weatherReports.count) report(s)")
+//                print("SAVED LOCATIONS VC - receiving: \(weatherReports.count) report(s)")
                 if weatherReports.count == 1 {
                     self.savedLocationsWeatherReports += weatherReports
                 } else {
@@ -91,7 +95,6 @@ extension SavedLocationsViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedWeatherReport = savedLocationsWeatherReports[indexPath.row]
         WeatherReportData.currentForecast.accept(selectedWeatherReport)
-        // TODO - what to do here. add logic to add hourly and daily info into the UI
         
         OpenWeatherManager.getFiveDayAndHourlyForecast(cityID: selectedWeatherReport.id) { (jsonData) in
             if let jsonData = jsonData {
@@ -132,14 +135,4 @@ extension SavedLocationsViewController: UITableViewDelegate, UITableViewDataSour
         }
         persistSavedLocations()
     }
-}
-
-    
-// MARK: - Navigation
-extension SavedLocationsViewController {
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-    }
-    
 }
