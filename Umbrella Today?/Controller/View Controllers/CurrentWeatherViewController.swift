@@ -103,7 +103,6 @@ extension CurrentWeatherViewController {
         
         weatherImageView.image = WeatherImages.getImage(weatherDescription: unwrappedWeatherReport.description, isDaytime: isDaytime)
         
-        // handle these errors later
         currentTempLabel.text = "\(unwrappedWeatherReport.temperature.current)º"
         var uppercasedLocation = "\(unwrappedWeatherReport.location.uppercased())"
 
@@ -136,7 +135,6 @@ extension CurrentWeatherViewController {
         attributedText.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedText.length))
 
         descriptionLabel.attributedText = attributedText
-        
         buttonToSavedLocations.tintColor = temperatureTextColor
     }
 }
