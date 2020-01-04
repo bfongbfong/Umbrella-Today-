@@ -157,6 +157,7 @@ extension ScrollParentViewController: CLLocationManagerDelegate {
             self.present(alert, animated: true)
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
+            getLocation()
         case .restricted:
             // alert user that they have been restricted
             print("location services are restricted")
