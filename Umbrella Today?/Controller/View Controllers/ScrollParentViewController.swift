@@ -13,16 +13,19 @@ import RxCocoa
 
 class ScrollParentViewController: UIViewController {
     
+    // MARK: - Outlets
     @IBOutlet weak var scrollView: UIScrollView!
 
+    // MARK: - Properties
     var pages = [CurrentWeatherViewController]()
-    
     var locationManager = CLLocationManager()
     var currentLocation: CLLocation!
     var currentWeatherReport: WeatherReport!
     
+    // For white layer
     var loadingView = UIView()
     
+    // RxSwift
     let disposeBag = DisposeBag()
     
     var isDaytime = false {
@@ -35,27 +38,16 @@ class ScrollParentViewController: UIViewController {
         }
     }
     
+    // MARK: - View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         addWhiteLayer()
         checkLocationServices()
     }
-    
-    func addWhiteLayer() {
-        loadingView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
-        loadingView.backgroundColor = .white
-        view.addSubview(loadingView)
-        view.bringSubviewToFront(loadingView)
-    }
-    
-    func whiteFadeAwayAnimation() {
-        UIView.animate(withDuration: 0.5, animations: {
-            self.loadingView.alpha = 0
-        }) { (_) in
-            self.loadingView.removeFromSuperview()
-        }
-    }
-    
+}
+
+// MARK: - Setup Pages
+extension ScrollParentViewController {
     func setupPages() {
         scrollView.isPagingEnabled = true
         scrollView.showsHorizontalScrollIndicator = false
@@ -106,12 +98,34 @@ class ScrollParentViewController: UIViewController {
         page.didMove(toParent: self)
         return page
     }
+}
+
+
+// MARK: - UIFunctions
+extension ScrollParentViewController {
     
+    func addWhiteLayer() {
+        loadingView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+        loadingView.backgroundColor = .white
+        view.addSubview(loadingView)
+        view.bringSubviewToFront(loadingView)
+    }
     
+    func whiteFadeAwayAnimation() {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.loadingView.alpha = 0
+        }) { (_) in
+            self.loadingView.removeFromSuperview()
+        }
+    }
 }
 
 // MARK: - CLLocation Manager
-extension ScrollParentViewController {
+extension ScrollParentViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        getLocation()
+    }
+    
     func setupLocationManager() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -167,28 +181,12 @@ extension ScrollParentViewController {
     }
 }
 
-
-// MARK: - CLLocation Manager Delegate
-extension ScrollParentViewController: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        getLocation()
-    }
-}
-
-
 // MARK: - API Calls
 extension ScrollParentViewController {
     func fireApiCalls() {
         guard currentLocation != nil else { return }
-        newMethod()
-    }
-}
-
-extension ScrollParentViewController {
-    
-    func newMethod() {
-        let queue = OperationQueue()
         
+        let queue = OperationQueue()
         let group = DispatchGroup()
 
         let operation1 = BlockOperation {
@@ -269,7 +267,12 @@ extension ScrollParentViewController {
         queue.addOperation(operation3)
         queue.addOperation(operation4)
     }
-    
+}
+
+
+// MARK: - Logic Functions
+extension ScrollParentViewController {
+    // MARK: Check Sunlight
     func checkSunlight() {
         let now = Int(NSDate().timeIntervalSince1970)
 //        print("right now is \(now) in epoch time")
