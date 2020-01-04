@@ -12,33 +12,43 @@ import Firebase
 
 class LoginViewController: UIViewController {
 
+    // MARK: - Outlets
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var errorLabel: UILabel!
     
-    
+    // MARK: - View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         errorLabel.alpha = 0
-        emailTextField.delegate = self
-        emailTextField.tag = 0
-        passwordTextField.delegate = self
-        passwordTextField.tag = 1
-        
+        setupTextFields()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setupUI()
     }
-    
+}
+
+// MARK: - Setup
+extension LoginViewController {
     func setupUI() {
         Helpers.styleTextField(emailTextField)
         Helpers.styleTextField(passwordTextField)
         Helpers.styleFilledButton(loginButton)
     }
     
+    func setupTextFields() {
+        emailTextField.delegate = self
+        emailTextField.tag = 0
+        passwordTextField.delegate = self
+        passwordTextField.tag = 1
+    }
+}
+
+// MARK: - IBActions & Objc Functions
+extension LoginViewController {
     @IBAction func loginButtonTapped(_ sender: Any) {
         let email = emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         let password = passwordTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -61,15 +71,12 @@ class LoginViewController: UIViewController {
                 return
             }
             
-            self.transitionToHome()
+            self.dismiss(animated: true, completion: nil)
         }
-    }
-    
-    func transitionToHome() {
-        dismiss(animated: true, completion: nil)
     }
 }
 
+// MARK: - UITextFieldDelegate Methods
 extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField.tag == 1 {
@@ -82,11 +89,8 @@ extension LoginViewController: UITextFieldDelegate {
        // Try to find next responder
        if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
           nextField.becomeFirstResponder()
-       } else {
-          // Not found, so remove keyboard.
-          textField.resignFirstResponder()
        }
-       // Do not add a line break
+        
        return false
     }
 }
