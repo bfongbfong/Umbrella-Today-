@@ -51,8 +51,7 @@ class CurrentWeatherViewController: UIViewController {
     var descriptionTextColor: UIColor!
     var detailTextHighlightsColor: UIColor!
     
-    var loadingView = UIView()
-    
+    // RxSwift
     let disposeBag = DisposeBag()
     
     // MARK: - View Controller Life Cycle
@@ -61,9 +60,13 @@ class CurrentWeatherViewController: UIViewController {
         listenForCurrentWeatherUpdate()
         updateUI()
     }
+}
+
+// MARK: - IBActions & Objc Functions
+extension CurrentWeatherViewController {
     
-    // Navigate to User auth or User info
     @IBAction func userButtonTapped(_ sender: Any) {
+        // Check current user, if user doesn't exist, navigate to log in / sign up
         if let user = FirebaseManager.currentUser {
             print(user)
             // there's a user
@@ -89,24 +92,8 @@ class CurrentWeatherViewController: UIViewController {
 
 // MARK: - UI Functions
 extension CurrentWeatherViewController {
-    
-    func addWhiteLayer() {
-        loadingView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
-        loadingView.backgroundColor = .white
-        view.addSubview(loadingView)
-        view.bringSubviewToFront(loadingView)
-    }
-    
-    func whiteFadeAwayAnimation() {
-        UIView.animate(withDuration: 0.5, animations: {
-            self.loadingView.alpha = 0
-        }) { (_) in
-            self.loadingView.removeFromSuperview()
-        }
-    }
-    
     func updateUI() {
-        if weatherReport == nil {
+        guard let unwrappedWeatherReport = weatherReport else {
             print("weather report is nil. there was an error with the API or parsing the JSON")
             return
         }
@@ -114,14 +101,14 @@ extension CurrentWeatherViewController {
         view.backgroundColor = backgroundColor
         currentTempLabel.textColor = temperatureTextColor
         
-        weatherImageView.image = WeatherImages.getImage(weatherDescription: weatherReport!.description, isDaytime: isDaytime)
+        weatherImageView.image = WeatherImages.getImage(weatherDescription: unwrappedWeatherReport.description, isDaytime: isDaytime)
         
         // handle these errors later
-        currentTempLabel.text = "\(weatherReport?.temperature.current ?? 0)º"
-        var uppercasedLocation = "\(weatherReport!.location.uppercased())"
+        currentTempLabel.text = "\(unwrappedWeatherReport.temperature.current)º"
+        var uppercasedLocation = "\(unwrappedWeatherReport.location.uppercased())"
 
-        if let state = weatherReport!.state {
-            uppercasedLocation = "\(weatherReport!.location.uppercased()), \(state)"
+        if let state = unwrappedWeatherReport.state {
+            uppercasedLocation = "\(unwrappedWeatherReport.location.uppercased()), \(state)"
         }
         
         locationLabel.text = uppercasedLocation
@@ -130,13 +117,13 @@ extension CurrentWeatherViewController {
         
         descriptionLabel.textColor = descriptionTextColor
         
-        let capitalizedDescription = weatherReport?.description.capitalized
+        let capitalizedDescription = unwrappedWeatherReport.description.capitalized
 
-        let description = "\(capitalizedDescription!),\n\(weatherReport!.humidity!)% humidity. Feels like \(weatherReport!.temperature.feelsLike)º"
+        let description = "\(capitalizedDescription),\n\(unwrappedWeatherReport.humidity!)% humidity. Feels like \(weatherReport!.temperature.feelsLike)º"
         
-        let range1 = (description as NSString).range(of: "\(weatherReport!.temperature.feelsLike)º")
-        let range2 = (description as NSString).range(of: "\(weatherReport!.humidity!)%")
-        let range3 = (description as NSString).range(of: capitalizedDescription!)
+        let range1 = (description as NSString).range(of: "\(unwrappedWeatherReport.temperature.feelsLike)º")
+        let range2 = (description as NSString).range(of: "\(unwrappedWeatherReport.humidity!)%")
+        let range3 = (description as NSString).range(of: capitalizedDescription)
 
         let attributedText = NSMutableAttributedString.init(string: description)
         attributedText.addAttribute(NSAttributedString.Key.foregroundColor, value: detailTextHighlightsColor!, range: range1)
