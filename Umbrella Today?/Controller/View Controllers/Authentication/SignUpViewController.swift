@@ -12,6 +12,7 @@ import Firebase
 
 class SignUpViewController: UIViewController {
 
+    // MARK: - Outlets
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -19,9 +20,22 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var signupButton: UIButton!
     @IBOutlet weak var errorLabel: UILabel!
     
+    // MARK: - View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         errorLabel.alpha = 0
+        setupTextFields()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setupUI()
+    }
+}
+
+// MARK: - Setup Functions
+extension SignUpViewController {
+    func setupTextFields() {
         firstNameTextField.autocapitalizationType = UITextAutocapitalizationType.words
         lastNameTextField.autocapitalizationType = UITextAutocapitalizationType.words
         firstNameTextField.delegate = self
@@ -32,12 +46,6 @@ class SignUpViewController: UIViewController {
         emailTextField.tag = 2
         passwordTextField.delegate = self
         passwordTextField.tag = 3
-
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        setupUI()
     }
     
     func setupUI() {
@@ -47,8 +55,15 @@ class SignUpViewController: UIViewController {
         Helpers.styleTextField(passwordTextField)
         Helpers.styleFilledButton(signupButton)
     }
-    
+}
+
+
+// MARK: - IBActions & Objc Functions
+extension SignUpViewController {
     @IBAction func signupButtonTapped(_ sender: Any) {
+        // dismisses keyboard
+        view.endEditing(true)
+        
         let firstName = firstNameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         let lastName = lastNameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         let email = emailTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -89,33 +104,26 @@ class SignUpViewController: UIViewController {
         }
         
 //        print("sign up successful!")
-        // Transition to the Home Screen
-        transitionToHome()
-    }
-    
-    func transitionToHome() {
         dismiss(animated: true, completion: nil)
     }
 }
 
+// MARK: - UITextFieldDelegate Methods
 extension SignUpViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        // Makes enter button go to next textfield
+        
         if textField.tag == 3 {
-            // password textfield
+            // password textfield - enter should be same as pressing sign up
             signupButtonTapped("Enter on textfield")
             textField.resignFirstResponder()
             return true
         }
         
-        
        // Try to find next responder
        if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
           nextField.becomeFirstResponder()
-       } else {
-          // Not found, so remove keyboard.
-          textField.resignFirstResponder()
        }
-       // Do not add a line break
        return false
     }
 }
