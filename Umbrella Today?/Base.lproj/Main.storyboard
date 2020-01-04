@@ -585,7 +585,6 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <state key="normal" title="SIGN UP"/>
                                         <connections>
-                                            <action selector="signupTapped:" destination="uBS-g8-sj5" eventType="touchUpInside" id="Kq7-fb-GKs"/>
                                             <segue destination="KVB-CW-VyK" kind="show" id="ncU-jn-pUC"/>
                                         </connections>
                                     </button>
@@ -599,7 +598,6 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="loginTapped:" destination="uBS-g8-sj5" eventType="touchUpInside" id="Y2W-za-V4v"/>
                                             <segue destination="ZM4-Hu-oCI" kind="show" id="qeD-ny-rOc"/>
                                         </connections>
                                     </button>

@@ -8,11 +8,13 @@
 
 import UIKit
 
-class AuthenticationViewController: UIViewController, UIGestureRecognizerDelegate {
+class AuthenticationViewController: UIViewController {
 
+    // MARK: - Outlets
     @IBOutlet weak var signupButton: UIButton!
     @IBOutlet weak var loginButton: UIButton!
     
+    // MARK: - View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -20,25 +22,25 @@ class AuthenticationViewController: UIViewController, UIGestureRecognizerDelegat
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        // Need these here because there is no navigation bar
         self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         self.navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
-    
-    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
-    }
-    
+}
+
+// MARK: - UI Functions
+extension AuthenticationViewController {
     func setupUI() {
         Helpers.styleFilledButton(signupButton)
         Helpers.styleHollowButton(loginButton)
     }
-
     
-    @IBAction func signupTapped(_ sender: Any) {
-        
+}
+    
+// MARK: - UI Functions
+extension AuthenticationViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
     
-    @IBAction func loginTapped(_ sender: Any) {
-        
-    }
 }
