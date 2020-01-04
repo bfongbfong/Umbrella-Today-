@@ -58,11 +58,7 @@ class CurrentWeatherViewController: UIViewController {
     // MARK: - View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         listenForCurrentWeatherUpdate()
-        
-//        addWhiteLayer()
-//        checkLocationServices()
         updateUI()
     }
     
@@ -156,11 +152,6 @@ extension CurrentWeatherViewController {
         
         buttonToSavedLocations.tintColor = temperatureTextColor
     }
-    
-    func showErrorAlert() {
-        // to be called if weather report is ever nil
-        
-    }
 }
 
 // MARK: - Setup RxSwift Listeners
@@ -173,141 +164,10 @@ extension CurrentWeatherViewController {
                 print("current weather report accepted: \(weatherReport.temperature.current)")
                 self.weatherReport = weatherReport
                 
-//                let currentReportSimple = self.weatherReport!.convertIntoSimpleWeatherReportForFirstHourlyResult()
-                
                 DispatchQueue.main.async {
                     self.updateUI()
                 }
             }).disposed(by: disposeBag)
     }
-}
-
-// MARK: - CLLocation Manager
-extension CurrentWeatherViewController {
-    func setupLocationManager() {
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-    }
-    
-    func checkLocationServices() {
-        if CLLocationManager.locationServicesEnabled() {
-            // setup our location manager
-            setupLocationManager()
-            checkLocationAuthorization()
-        } else {
-            // show alert telling user they have to enable it.
-        }
-    }
-    
-    func checkLocationAuthorization() {
-        switch CLLocationManager.authorizationStatus() {
-        case .authorizedWhenInUse:
-            // do map stuff
-            getLocation()
-            break
-        case .authorizedAlways:
-            // no need to ask
-            getLocation()
-            break
-        case .denied:
-            // alert user to go to settings to turn on permissions
-            break
-        case .notDetermined:
-            locationManager.requestWhenInUseAuthorization()
-            break
-        case .restricted:
-            // alert user that they have been restricted
-            break
-        @unknown default:
-            print("Error: Authorization status was unknown.")
-            break
-        }
-    }
-    
-    func getLocation() {
-        if (CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
-                CLLocationManager.authorizationStatus() ==  .authorizedAlways) {
-              currentLocation = locationManager.location
-//            populateWeatherReportData()
-        }
-    }
-}
-
-
-// MARK: - CLLocation Manager Delegate
-extension CurrentWeatherViewController: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        getLocation()
-    }
-}
-
-// MARK: - Logic Functions
-extension CurrentWeatherViewController {
-    
-    func checkSunlight() {
-        let now = Int(NSDate().timeIntervalSince1970)
-//        print("right now is \(now) in epoch time")
-        
-        if weatherReport != nil {
-            if weatherReport!.sunriseTime != nil {
-//                print("sunrise time: \(weatherReport!.sunriseTime!)")
-            }
-        }
-        if weatherReport != nil {
-            if weatherReport!.sunsetTime != nil {
-//                print("sunset time: \(weatherReport!.sunsetTime!)")
-                if now > weatherReport!.sunsetTime! {
-                    // it's night time.
-                    isDaytime = false
-                } else {
-                    // it's daytime.
-                    isDaytime = true
-                }
-            }
-        }
-    }
-    
-    func populateWeatherReportData() {
-        
-        guard currentLocation != nil else { return }
-        
-        OpenWeatherManager.getCurrentWeatherData(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude) { (jsonWeatherObject) in
-
-            if let responseJson = jsonWeatherObject {
-                self.weatherReport = JsonParser.parseJsonCurrentWeatherObject(jsonObject: responseJson)
-                
-                DispatchQueue.main.async {
-                    self.updateUI()
-                    
-                }
-            }
-        }
-        
-//        OpenWeatherManager.getCurrentWeatherData(cityID: hurzufID) { (jsonWeatherObject) in
-//            if let responseJson = jsonWeatherObject {
-//                DispatchQueue.main.async {
-//
-//                    self.weatherReport = JsonParser.parseJsonCurrentWeatherObject(jsonObject: responseJson)
-//                    self.updateUI()
-//                }
-//            }
-//        }
-//
-    
-        
-//        AutocompleteSearchManager.searchForCities(cityName: "dog", maxNumberOfResults: 10)
-    }
-}
-
-
-// MARK: - Navigation
-extension CurrentWeatherViewController {
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "ToSavedLocationsViewController" {
-//            if let savedLocationsViewController = segue.destination as? SavedLocationsViewController {
-//                savedLocationsViewController.savedLocationsWeatherReports.append(self.weatherReport!)
-//            }
-//        }
-//    }
 }
 
