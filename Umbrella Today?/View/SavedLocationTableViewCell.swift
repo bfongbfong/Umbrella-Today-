@@ -28,12 +28,12 @@ class SavedLocationTableViewCell: UITableViewCell {
 
     }
     
-    func update(location: String, time: String, temperature: Int, description: String, currentLocation: Bool) {
+    func update(location: String, time: String, temperature: Int, description: String, currentLocation: Bool, isDaytime: Bool) {
         
         locationLabel.text = location.uppercased()
         timeLabel.text = time
         temperatureLabel.text = "\(temperature)º"
-        weatherImageView.image = WeatherImages.getImage(weatherDescription: description, isDaytime: true)
+        weatherImageView.image = WeatherImages.getImage(weatherDescription: description, isDaytime: isDaytime)
     }
 
 }

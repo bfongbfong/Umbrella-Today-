@@ -95,14 +95,7 @@ class WeatherImages {
                           UIImage(named: "drizzle_04")!,
                           UIImage(named: "drizzle_05")!,
                           UIImage(named: "drizzle_06")!,
-                          UIImage(named: "drizzle_07")!,
-                          UIImage(named: "drizzle_08")!,
-                          UIImage(named: "drizzle_09")!,
-                          UIImage(named: "drizzle_10")!,
-                          UIImage(named: "drizzle_11")!,
-                          UIImage(named: "drizzle_12")!,
-                          UIImage(named: "drizzle_13")!,
-                          UIImage(named: "drizzle_14")!,
+                          UIImage(named: "drizzle_07")!
         ]
         return UIImage.animatedImage(with: drizzleImages, duration: 1.0)!
     }
@@ -136,8 +129,10 @@ class WeatherImages {
             return isDaytime ? fewCloudsDay : fewCloudsNight
         case "scattered clouds", "broken clouds", "overcast clouds":
             return cloudy
-        case "light rain", "moderate rain", "heavy intensity rain", "very heavy rain", "extreme rain", "light intensity shower rain", "shower rain", "heavy intensity shower rain", "ragged shower rain", "light intensity drizzle", "drizzle", "heavy intensity drizzle", "light intensity drizzle rain", "drizzle rain", "heavy intensity drizzle rain", "shower rain and drizzle", "heavy shower rain and drizzle", "shower drizzle":
+        case "light rain", "moderate rain", "heavy intensity rain", "very heavy rain", "extreme rain", "light intensity shower rain", "shower rain", "heavy intensity shower rain", "ragged shower rain":
             return rain
+        case "light intensity drizzle", "drizzle", "heavy intensity drizzle", "light intensity drizzle rain", "drizzle rain", "heavy intensity drizzle rain", "shower rain and drizzle", "heavy shower rain and drizzle", "shower drizzle":
+            return drizzle
         case "light snow", "snow", "heavy snow", "sleet", "light shower sleet", "shower sleet", "light rain and snow", "rain and snow", "light shower snow", "shower snow", "heavey shower snow", "freezing rain":
             return snow
         case "thunderstorm with light rain", "thunderstorm with rain", "thunderstorm with heavy rain", "light thunderstorm", "thunderstorm", "heavy thunderstorm", "ragged thunderstorm", "thunderstorm with light drizzle", "thunderstorm with drizzle", "thunderstorm with heavy drizzle":
@@ -145,7 +140,6 @@ class WeatherImages {
         default:
             return isDaytime ? mistDay : mistNight
         }
-        return nil
     }
 
 }

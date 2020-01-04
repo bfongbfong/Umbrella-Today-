@@ -82,9 +82,20 @@ extension SavedLocationsViewController: UITableViewDelegate, UITableViewDataSour
         let timeZoneOffset = thisReport.timeZone!
         let unixTimeStamp = Date().timeIntervalSince1970
         
+        var isDaytime = true
+        if let sunriseTime = thisReport.sunriseTime {
+            if let sunsetTime = thisReport.sunsetTime {
+                if Helpers.checkIfIsDaytime(unixTimeStamp: unixTimeStamp, sunriseTime: Double(sunriseTime), sunsetTime: Double(sunsetTime)) {
+                    isDaytime = true
+                } else {
+                    isDaytime = false
+                }
+            }
+        }
+        
         let time = Helpers.convertToTime(unixTimeStamp: unixTimeStamp, timeZoneOffset: timeZoneOffset, accurateToMinute: true, currentTimeZone: false)
         
-        cell.update(location: location, time: time, temperature: thisReport.temperature.current, description: description, currentLocation: false)
+        cell.update(location: location, time: time, temperature: thisReport.temperature.current, description: description, currentLocation: false, isDaytime: isDaytime)
         return cell
     }
     

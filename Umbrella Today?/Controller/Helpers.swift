@@ -330,6 +330,22 @@ struct Helpers {
         
         return nil
     }
+    
+    // MARK: Check if is Daytime
+    static func checkIfIsDaytime(unixTimeStamp: Double, sunriseTime: Double, sunsetTime: Double) -> Bool {
+        if unixTimeStamp > sunsetTime {
+//            it's night time
+            return false
+        } else {
+            if unixTimeStamp > sunriseTime {
+//                it's day time
+                return true
+            } else {
+//                it's early morning
+                return false
+            }
+        }
+    }
 }
 
 // MARK: - Styling
