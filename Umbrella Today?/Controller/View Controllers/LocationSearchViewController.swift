@@ -12,21 +12,22 @@ import RxCocoa
 
 class LocationSearchViewController: UIViewController {
     
+    // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var textField: UITextField!
     
+    // MARK: - Properties
     var searchResultCities = [City]()
-//    var savedWeatherReports = [WeatherReport]()
     var savedWeatherReport: WeatherReport?
 
-
+    // RxSWift
     let disposeBag = DisposeBag()
     
+    // MARK: - View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        listenForSavedLocationsUpdate()
     }
 }
 
@@ -63,19 +64,8 @@ extension LocationSearchViewController {
     }
 }
 
+// MARK: - Retrieve Data
 extension LocationSearchViewController {
-    func listenForSavedLocationsUpdate() {
-        
-        // the only reaosn this is here, is so i can get the beginning of the array, and attach the new part to send it back
-//        WeatherReportData.savedLocationsWeatherReports.asObservable()
-//            .subscribe(onNext: { weatherReports in
-//
-//                print("LOCATION SEARCH VC - receiving: \(weatherReports.count) report(s)")
-//                self.savedWeatherReports = weatherReports
-//
-//            }).disposed(by: disposeBag)
-    }
-    
     func findAndSendDataForSelectedCity(city: City) {
         let queue = OperationQueue()
         let group = DispatchGroup()
@@ -106,7 +96,7 @@ extension LocationSearchViewController {
         }
         
         let operation3 = BlockOperation {
-            print("LOCATION SEARCH VC - sending addition \(self.savedWeatherReport!.location)")
+//            print("LOCATION SEARCH VC - sending addition \(self.savedWeatherReport!.location)")
             WeatherReportData.savedLocationsWeatherReports.accept([self.savedWeatherReport!])
         }
         
@@ -115,7 +105,6 @@ extension LocationSearchViewController {
         queue.addOperation(operation1)
         queue.addOperation(operation2)
         queue.addOperation(operation3)
-        
     }
 
 }
