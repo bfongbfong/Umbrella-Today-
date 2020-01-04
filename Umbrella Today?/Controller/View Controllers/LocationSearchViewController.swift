@@ -88,11 +88,12 @@ extension LocationSearchViewController {
         }
         
         let operation2 = BlockOperation {
-            AutocompleteSearchManager.searchForCities(input: self.savedWeatherReport!.location, maxNumberOfResults: 1) { (arrayOfCities) in
-                let foundCity = arrayOfCities[0]
-                let abbreviatedState = Helpers.convertStateToAbbr(stateName: foundCity.state!)
-                self.savedWeatherReport!.state = abbreviatedState
+            guard let state = city.state else {
+                print("state is empty")
+                return
             }
+            let abbreviatedState = Helpers.convertStateToAbbr(stateName: state)
+            self.savedWeatherReport!.state = abbreviatedState
         }
         
         let operation3 = BlockOperation {
