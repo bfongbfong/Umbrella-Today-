@@ -119,54 +119,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "113127B6-5DE8-49FC-ACC1-E44F46D7F9F9"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Umbrella Today?/Controller/PersistenceManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
-            landmarkName = "listenForChangesToSavedLocationsAndPersist()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "113127B6-5DE8-49FC-ACC1-E44F46D7F9F9 - d399a00260457ba9"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "static UmbrellaPal.PersistenceManager.listenForChangesToSavedLocationsAndPersist() -&gt; ()"
-                  moduleName = "UmbrellaPal"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/brandonfong/Documents/Coding/iOS%20Projects/Umbrella%20Today%3F/Umbrella%20Today%3F/Controller/PersistenceManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "48"
-                  endingLineNumber = "48"
-                  offsetFromSymbolStart = "580">
-               </Location>
-               <Location
-                  uuid = "113127B6-5DE8-49FC-ACC1-E44F46D7F9F9 - c65a815c5ca9e5be"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Array&lt;UmbrellaPal.WeatherReport&gt;) -&gt; () in static UmbrellaPal.PersistenceManager.listenForChangesToSavedLocationsAndPersist() -&gt; ()"
-                  moduleName = "UmbrellaPal"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/brandonfong/Documents/Coding/iOS%20Projects/Umbrella%20Today%3F/Umbrella%20Today%3F/Controller/PersistenceManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "50"
-                  endingLineNumber = "50"
-                  offsetFromSymbolStart = "128">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "F74157C8-3D53-4EE9-9BC5-58085AED9A93"
             shouldBeEnabled = "No"
             ignoreCount = "0"

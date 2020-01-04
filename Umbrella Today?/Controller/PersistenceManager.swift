@@ -45,17 +45,4 @@ class PersistenceManager {
         
         return returnArray
     }
-    
-    static func listenForChangesToSavedLocationsAndPersist() {
-//
-//        print("file path: ", FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
-//        WeatherReportData.savedLocationsWeatherReports.asObservable()
-//            .subscribe(onNext: { savedLocationsWeatherReports in
-//
-//                print("Persistenting \(savedLocationsWeatherReports.count) item(s)")
-//
-//                persistWeatherReports(savedLocationsWeatherReports)
-//
-//            }).disposed(by: disposeBag)
-    }
 }

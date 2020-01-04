@@ -35,7 +35,7 @@ class UserInfoViewController: UIViewController {
 extension UserInfoViewController {
     func setupUI() {
         errorLabel.alpha = 0
-        Helpers.styleFilledButton(logoutButton)
+        Helpers.Style.redButton(logoutButton)
 
         if let nameOfUser = nameOfUser {
             greetingLabel.text = "Hello,"

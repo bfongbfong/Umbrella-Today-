@@ -34,9 +34,9 @@ class LoginViewController: UIViewController {
 // MARK: - Setup
 extension LoginViewController {
     func setupUI() {
-        Helpers.styleTextField(emailTextField)
-        Helpers.styleTextField(passwordTextField)
-        Helpers.styleFilledButton(loginButton)
+        Helpers.Style.textField(emailTextField)
+        Helpers.Style.textField(passwordTextField)
+        Helpers.Style.redButton(loginButton)
     }
     
     func setupTextFields() {

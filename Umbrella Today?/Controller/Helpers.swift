@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Helpers {
+struct Helpers {
     static func convertKelvinToFarenheit(kelvinNumber: Double) -> Int {
         return Int( ( ( ( kelvinNumber - 273.15 ) * 9 ) / 5 ) + 32 )
     }
@@ -335,39 +335,41 @@ class Helpers {
 // MARK: - Styling
 extension Helpers {
     
-    static func styleTextField(_ textfield: UITextField) {
+    struct Style {
+        static func textField(_ textfield: UITextField) {
+            
+            textfield.clipsToBounds = true
+            
+            // Create the bottom line
+            let bottomLine = CALayer()
+            
+            bottomLine.frame = CGRect(x: 0, y: textfield.frame.height - 2, width: textfield.frame.width, height: 2)
+            
+            bottomLine.backgroundColor = UIColor.myYellow().cgColor
+                    
+            // Remove border on text field
+            textfield.borderStyle = .none
+            
+            // Add the line to the text field
+            textfield.layer.addSublayer(bottomLine)
+            
+        }
         
-        textfield.clipsToBounds = true
+        static func redButton(_ button: UIButton) {
+            
+            // Filled rounded corner style
+            button.setBackgroundImage(UIImage(named: "red_button")!, for: .normal)
+            button.tintColor = UIColor.white
+            button.titleLabel?.font = UIFont(name: Constants.Fonts.mainFont, size: 19)
+        }
         
-        // Create the bottom line
-        let bottomLine = CALayer()
-        
-        bottomLine.frame = CGRect(x: 0, y: textfield.frame.height - 2, width: textfield.frame.width, height: 2)
-        
-        bottomLine.backgroundColor = UIColor.myYellow().cgColor
-                
-        // Remove border on text field
-        textfield.borderStyle = .none
-        
-        // Add the line to the text field
-        textfield.layer.addSublayer(bottomLine)
-        
-    }
-    
-    static func styleFilledButton(_ button: UIButton) {
-        
-        // Filled rounded corner style
-        button.setBackgroundImage(UIImage(named: "red_button")!, for: .normal)
-        button.tintColor = UIColor.white
-        button.titleLabel?.font = UIFont(name: Constants.Fonts.mainFont, size: 19)
-    }
-    
-    static func styleHollowButton(_ button: UIButton) {
-        
-        // Hollow rounded corner style
-        button.setBackgroundImage(UIImage(named: "yellow_button")!, for: .normal)
-        button.tintColor = UIColor.white
-        button.titleLabel?.font = UIFont(name: Constants.Fonts.mainFont, size: 19)
+        static func yellowButton(_ button: UIButton) {
+            
+            // Hollow rounded corner style
+            button.setBackgroundImage(UIImage(named: "yellow_button")!, for: .normal)
+            button.tintColor = UIColor.white
+            button.titleLabel?.font = UIFont(name: Constants.Fonts.mainFont, size: 19)
+        }
     }
     
     static func showError(_ errorMessage: String, errorLabel: UILabel) {

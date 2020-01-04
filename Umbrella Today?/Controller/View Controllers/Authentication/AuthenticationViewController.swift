@@ -31,8 +31,8 @@ class AuthenticationViewController: UIViewController {
 // MARK: - UI Functions
 extension AuthenticationViewController {
     func setupUI() {
-        Helpers.styleFilledButton(signupButton)
-        Helpers.styleHollowButton(loginButton)
+        Helpers.Style.redButton(signupButton)
+        Helpers.Style.yellowButton(loginButton)
     }
     
 }

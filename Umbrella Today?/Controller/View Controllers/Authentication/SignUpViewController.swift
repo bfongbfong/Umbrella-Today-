@@ -49,11 +49,11 @@ extension SignUpViewController {
     }
     
     func setupUI() {
-        Helpers.styleTextField(firstNameTextField)
-        Helpers.styleTextField(lastNameTextField)
-        Helpers.styleTextField(emailTextField)
-        Helpers.styleTextField(passwordTextField)
-        Helpers.styleFilledButton(signupButton)
+        Helpers.Style.textField(firstNameTextField)
+        Helpers.Style.textField(lastNameTextField)
+        Helpers.Style.textField(emailTextField)
+        Helpers.Style.textField(passwordTextField)
+        Helpers.Style.redButton(signupButton)
     }
 }
 

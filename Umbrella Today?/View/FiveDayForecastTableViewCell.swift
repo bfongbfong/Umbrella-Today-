@@ -42,11 +42,8 @@ class FiveDayForecastTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
-    // TODOL - figure out why colors are reversed
     
     // need to pass in min temp
     func update(day: String, minTemp: Int, maxTemp: Int, description: String, isDaytime: Bool) {
