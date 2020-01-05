@@ -41,13 +41,23 @@ class ScrollParentViewController: UIViewController {
     // MARK: - View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        print("view did appear")
         addWhiteLayer()
+        // had to move this here because the alerts wouldn't be able to be presented if the view wasn't in the window hierarchy yet
         checkLocationServices()
     }
 }
 
 // MARK: - Setup Pages
 extension ScrollParentViewController {
+    @objc func navigateToLocationServicesSettings() {
+        UIApplication.shared.open(URL(string:UIApplication.openSettingsURLString)!)
+    }
+    
     func setupPages() {
         scrollView.isPagingEnabled = true
         scrollView.showsHorizontalScrollIndicator = false
@@ -154,7 +164,9 @@ extension ScrollParentViewController: CLLocationManagerDelegate {
             print("location services are denied")
             let alert = UIAlertController(title: "Location Permissions Denied", message: "Please enable location services in your device's settings.", preferredStyle: .alert)
 //            alerts are not showing up becacuse scroll view apparently is not in window hierarchy
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+                self.navigateToLocationServicesSettings()
+            }))
             self.present(alert, animated: true, completion: nil)
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
