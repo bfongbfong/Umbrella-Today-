@@ -153,11 +153,13 @@ extension ScrollParentViewController: CLLocationManagerDelegate {
             // alert user to go to settings to turn on permissions
             print("location services are denied")
             let alert = UIAlertController(title: "Location Permissions Denied", message: "Please enable location services in your device's settings.", preferredStyle: .alert)
+//            alerts are not showing up becacuse scroll view apparently is not in window hierarchy
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alert, animated: true)
+            self.present(alert, animated: true, completion: nil)
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
-            getLocation()
+            checkLocationServices()
+//            getLocation()
         case .restricted:
             // alert user that they have been restricted
             print("location services are restricted")
@@ -185,7 +187,13 @@ extension ScrollParentViewController: CLLocationManagerDelegate {
 // MARK: - API Calls
 extension ScrollParentViewController {
     func fireApiCalls() {
-        guard currentLocation != nil else { return }
+        guard currentLocation != nil else {
+            let alert = UIAlertController(title: "Unable to retrieve location.", message: "Please try restarting the app.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true)
+            print("location was nil")
+            return
+        }
         
         let queue = OperationQueue()
         let group = DispatchGroup()

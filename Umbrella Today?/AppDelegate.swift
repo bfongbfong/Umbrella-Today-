@@ -19,7 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         FirebaseManager.listenForUserChange()
         
+        // the only thing that should be persisted is the cities themselves
         PersistenceManager.persistedWeatherReports = PersistenceManager.loadWeatherReports()
+        // they need to be updated for time and weather
+        
         print("loaded \(PersistenceManager.persistedWeatherReports.count) item(s)")
         // used to wipe storage empty
 //        PersistenceManager.persistWeatherReports([])
