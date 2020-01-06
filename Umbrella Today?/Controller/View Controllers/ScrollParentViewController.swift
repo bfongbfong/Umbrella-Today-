@@ -41,6 +41,9 @@ class ScrollParentViewController: UIViewController {
     // MARK: - View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        AutocompleteSearchManager.getExactMatchingCities(input: "Livingston") { (cityArray) in
+            
+        }
         addWhiteLayer()
         listenForSceneBecomingActive()
     }
@@ -233,16 +236,15 @@ extension ScrollParentViewController {
         let operation2 = BlockOperation {
             group.enter()
             if let currentWeatherReport = WeatherReport.currentLocation {
-                AutocompleteSearchManager.searchForCities(input: currentWeatherReport.location, maxNumberOfResults: 1) { (arrayOfCities) in
-                    if let state = arrayOfCities[0].state {
-//                        print("state is:", state)
-                        let stateAbbr = Helpers.convertStateToAbbr(stateName: state)
-//                        print("abbreviated state is:", stateAbbr)
-                        if WeatherReport.currentLocation != nil {
-                            WeatherReport.currentLocation!.state = stateAbbr
+                AutocompleteSearchManager.getExactMatchingCities(input: currentWeatherReport.location) { (arrayOfMatchingCities) in
+                    
+                    for city in arrayOfMatchingCities {
+                        if city.id == currentWeatherReport.id {
+                            if let state = city.state {
+                                let stateAbbr = Helpers.convertStateToAbbr(stateName: state)
+                                currentWeatherReport.state = stateAbbr
+                            }
                         }
-                        
-//                        print("Operation 2 done")
                     }
                     group.leave()
                 }
