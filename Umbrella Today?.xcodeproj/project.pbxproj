@@ -52,6 +52,7 @@
 		55C92A9523BC0B950040F854 /* HourlyForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C92A9423BC0B950040F854 /* HourlyForecastViewController.swift */; };
 		55CC3E8A23BFC30B001A38C1 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CC3E8923BFC30B001A38C1 /* UserInfoViewController.swift */; };
 		55CC3E8C23BFD425001A38C1 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CC3E8B23BFD425001A38C1 /* FirebaseManager.swift */; };
+		55DCE75B23C2C6B300B1B39C /* SceneDelegateObservables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DCE75A23C2C6B300B1B39C /* SceneDelegateObservables.swift */; };
 		740AA9BC6AFAFF17F1BCBC0D /* Pods_Umbrella_Today_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAFD893038799641174FC52B /* Pods_Umbrella_Today_.framework */; };
 /* End PBXBuildFile section */
 
@@ -104,6 +105,7 @@
 		55C92A9423BC0B950040F854 /* HourlyForecastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastViewController.swift; sourceTree = "<group>"; };
 		55CC3E8923BFC30B001A38C1 /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		55CC3E8B23BFD425001A38C1 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		55DCE75A23C2C6B300B1B39C /* SceneDelegateObservables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegateObservables.swift; sourceTree = "<group>"; };
 		99EC326CFE3E1ADBC87A6EF7 /* Pods-Umbrella Today?.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Umbrella Today?.release.xcconfig"; path = "Target Support Files/Pods-Umbrella Today?/Pods-Umbrella Today?.release.xcconfig"; sourceTree = "<group>"; };
 		FAFD893038799641174FC52B /* Pods_Umbrella_Today_.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Umbrella_Today_.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -181,6 +183,7 @@
 				5585762E23B87E3E00CABA38 /* Range.swift */,
 				555A1A5823BE7DBD00953214 /* DayOfWeek.swift */,
 				551A0FAB23C02F2300F4E5F1 /* Constants.swift */,
+				55DCE75A23C2C6B300B1B39C /* SceneDelegateObservables.swift */,
 				555A1A5623BE3A9400953214 /* cities.us.fromAPI.json */,
 				55A079AD23BD2D65002BD11D /* city.list.withoutUS.json */,
 				5585762A23B8794000CABA38 /* IndexesOfAlphabeticalCheckPointsInCityList.txt */,
@@ -439,6 +442,7 @@
 				55A079AA23BD1C39002BD11D /* AutocompleteCitySearchTableViewCell.swift in Sources */,
 				555A1A5923BE7DBD00953214 /* DayOfWeek.swift in Sources */,
 				551CF19A23BB039A00101E57 /* FiveDayForecastViewController.swift in Sources */,
+				55DCE75B23C2C6B300B1B39C /* SceneDelegateObservables.swift in Sources */,
 				55C3FE4723B6B27F00CE7776 /* Umbrella_Today_.xcdatamodeld in Sources */,
 				551BFA7823BF000D00E98456 /* SignUpViewController.swift in Sources */,
 				5585763123B87E5700CABA38 /* Temperature.swift in Sources */,
