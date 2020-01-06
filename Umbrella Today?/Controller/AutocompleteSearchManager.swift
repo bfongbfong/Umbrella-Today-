@@ -76,9 +76,9 @@ class AutocompleteSearchManager {
                 setRange(cityNameCharacters: cityNameCharacters, range: &range)
 
                 let cities = getExactMatchingCitiesHelper(jsonArray: jsonArray, range: range, input: cityNameCharacters)
-                cities.forEach { (city) in
-                    print(city.name, city.state!)
-                }
+//                cities.forEach { (city) in
+//                    print(city.name, city.state!)
+//                }
                 completion(cities)
                 
             } catch {

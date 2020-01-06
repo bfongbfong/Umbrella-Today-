@@ -41,9 +41,6 @@ class ScrollParentViewController: UIViewController {
     // MARK: - View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        AutocompleteSearchManager.getExactMatchingCities(input: "Livingston") { (cityArray) in
-            
-        }
         addWhiteLayer()
         listenForSceneBecomingActive()
     }
@@ -70,10 +67,36 @@ extension ScrollParentViewController {
         let page2 = setupHourlyForecastVC()
         let page3 = setupFiveDayForecastVC()
         
-        let views: [String: UIView] = ["view": view, "page1": page1.view, "page2": page2.view, "page3": page3.view]
-        let verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|[page1(==view)]", options: [], metrics: nil, views: views)
-        let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|[page1(==view)][page2(==view)][page3(==view)]|", options: [.alignAllTop, .alignAllBottom], metrics: nil, views: views)
-        NSLayoutConstraint.activate(verticalConstraints + horizontalConstraints)
+        NSLayoutConstraint(item: page1.view!, attribute: .top, relatedBy: .equal, toItem: self.scrollView, attribute: .top, multiplier: 1.0, constant: 0).isActive = true
+        NSLayoutConstraint(item: page1.view!, attribute: .height, relatedBy: .equal, toItem: self.view, attribute: .height, multiplier: 1.0, constant: 0).isActive = true
+
+        NSLayoutConstraint(item: page1.view!, attribute: .left, relatedBy: .equal, toItem: self.scrollView, attribute: .left, multiplier: 1.0, constant: 0).isActive = true
+
+
+        NSLayoutConstraint(item: page1.view!, attribute: .width, relatedBy: .equal, toItem: self.view, attribute: .width, multiplier: 1.0, constant: 0).isActive = true
+        NSLayoutConstraint(item: page2.view!, attribute: .width, relatedBy: .equal, toItem: self.view, attribute: .width, multiplier: 1.0, constant: 0).isActive = true
+        NSLayoutConstraint(item: page3.view!, attribute: .width, relatedBy: .equal, toItem: self.view, attribute: .width, multiplier: 1.0, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: page1.view!, attribute: .right, relatedBy: .equal, toItem: page2.view!, attribute: .left, multiplier: 1.0, constant: 0).isActive = true
+        
+        NSLayoutConstraint(item: page2.view!, attribute: .right, relatedBy: .equal, toItem: page3.view!, attribute: .left, multiplier: 1.0, constant: 0).isActive = true
+
+        NSLayoutConstraint(item: page3.view!, attribute: .right, relatedBy: .equal, toItem: self.scrollView, attribute: .right, multiplier: 1.0, constant: 0).isActive = true
+
+        // align all top
+        NSLayoutConstraint(item: page1.view!, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1.0, constant: 0).isActive = true
+        NSLayoutConstraint(item: page2.view!, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1.0, constant: 0).isActive = true
+        NSLayoutConstraint(item: page3.view!, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1.0, constant: 0).isActive = true
+
+        // align all bottom
+        NSLayoutConstraint(item: page1.view!, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1.0, constant: 0).isActive = true
+        NSLayoutConstraint(item: page2.view!, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1.0, constant: 0).isActive = true
+        NSLayoutConstraint(item: page3.view!, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1.0, constant: 0).isActive = true
+        
+//        let views: [String: UIView] = ["view": view, "page1": page1.view, "page2": page2.view, "page3": page3.view]
+//        let verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|[page1(==view)]", options: [], metrics: nil, views: views)
+//        let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|[page1(==view)][page2(==view)][page3(==view)]|", options: [.alignAllTop, .alignAllBottom], metrics: nil, views: views)
+//        NSLayoutConstraint.activate(verticalConstraints + horizontalConstraints)
     }
     
     private func setupCurrentWeatherVC() -> UIViewController {

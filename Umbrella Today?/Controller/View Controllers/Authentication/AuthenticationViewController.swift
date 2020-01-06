@@ -40,7 +40,11 @@ extension AuthenticationViewController {
 // MARK: - UI Functions
 extension AuthenticationViewController: UIGestureRecognizerDelegate {
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
+        // following code to prevent UI freezing
+        if responds(to: #selector(getter: self.navigationController?.interactivePopGestureRecognizer)) && gestureRecognizer == self.navigationController?.interactivePopGestureRecognizer {
+            return false
+        } else {
+            return true
+        }
     }
-    
 }
