@@ -56,6 +56,40 @@ class AutocompleteSearchManager {
         return
     }
     
+    /// Used for getting the state from a city name
+    static func getExactMatchingCities(input: String, completion: @escaping((_ cities: [City]) -> Void)) {
+        let capitalizedCityName = input.capitalized
+        let cityNameCharacters = Array(capitalizedCityName)
+
+        if let path = Bundle.main.url(forResource: "cities.us.fromAPI", withExtension: "json") {
+            do {
+                let data = try Data(contentsOf: path)
+                let jsonResult = try JSONSerialization.jsonObject(with: data, options: [])
+                
+                guard let jsonArray = jsonResult as? [Any] else {
+                    print("Data of file could not be made casted into an array")
+                    return
+                }
+                
+                var range = Range(leftIndex: 0, rightIndex: jsonArray.count)
+
+                setRange(cityNameCharacters: cityNameCharacters, range: &range)
+
+                let cities = getExactMatchingCitiesHelper(jsonArray: jsonArray, range: range, input: cityNameCharacters)
+                cities.forEach { (city) in
+                    print(city.name, city.state!)
+                }
+                completion(cities)
+                
+            } catch {
+               // handle error
+                print("Error accessing JSON file")
+                return
+            }
+        }
+        return
+    }
+    
     /// Finds first alphanumeric city name within JSON file, and returns an array of cities that match.
     ///
     /// - Parameters:
@@ -70,31 +104,6 @@ class AutocompleteSearchManager {
         
         guard let firstMatchIndex = findFirstMatchIndex(jsonArray: jsonArray, range: range, input: input) else {
             return []
-        }
-        
-        guard let cityObject = jsonArray[firstMatchIndex] as? [String: Any] else {
-            // i think return empty if the middle element doesn't exist, or isn't a dictionary?
-            return []
-        }
-        guard let cityName = cityObject["name"] as? String else {
-            return []
-        }
-        
-        guard let countryName = cityObject["country"] as? String else {
-            return []
-        }
-        
-        guard let cityId = cityObject["id"] as? Int else {
-            print("city id not found")
-            return []
-        }
-        
-        if let stateName = cityObject["state"] as? String {
-            let firstMatchedCity = City(name: cityName, state: stateName, country: countryName, id: cityId)
-            cities.append(firstMatchedCity)
-        } else {
-            let firstMatchedCity = City(name: cityName, country: countryName, id: cityId)
-            cities.append(firstMatchedCity)
         }
         
         for i in 0...(maxNumberOfResults - 1) {
@@ -125,6 +134,52 @@ class AutocompleteSearchManager {
                     let thisCity = City(name: cityName, country: countryName, id: cityId)
                     cities.append(thisCity)
                 }
+            }
+        }
+        
+        return cities
+    }
+    
+    static func getExactMatchingCitiesHelper(jsonArray: [Any], range: Range, input: [Character]) -> [City] {
+        
+        var cities = [City]()
+        
+        guard let firstMatchIndex = findFirstMatchIndex(jsonArray: jsonArray, range: range, input: input) else {
+            return []
+        }
+        
+        var i = firstMatchIndex
+        while i <= range.rightIndex {
+            guard let cityObject = jsonArray[i] as? [String: Any] else {
+                // i think return empty if the middle element doesn't exist, or isn't a dictionary?
+                return cities
+            }
+            guard let cityName = cityObject["name"] as? String else {
+                return cities
+            }
+            
+            let cityNameChars = Array(cityName)
+            
+            if cityNameChars == input {
+                guard let countryName = cityObject["country"] as? String else {
+                    return cities
+                }
+                
+                guard let cityId = cityObject["id"] as? Int else {
+                    return cities
+                }
+                
+                if let stateName = cityObject["state"] as? String {
+                    let thisCity = City(name: cityName, state: stateName, country: countryName, id: cityId)
+                    cities.append(thisCity)
+
+                } else {
+                    let thisCity = City(name: cityName, country: countryName, id: cityId)
+                    cities.append(thisCity)
+                }
+                i += 1
+            } else {
+                return cities
             }
         }
         
