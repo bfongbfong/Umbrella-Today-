@@ -41,23 +41,24 @@ class ScrollParentViewController: UIViewController {
     // MARK: - View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        print("view did appear")
         addWhiteLayer()
-        // had to move this here because the alerts wouldn't be able to be presented if the view wasn't in the window hierarchy yet
-        checkLocationServices()
+        listenForSceneBecomingActive()
     }
 }
 
-// MARK: - Setup Pages
+// MARK: - Setup
 extension ScrollParentViewController {
-    @objc func navigateToLocationServicesSettings() {
-        UIApplication.shared.open(URL(string:UIApplication.openSettingsURLString)!)
+    func listenForSceneBecomingActive() {
+        SceneDelegateObservables.sceneDidBecomeActive.asObservable()
+            .skip(1)
+            .subscribe(onNext: { active in
+                
+                self.checkLocationServices()
+                
+            }).disposed(by: disposeBag)
     }
     
+    // MARK: Setup Pages
     func setupPages() {
         scrollView.isPagingEnabled = true
         scrollView.showsHorizontalScrollIndicator = false
@@ -128,9 +129,19 @@ extension ScrollParentViewController {
             self.loadingView.removeFromSuperview()
         }
     }
+    
+    private func showAlert(title: String, message: String, navigateToSettings: Bool) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (alert) in
+            if navigateToSettings {
+                self.navigateToLocationServicesSettings()
+            }
+        }))
+        self.present(alert, animated: true)
+    }
 }
 
-// MARK: - CLLocation Manager
+// MARK: - CLLocation Manager & Location Services
 extension ScrollParentViewController: CLLocationManagerDelegate {
     func checkLocationServices() {
         if CLLocationManager.locationServicesEnabled() {
@@ -140,9 +151,7 @@ extension ScrollParentViewController: CLLocationManagerDelegate {
         } else {
             // show alert telling user they have to enable it.
             print("user has to enable location services")
-            let alert = UIAlertController(title: "Location Services Not Enabled", message: "Please enable location services in your device's settings.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alert, animated: true)
+            showAlert(title: "Location Services Not Enabled", message: "Please enable location services in your device's settings.", navigateToSettings: true)
         }
     }
     
@@ -162,24 +171,16 @@ extension ScrollParentViewController: CLLocationManagerDelegate {
         case .denied:
             // alert user to go to settings to turn on permissions
             print("location services are denied")
-            let alert = UIAlertController(title: "Location Permissions Denied", message: "Please enable location services in your device's settings.", preferredStyle: .alert)
-//            alerts are not showing up becacuse scroll view apparently is not in window hierarchy
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
-                self.navigateToLocationServicesSettings()
-            }))
-            self.present(alert, animated: true, completion: nil)
+            showAlert(title: "Location Permissions Denied", message: "Please enable location services in your device's settings.", navigateToSettings: true)
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
-            checkLocationServices()
-//            getLocation()
         case .restricted:
             // alert user that they have been restricted
             print("location services are restricted")
-            let alert = UIAlertController(title: "Location Permissions Denied", message: "Location services have been restricted.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alert, animated: true)
+            showAlert(title: "Location Permissions Denied", message: "Location services have been restricted.", navigateToSettings: false)
         @unknown default:
             print("Error: Authorization status was unknown.")
+            showAlert(title: "Unknown Error", message: "Please try restarting the app.", navigateToSettings: false)
         }
     }
     
@@ -191,6 +192,10 @@ extension ScrollParentViewController: CLLocationManagerDelegate {
         }
     }
     
+    func navigateToLocationServicesSettings() {
+        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+    }
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         getLocation()
     }
@@ -200,9 +205,7 @@ extension ScrollParentViewController: CLLocationManagerDelegate {
 extension ScrollParentViewController {
     func fireApiCalls() {
         guard currentLocation != nil else {
-            let alert = UIAlertController(title: "Unable to retrieve location.", message: "Please try restarting the app.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alert, animated: true)
+            showAlert(title: "Unable to retrieve location.", message: "Please try restarting the app.", navigateToSettings: false)
             print("location was nil")
             return
         }
