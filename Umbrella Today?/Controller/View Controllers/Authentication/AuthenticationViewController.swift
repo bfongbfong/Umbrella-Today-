@@ -34,7 +34,6 @@ extension AuthenticationViewController {
         Helpers.Style.redButton(signupButton)
         Helpers.Style.yellowButton(loginButton)
     }
-    
 }
     
 // MARK: - UI Functions
