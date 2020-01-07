@@ -12,10 +12,6 @@ import Alamofire
 class OpenWeatherManager {
     
     static let apikey = "8cf99fbd36fd589f46f2813475533328"
-    
-    // coordinates for my house for test
-    static let homeLat = "40.920295"
-    static let homeLon = "-74.530521"
 
     static func getCurrentWeatherData(latitude: Double, longitude: Double, completion: @escaping((_ jsonWeatherObject: [String: Any]?) -> Void)) {
        
