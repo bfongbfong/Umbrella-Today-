@@ -563,6 +563,7 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="Y5G-dj-EjK" id="1JC-0e-VWg"/>
+                        <outlet property="tableViewHeightConstraint" destination="PWO-Uq-mEE" id="hbo-dg-s9x"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B7x-VD-eyf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

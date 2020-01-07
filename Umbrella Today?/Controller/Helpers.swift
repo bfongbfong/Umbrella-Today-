@@ -171,7 +171,6 @@ struct Helpers {
                 returnArray.append(midDayReport)
             }
         }
-
         return returnArray
     }
     

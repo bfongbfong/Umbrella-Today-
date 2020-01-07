@@ -13,6 +13,7 @@ class FiveDayForecastViewController: UIViewController {
     
     // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     
     // MARK: - Properties
     var isDaytime = false {
@@ -49,6 +50,7 @@ extension FiveDayForecastViewController {
                 self.simpleWeatherReports = weatherReports
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
+                    self.configureTableViewHeight()
                 }
                 
             }).disposed(by: disposeBag)
@@ -80,5 +82,15 @@ extension FiveDayForecastViewController: UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
+    }
+}
+
+extension FiveDayForecastViewController {
+    func configureTableViewHeight() {
+        if self.simpleWeatherReports.count == 5 {
+            self.tableViewHeightConstraint.constant = 400
+        } else {
+            self.tableViewHeightConstraint.constant = 480
+        }
     }
 }
