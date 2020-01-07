@@ -28,6 +28,7 @@ class LocationSearchViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.keyboardDismissMode = .onDrag
     }
 }
 
@@ -55,7 +56,7 @@ extension LocationSearchViewController {
             return
         }
         
-        AutocompleteSearchManager.searchForCities(input: text, maxNumberOfResults: 5) { cities in
+        AutocompleteSearchManager.searchForCities(input: text, maxNumberOfResults: 20) { cities in
             self.searchResultCities = cities
             DispatchQueue.main.async {
                 self.tableView.reloadData()
